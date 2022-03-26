@@ -23,8 +23,9 @@ const Login = (props) => {
   return (
     <div
       style={{
-        margin: "200px auto",
+        margin: "100px auto",
         width: "100%",
+        height:"500px",
         textAlign: "center",
         border: "1px solid black",
       }}
