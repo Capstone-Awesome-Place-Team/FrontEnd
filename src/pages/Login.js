@@ -23,11 +23,10 @@ const Login = (props) => {
   return (
     <div
       style={{
-        margin: "auto",
-        width: "500px",
+        margin: "200px auto",
+        width: "100%",
         textAlign: "center",
         border: "1px solid black",
-        // height: "100vh"
       }}
     >
       <div style={{ width: "200px", margin: "50px auto" }}>
@@ -72,6 +71,7 @@ const Login = (props) => {
           </button>
         </div>
       </form>
+      <div>회원가입</div>
     </div>
   );
 };

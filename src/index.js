@@ -5,9 +5,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import Global from './shared/Global'
+
 ReactDOM.render(
   <BrowserRouter>
+  <Global>
     <App />
+    </Global>
   </BrowserRouter>,
   document.getElementById('root')
 );
