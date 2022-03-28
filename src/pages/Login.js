@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import { IdCheck, PwCheck } from "../shared/regex";
 import example_log from "../static/image/example_logo.png";
+import {useNavigate} from 'react-router-dom';
 const Login = (props) => {
   const Id = useRef();
   const Pwd = useRef();
+  const navigate =useNavigate();
   const checkLogin = (event) => {
     event.preventDefault();
     const checkId = IdCheck(Id.current.value);
@@ -13,17 +15,14 @@ const Login = (props) => {
       alert("아이디 또는 비밀번호 형식이 틀립니다.");
     } else {
       console.log("API 통신 보내기");
+      // 로그인 API 보내기
     }
   };
-
-  React.useEffect(() => {
-    // 로그인 API 보내기
-  }, []);
 
   return (
     <div
       style={{
-        margin: "100px auto",
+        margin: "100px 0px",
         width: "100%",
         height:"500px",
         textAlign: "center",
@@ -72,7 +71,7 @@ const Login = (props) => {
           </button>
         </div>
       </form>
-      <div>회원가입</div>
+      <div onClick={()=>navigate('/signup')} >회원가입</div>
     </div>
   );
 };
