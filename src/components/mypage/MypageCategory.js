@@ -14,7 +14,7 @@ const MypageCategory = (props) => {
       }}
     >
       <Element onClick={() => setCategory("edit_profile")}>
-        내 정보 수정
+        내 정보
       </Element>
       <Element onClick={() => setCategory("favorite_list")}>내 찜 목록</Element>
       <Element onClick={() => setCategory("favorite_list_map")}>

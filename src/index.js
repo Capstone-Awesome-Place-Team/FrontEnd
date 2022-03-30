@@ -6,10 +6,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import Global from './shared/Global'
+import GlobalStyle from './shared/GlobalStyle'
 
 ReactDOM.render(
   <BrowserRouter>
   <Global>
+    <GlobalStyle />
     <App />
     </Global>
   </BrowserRouter>,

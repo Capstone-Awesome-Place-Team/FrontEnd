@@ -1,12 +1,16 @@
-import React,{useState} from "react";
-
+import React, { useState } from "react";
+import styled from "styled-components";
 import { IdCheck, PwCheck, NicknameCheck } from "../../shared/regex";
 
-const Editprofile = (props) =>{
-    const [Id, setId] = useState();
+import edit_button from "../../static/image/edit_button.svg";
+import edit_enter from "../../static/image/edit_enter.svg";
+import edit_cancel from "../../static/image/edit_cancel.svg";
+const Editprofile = (props) => {
+  const [Id, setId] = useState();
   const [Pwd, setPwd] = useState();
   const [PwdCheck, setPwdCheck] = useState();
-  const [nickName, setNickName] = useState();
+  const [nickName, setNickName] = useState("초기닉네임");
+  const [changingNickName, setChangingNickName] = useState(nickName);
 
   const [IdMessage, setIdMessage] = useState();
   const [PwMessage, setPwMessage] = useState();
@@ -18,10 +22,10 @@ const Editprofile = (props) =>{
   const [NickMessageColor, setNickMessageColor] = useState();
   const [PwCheckMessageColor, setPwdChekMessageColor] = useState();
 
-  const [isEdit, setIsEdit] =useState(false)
+  const [isEdit, setIsEdit] = useState(false);
   const edit = (event) => {
     event.preventDefault();
-    console.log("dd")
+    console.log("dd");
     const info = {
       pw: Pwd,
       nickname: nickName,
@@ -29,7 +33,6 @@ const Editprofile = (props) =>{
     console.log(info);
 
     if (
-      IdMessageColor &&
       PwMessageColor &&
       NickMessageColor &&
       PwCheckMessageColor
@@ -37,9 +40,11 @@ const Editprofile = (props) =>{
       console.log("요청모두 맞아서 api 호출");
       // API 호출
       // dispatch(SignUpDB(info));
+      setIsEdit(!isEdit); // 버튼 true/false
+      setNickName(changingNickName); // 실질적으로 내정보에서 보는 닉네임으로 최종 변경
     }
   };
-  
+
   const pwCheck = (event) => {
     const current_pw = event.target.value;
     setPwd(current_pw);
@@ -66,7 +71,7 @@ const Editprofile = (props) =>{
 
   const nickNameCheck = (event) => {
     const current_nickname = event.target.value;
-    setNickName(current_nickname);
+    setChangingNickName(current_nickname)
     if (!NicknameCheck(current_nickname)) {
       setNickMessageColor(false);
       setNickMessage("영대소문자,숫자,한글 사용");
@@ -75,43 +80,105 @@ const Editprofile = (props) =>{
       setNickMessage("사용가능한 닉네임입니다.");
     }
   };
-    return ( <div
-        style={{
-          width: "100%",
-          // height: "500px",
-          textAlign: "center",
-          border: "1px solid black",
-        }}
-      >
-        <form onSubmit={edit}>
-          
-          <div className="nickName">
-            <label htmlFor="nickname">닉네임</label>
-            <br />
-            <input type="text" id="nickname" onChange={nickNameCheck} disabled={isEdit?'': 'disabled'}></input>
-            <div style={{ color: NickMessageColor ? "green" : "red" }}>
-              {NickMessage}
+  return (
+    <div
+      style={{
+        width: "100%",
+        // height: "500px",
+        textAlign: "center",
+        border: "1px solid black",
+        padding: "5px",
+      }}
+    >
+      <Wrap>
+        <div className="nickName">
+          <label htmlFor="nickname">내 닉네임</label>
+          <br />
+          {isEdit ? (
+            <input
+              type="text"
+              id="nickname"
+              defaultValue={nickName}
+              onChange={nickNameCheck}
+            ></input>
+          ) : (
+            <div
+              style={{ color: "blue", fontWeight: "bold", fontSize: "20px" }}
+            >
+              {nickName}
             </div>
+          )}
+          <div style={{ color: NickMessageColor ? "green" : "red" }}>
+            {NickMessage}
           </div>
-          <div className="PwdInput">
-            <label htmlFor="Pwd">비밀번호 입력</label>
-            <br />
-            <input type="password" id="Pwd" onChange={pwCheck} disabled={isEdit?'': 'disabled'}></input>
-            <div style={{ color: PwMessageColor ? "green" : "red" }}>
-              {PwMessage}
+        </div>
+        {isEdit ? (
+          <>
+            <div className="PwdInput">
+              <label htmlFor="Pwd">비밀번호</label>
+              <br />
+              <input type="password" id="Pwd" onChange={pwCheck}></input>
+              <div style={{ color: PwMessageColor ? "green" : "red" }}>
+                {PwMessage}
+              </div>
             </div>
-          </div>
-          <div className="PwdCheckInput">
-            <label htmlFor="PwdCheck">비밀번호 확인</label>
-            <br />
-            <input type="password" id="PwdCheck" onChange={pwDoubleCheck} disabled={isEdit?'': 'disabled'}></input>
-            <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
-              {PwCheckMessage}
+            <div className="PwdCheckInput">
+              <label htmlFor="PwdCheck">비밀번호 확인</label>
+              <br />
+              <input
+                type="password"
+                id="PwdCheck"
+                onChange={pwDoubleCheck}
+              ></input>
+              <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
+                {PwCheckMessage}
+              </div>
             </div>
+          </>
+        ) : null}
+        {isEdit ? (
+          <div>
+            <button
+              onClick={edit}
+              style={{ border: "none", background: "none" }}
+            >
+              <img src={edit_enter} alt="edit_enter" />
+            </button>
+            <button
+              onClick={() => setIsEdit(!isEdit)}
+              style={{ border: "none", background: "none" }}
+            >
+              <img src={edit_cancel} width="68px" height="31px" alt="edit" />
+            </button>
           </div>
-          <button type='text' onClick={()=> setIsEdit(!isEdit) }>{isEdit?'확인': '수정하기'}</button>
-        </form>
-      </div>)
-}
+        ) : (
+          <button
+            onClick={() => setIsEdit(!isEdit)}
+            style={{ border: "none", background: "none" }}
+          >
+            <img src={edit_button} width="68px" height="31px" alt="edit" />
+          </button>
+        )}
+      </Wrap>
+    </div>
+  );
+};
+
+const Wrap = styled.div`
+  & input {
+    height: 25px;
+    width: 150px ;
+    border: 1px solid #c1c1c1;
+    background: #f0f0f0;
+    border-radius: 22px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 5px 0px;
+    padding: 0px 10px;
+    box-sizing: border-box;
+  }
+  & button {
+    margin: 5px;
+  }
+`;
 
 export default Editprofile;
