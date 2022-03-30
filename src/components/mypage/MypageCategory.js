@@ -8,9 +8,6 @@ const MypageCategory = (props) => {
     <div
       style={{
         display: "flex",
-        color: "#E22F2F",
-        fontSize: "25px",
-        fontWeight: "bold",
         justifyContent: "center",
       }}
     >
@@ -32,6 +29,9 @@ const MypageCategory = (props) => {
 
 const Element = styled.div`
   margin: 0 10px;
+  color: #e22f2f;
+  font-size: 25px;
+  font-weight: bold;
   &:hover {
     cursor: pointer;
   }
