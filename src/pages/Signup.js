@@ -87,7 +87,6 @@ const Signup = (props) => {
   return (
     <div
       style={{
-        margin: "100px 0px",
         width: "100%",
         // height: "500px",
         textAlign: "center",
