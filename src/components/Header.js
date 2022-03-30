@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import styled from 'styled-components'
 import header_profile from '../static/image/header_profile.svg'
 
 const Header = (props) => {
@@ -24,14 +24,22 @@ const Header = (props) => {
         boxSizing:"border-box"
       }}
     >
-      <div onClick={()=> navigate('/')}>Awesome Place</div>
+      <Box onClick={()=> navigate('/')}>Awesome Place</Box>
       <div>logo</div>
       <div style={{display:"flex", alignItems:"center"}}>
-      <div onClick={()=> navigate('/signin')}>로그인/마이페이지</div>
+      <Box onClick={()=> navigate('/signin')}>로그인</Box>
+      <Box onClick={()=> navigate('/mypage')}>마이페이지</Box>
       <img src={header_profile} alt="profile"></img>
       </div>
     </div>
   );
 };
+
+const Box = styled.div`
+  margin: 0px 5px;
+  &:hover{
+    cursor:pointer ;
+  }
+`;
 
 export default Header;
