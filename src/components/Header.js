@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import header_profile from '../static/image/header_profile.svg'
 
 const Header = (props) => {
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -21,10 +24,10 @@ const Header = (props) => {
         boxSizing:"border-box"
       }}
     >
-      <div>Awesome Place</div>
+      <div onClick={()=> navigate('/')}>Awesome Place</div>
       <div>logo</div>
       <div style={{display:"flex", alignItems:"center"}}>
-      <div >로그인/마이페이지</div>
+      <div onClick={()=> navigate('/signin')}>로그인/마이페이지</div>
       <img src={header_profile} alt="profile"></img>
       </div>
     </div>
