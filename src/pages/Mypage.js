@@ -9,7 +9,7 @@ import MypageCategory from "../components/mypage/MypageCategory";
 const Mypage =(props) =>{
 const [category, setCategory] = useState('edit_profile');
     return(<div>
-        <MypageCategory setCategory={setCategory}/>
+        <MypageCategory setCategory={setCategory} category={category}/>
         {category==='edit_profile'&&<Editprofile />}
         {category==='favorite_list'&&<FavoriteList />}
         {category==='favorite_list_map'&&<FavoriteListMap /> }
