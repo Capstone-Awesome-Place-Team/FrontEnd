@@ -1,12 +1,10 @@
-import react from "react";
-
 const Global = (props) => {
   return (
     <div
       style={{
         width: "100%",
-        maxWidth:"700px",
-        minWidth:"350px",
+        maxWidth: "700px",
+        minWidth: "350px",
         margin: "auto",
         position: "fixed",
         right: "50%",
