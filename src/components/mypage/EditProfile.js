@@ -25,21 +25,16 @@ const Editprofile = (props) => {
   const [isEdit, setIsEdit] = useState(false);
   const edit = (event) => {
     event.preventDefault();
-    console.log("dd");
     const info = {
       pw: Pwd,
       nickname: nickName,
     };
     console.log(info);
 
-    if (
-      PwMessageColor &&
-      NickMessageColor &&
-      PwCheckMessageColor
-    ) {
+    if (PwMessageColor && NickMessageColor && PwCheckMessageColor) {
       console.log("요청모두 맞아서 api 호출");
       // API 호출
-      // dispatch(SignUpDB(info));
+      // dispatch(SignUpDB(info)); // 닉네임, 비밀번호
       setIsEdit(!isEdit); // 버튼 true/false
       setNickName(changingNickName); // 실질적으로 내정보에서 보는 닉네임으로 최종 변경
     }
@@ -71,7 +66,7 @@ const Editprofile = (props) => {
 
   const nickNameCheck = (event) => {
     const current_nickname = event.target.value;
-    setChangingNickName(current_nickname)
+    setChangingNickName(current_nickname);
     if (!NicknameCheck(current_nickname)) {
       setNickMessageColor(false);
       setNickMessage("영대소문자,숫자,한글 사용");
@@ -95,12 +90,18 @@ const Editprofile = (props) => {
           <label htmlFor="nickname">내 닉네임</label>
           <br />
           {isEdit ? (
-            <input
-              type="text"
-              id="nickname"
-              defaultValue={nickName}
-              onChange={nickNameCheck}
-            ></input>
+            <>
+              <input
+                type="text"
+                id="nickname"
+                defaultValue={nickName}
+                onChange={nickNameCheck}
+              ></input>
+
+              <div style={{ color: NickMessageColor ? "green" : "red" }}>
+                {NickMessage}
+              </div>
+            </>
           ) : (
             <div
               style={{ color: "blue", fontWeight: "bold", fontSize: "20px" }}
@@ -108,9 +109,6 @@ const Editprofile = (props) => {
               {nickName}
             </div>
           )}
-          <div style={{ color: NickMessageColor ? "green" : "red" }}>
-            {NickMessage}
-          </div>
         </div>
         {isEdit ? (
           <>
@@ -167,7 +165,7 @@ const Editprofile = (props) => {
 const Wrap = styled.div`
   & input {
     height: 25px;
-    width: 150px ;
+    width: 150px;
     border: 1px solid #c1c1c1;
     background: #f0f0f0;
     border-radius: 22px;
