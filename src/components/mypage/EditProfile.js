@@ -6,18 +6,16 @@ import edit_button from "../../static/image/edit_button.svg";
 import edit_enter from "../../static/image/edit_enter.svg";
 import edit_cancel from "../../static/image/edit_cancel.svg";
 const Editprofile = (props) => {
-  const [Id, setId] = useState();
+  
   const [Pwd, setPwd] = useState();
   const [PwdCheck, setPwdCheck] = useState();
   const [nickName, setNickName] = useState("초기닉네임");
   const [changingNickName, setChangingNickName] = useState(nickName);
 
-  const [IdMessage, setIdMessage] = useState();
   const [PwMessage, setPwMessage] = useState();
   const [NickMessage, setNickMessage] = useState();
   const [PwCheckMessage, setPwdChekMessage] = useState();
 
-  const [IdMessageColor, setIdMessageColor] = useState();
   const [PwMessageColor, setPwMessageColor] = useState();
   const [NickMessageColor, setNickMessageColor] = useState();
   const [PwCheckMessageColor, setPwdChekMessageColor] = useState();
@@ -146,7 +144,7 @@ const Editprofile = (props) => {
               onClick={() => setIsEdit(!isEdit)}
               style={{ border: "none", background: "none" }}
             >
-              <img src={edit_cancel} width="68px" height="31px" alt="edit" />
+              <img src={edit_cancel} alt="edit" />
             </button>
           </div>
         ) : (
