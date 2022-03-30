@@ -21,7 +21,6 @@ const Signup = (props) => {
     const info = {
       id: Id,
       pw: Pwd,
-      pw_check: PwdCheck,
       nickname: nickName,
     };
     console.log(info);
