@@ -8,7 +8,7 @@ import edit_cancel from "../../static/image/edit_cancel.svg";
 const Editprofile = (props) => {
   
   const [Pwd, setPwd] = useState();
-  const [PwdCheck, setPwdCheck] = useState();
+  // const [PwdCheck, setPwdCheck] = useState();
   const [nickName, setNickName] = useState("초기닉네임");
   const [changingNickName, setChangingNickName] = useState(nickName);
 
@@ -21,6 +21,9 @@ const Editprofile = (props) => {
   const [PwCheckMessageColor, setPwdChekMessageColor] = useState();
 
   const [isEdit, setIsEdit] = useState(false);
+
+  //나중에 useSelector 로 내정보 관련정보 가져오기
+   //스피너 처리 나중에할것
   const edit = (event) => {
     event.preventDefault();
     const info = {
@@ -52,7 +55,7 @@ const Editprofile = (props) => {
   };
   const pwDoubleCheck = (event) => {
     const current_pwCheck = event.target.value;
-    setPwdCheck(current_pwCheck);
+    // setPwdCheck(current_pwCheck);
     if (current_pwCheck === Pwd) {
       setPwdChekMessageColor(true);
       setPwdChekMessage("일치합니다.");
@@ -73,6 +76,10 @@ const Editprofile = (props) => {
       setNickMessage("사용가능한 닉네임입니다.");
     }
   };
+
+
+
+  
   return (
     <div
       style={{
