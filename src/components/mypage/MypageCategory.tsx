@@ -4,7 +4,7 @@ import { MypageCategoryType } from "../../types/interfaces";
 
 
 
- interface clicked {
+ interface clickedType {
   clicked: string
  }
   
@@ -43,15 +43,15 @@ const Element = styled.div`
     cursor: pointer;
   }
   &:nth-child(1) {
-    background-color: ${(props: clicked) =>
+    background-color: ${(props: clickedType) =>
       props.clicked === "edit_profile" ? "yellow" : "white"};
   }
   &:nth-child(2) {
-    background-color: ${(props: clicked) =>
+    background-color: ${(props: clickedType) =>
       props.clicked === "favorite_list" ? "yellow" : "white"};
   }
   &:nth-child(3) {
-    background-color: ${(props: clicked) =>
+    background-color: ${(props: clickedType) =>
       props.clicked === "favorite_list_map" ? "yellow" : "white"};
   }
 `;
