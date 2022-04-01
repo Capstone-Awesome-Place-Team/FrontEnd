@@ -1,22 +1,22 @@
 import React, { useState, useRef } from "react";
 import { IdCheck, PwCheck, NicknameCheck } from "../shared/regex";
 
-const Signup = (props) => {
+const Signup: React.FC = (props) => {
   const [Id, setId] = useState();
   const [Pwd, setPwd] = useState();
   const [PwdCheck, setPwdCheck] = useState();
   const [nickName, setNickName] = useState();
 
-  const [IdMessage, setIdMessage] = useState();
-  const [PwMessage, setPwMessage] = useState();
-  const [NickMessage, setNickMessage] = useState();
-  const [PwCheckMessage, setPwdChekMessage] = useState();
+  const [IdMessage, setIdMessage] = useState<string>();
+  const [PwMessage, setPwMessage] = useState<string>();
+  const [NickMessage, setNickMessage] = useState<string>();
+  const [PwCheckMessage, setPwdChekMessage] = useState<string>();
 
-  const [IdMessageColor, setIdMessageColor] = useState();
-  const [PwMessageColor, setPwMessageColor] = useState();
-  const [NickMessageColor, setNickMessageColor] = useState();
-  const [PwCheckMessageColor, setPwdChekMessageColor] = useState();
-  const signUp = (event) => {
+  const [IdMessageColor, setIdMessageColor] = useState<boolean>();
+  const [PwMessageColor, setPwMessageColor] = useState<boolean>();
+  const [NickMessageColor, setNickMessageColor] = useState<boolean>();
+  const [PwCheckMessageColor, setPwdChekMessageColor] = useState<boolean>();
+  const signUp = (event: any) => {
     event.preventDefault();
     const info = {
       id: Id,
@@ -36,7 +36,7 @@ const Signup = (props) => {
       // dispatch(SignUpDB(info));
     }
   };
-  const idCheck = (event) => {
+  const idCheck = (event: any) => {
     const current_id = event.target.value;
     setId(current_id);
     if (!IdCheck(current_id)) {
@@ -47,7 +47,7 @@ const Signup = (props) => {
       setIdMessage("규칙에 맞게 입력");
     }
   };
-  const pwCheck = (event) => {
+  const pwCheck = (event:any) => {
     const current_pw = event.target.value;
     setPwd(current_pw);
     console.log(PwCheck(current_pw));
@@ -59,7 +59,7 @@ const Signup = (props) => {
       setPwMessage("안전한 비밀번호");
     }
   };
-  const pwDoubleCheck = (event) => {
+  const pwDoubleCheck = (event : any) => {
     const current_pwCheck = event.target.value;
     setPwdCheck(current_pwCheck);
     if (current_pwCheck === Pwd) {
@@ -71,7 +71,7 @@ const Signup = (props) => {
     }
   };
 
-  const nickNameCheck = (event) => {
+  const nickNameCheck = (event : any) => {
     const current_nickname = event.target.value;
     setNickName(current_nickname);
     if (!NicknameCheck(current_nickname)) {

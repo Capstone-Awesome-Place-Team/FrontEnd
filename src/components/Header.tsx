@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from 'styled-components'
 import header_profile from '../static/image/header_profile.svg'
 
-const Header = (props) => {
+const Header:React.FC = (props) => {
   const navigate = useNavigate();
   return (
     <div

@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { MypageCategoryType } from "../../types/interfaces";
 
-const MypageCategory = (props) => {
+
+
+ interface clicked {
+  clicked: string
+ }
+  
+const MypageCategory: React.FC<MypageCategoryType> = (props) => {
   const { setCategory, category } = props;
 
   return (
@@ -36,15 +43,15 @@ const Element = styled.div`
     cursor: pointer;
   }
   &:nth-child(1) {
-    background-color: ${(props) =>
+    background-color: ${(props: clicked) =>
       props.clicked === "edit_profile" ? "yellow" : "white"};
   }
   &:nth-child(2) {
-    background-color: ${(props) =>
+    background-color: ${(props: clicked) =>
       props.clicked === "favorite_list" ? "yellow" : "white"};
   }
   &:nth-child(3) {
-    background-color: ${(props) =>
+    background-color: ${(props: clicked) =>
       props.clicked === "favorite_list_map" ? "yellow" : "white"};
   }
 `;

@@ -2,12 +2,18 @@ import React, { useRef, useState } from "react";
 import { IdCheck, PwCheck } from "../shared/regex";
 import example_log from "../static/image/example_logo.png";
 import {useNavigate} from 'react-router-dom';
-const Login = (props) => {
-  const Id = useRef();
-  const Pwd = useRef();
+
+
+
+const Login: React.FC = (props) => {
+  const Id = useRef<HTMLInputElement>(null);
+  const Pwd = useRef<HTMLInputElement>(null);
   const navigate =useNavigate();
-  const checkLogin = (event) => {
+  const checkLogin = (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+ if(!Id.current || !Pwd.current){
+   return;
+ }
     const checkId = IdCheck(Id.current.value);
     const checkPw = PwCheck(Pwd.current.value);
 
@@ -18,7 +24,6 @@ const Login = (props) => {
       // 로그인 API 보내기
     }
   };
-
   return (
     <div
       style={{

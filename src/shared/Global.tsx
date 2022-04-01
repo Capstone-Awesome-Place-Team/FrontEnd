@@ -1,4 +1,4 @@
-const Global = (props) => {
+const Global: React.FC = (props) => {
   return (
     <div
       style={{

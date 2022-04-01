@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Post from "../Post";
-const FavoriteList = (props) => {
+const FavoriteList: React.FC = (props) => {
   const [exampleData, setExampleData] = useState({
     id: "testId",
     nickname: "testName",

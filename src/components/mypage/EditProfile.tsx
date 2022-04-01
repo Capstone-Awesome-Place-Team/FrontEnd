@@ -5,26 +5,28 @@ import { IdCheck, PwCheck, NicknameCheck } from "../../shared/regex";
 import edit_button from "../../static/image/edit_button.svg";
 import edit_enter from "../../static/image/edit_enter.svg";
 import edit_cancel from "../../static/image/edit_cancel.svg";
-const Editprofile = (props) => {
+
+
+const Editprofile : React.FC = (props) => {
   
-  const [Pwd, setPwd] = useState();
+  const [Pwd, setPwd] = useState<string>();
   // const [PwdCheck, setPwdCheck] = useState();
-  const [nickName, setNickName] = useState("초기닉네임");
-  const [changingNickName, setChangingNickName] = useState(nickName);
+  const [nickName, setNickName] = useState<string>("초기닉네임");
+  const [changingNickName, setChangingNickName] = useState<string>(nickName);
 
-  const [PwMessage, setPwMessage] = useState();
-  const [NickMessage, setNickMessage] = useState();
-  const [PwCheckMessage, setPwdChekMessage] = useState();
+  const [PwMessage, setPwMessage] = useState<string>();
+  const [NickMessage, setNickMessage] = useState<string>();
+  const [PwCheckMessage, setPwdChekMessage] = useState<string>();
 
-  const [PwMessageColor, setPwMessageColor] = useState();
-  const [NickMessageColor, setNickMessageColor] = useState();
-  const [PwCheckMessageColor, setPwdChekMessageColor] = useState();
+  const [PwMessageColor, setPwMessageColor] = useState<boolean>();
+  const [NickMessageColor, setNickMessageColor] = useState<boolean>();
+  const [PwCheckMessageColor, setPwdChekMessageColor] = useState<boolean>();
 
   const [isEdit, setIsEdit] = useState(false);
 
   //나중에 useSelector 로 내정보 관련정보 가져오기
    //스피너 처리 나중에할것
-  const edit = (event) => {
+  const edit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const info = {
       pw: Pwd,
@@ -41,7 +43,8 @@ const Editprofile = (props) => {
     }
   };
 
-  const pwCheck = (event) => {
+  const pwCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    
     const current_pw = event.target.value;
     setPwd(current_pw);
     console.log(PwCheck(current_pw));
@@ -53,7 +56,7 @@ const Editprofile = (props) => {
       setPwMessage("안전한 비밀번호");
     }
   };
-  const pwDoubleCheck = (event) => {
+  const pwDoubleCheck = (event:React.ChangeEvent<HTMLInputElement>) => {
     const current_pwCheck = event.target.value;
     // setPwdCheck(current_pwCheck);
     if (current_pwCheck === Pwd) {
@@ -65,7 +68,7 @@ const Editprofile = (props) => {
     }
   };
 
-  const nickNameCheck = (event) => {
+  const nickNameCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const current_nickname = event.target.value;
     setChangingNickName(current_nickname);
     if (!NicknameCheck(current_nickname)) {

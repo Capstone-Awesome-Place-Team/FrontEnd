@@ -7,8 +7,8 @@ import MypageCategory from "../components/mypage/MypageCategory";
 
 
 
-const Mypage =(props) =>{
-const [category, setCategory] = useState('edit_profile');
+const Mypage: React.FC =(props) =>{
+const [category, setCategory] = useState<string>('edit_profile');
 
 useEffect(()=>{
     // 모든 정보 get 요청 해서 redux 에 저장해놓기
