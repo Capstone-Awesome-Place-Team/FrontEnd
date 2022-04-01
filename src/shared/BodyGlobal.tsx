@@ -1,8 +1,8 @@
 import React from 'react';
 
-const BodyGlobal = (props)=>{
+const BodyGlobal: React.FC = (props)=>{
     return(<div style={{
-        margin:"58px 0px"
+        margin:"100px 0px"
     }}>
         {props.children}
     </div>)

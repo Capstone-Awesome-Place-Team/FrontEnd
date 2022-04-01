@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { MypageCategoryType } from "../../types/interfaces";
 
-const MypageCategory = (props) => {
+
+
+ interface clicked {
+  clicked: string
+ }
+  
+const MypageCategory: React.FC<MypageCategoryType> = (props) => {
   const { setCategory, category } = props;
 
   return (
     <div
       style={{
         display: "flex",
+        color: "#E22F2F",
+        fontSize: "25px",
+        fontWeight: "bold",
         justifyContent: "center",
       }}
     >
@@ -29,22 +39,19 @@ const MypageCategory = (props) => {
 
 const Element = styled.div`
   margin: 0 10px;
-  color: #e22f2f;
-  font-size: 25px;
-  font-weight: bold;
   &:hover {
     cursor: pointer;
   }
   &:nth-child(1) {
-    background-color: ${(props) =>
+    background-color: ${(props: clicked) =>
       props.clicked === "edit_profile" ? "yellow" : "white"};
   }
   &:nth-child(2) {
-    background-color: ${(props) =>
+    background-color: ${(props: clicked) =>
       props.clicked === "favorite_list" ? "yellow" : "white"};
   }
   &:nth-child(3) {
-    background-color: ${(props) =>
+    background-color: ${(props: clicked) =>
       props.clicked === "favorite_list_map" ? "yellow" : "white"};
   }
 `;

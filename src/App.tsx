@@ -7,7 +7,7 @@ import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
 import BodyGlobal from "./shared/BodyGlobal";
 import Main from "./pages/Main";
-function App() {
+const App: React.FC = () =>{
   return (
     <div>
     <Header />

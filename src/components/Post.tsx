@@ -2,7 +2,9 @@ import React from "react";
 
 import header_profile from "../static/image/header_profile.svg";
 import heart_fill from '../static/image/heart-fill.svg'
-const Post = (props) => {
+import {PostPropsType} from '../types/interfaces'
+
+const Post: React.FC<PostPropsType> = (props) => {
   return (
     <div style={{ display: "flex", justifyContent:"center", margin:"5px 0px", border:"1px solid black"}}>
       <img

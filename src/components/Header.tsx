@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import header_profile from "../static/image/header_profile.svg";
+import styled from 'styled-components'
+import header_profile from '../static/image/header_profile.svg'
 
-const Header = (props) => {
+const Header:React.FC = (props) => {
   const navigate = useNavigate();
   return (
     <div
@@ -19,17 +19,17 @@ const Header = (props) => {
         zIndex: "5",
         color: "white",
         fontSize: "25px",
-        alignItems: "center",
-        padding: "0px 7px",
-        boxSizing: "border-box",
+        alignItems:"center",
+        padding:"0px 7px",
+        boxSizing:"border-box"
       }}
     >
-      <Box onClick={() => navigate("/")}>Awesome Place</Box>
+      <Box onClick={()=> navigate('/')}>Awesome Place</Box>
       <div>logo</div>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <Box onClick={() => navigate("/signin")}>로그인</Box>
-        <Box onClick={() => navigate("/mypage")}>마이페이지</Box>
-        <img src={header_profile} alt="profile"></img>
+      <div style={{display:"flex", alignItems:"center"}}>
+      <Box onClick={()=> navigate('/signin')}>로그인</Box>
+      <Box onClick={()=> navigate('/mypage')}>마이페이지</Box>
+      <img src={header_profile} alt="profile"></img>
       </div>
     </div>
   );
@@ -37,8 +37,8 @@ const Header = (props) => {
 
 const Box = styled.div`
   margin: 0px 5px;
-  &:hover {
-    cursor: pointer;
+  &:hover{
+    cursor:pointer ;
   }
 `;
 
