@@ -1,19 +1,17 @@
 import React, { useRef, useState } from "react";
 import { IdCheck, PwCheck } from "../shared/regex";
 import example_log from "../static/image/example_logo.png";
-import {useNavigate} from 'react-router-dom';
-
-
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = (props) => {
   const Id = useRef<HTMLInputElement>(null);
   const Pwd = useRef<HTMLInputElement>(null);
-  const navigate =useNavigate();
-  const checkLogin = (event:React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+  const checkLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
- if(!Id.current || !Pwd.current){
-   return;
- }
+    if (!Id.current || !Pwd.current) {
+      return;
+    }
     const checkId = IdCheck(Id.current.value);
     const checkPw = PwCheck(Pwd.current.value);
 
@@ -28,7 +26,7 @@ const Login: React.FC = (props) => {
     <div
       style={{
         width: "100%",
-        height:"500px",
+        height: "500px",
         textAlign: "center",
         border: "1px solid black",
       }}
@@ -75,7 +73,7 @@ const Login: React.FC = (props) => {
           </button>
         </div>
       </form>
-      <div onClick={()=>navigate('/signup')} >회원가입</div>
+      <div onClick={() => navigate("/signup")}>회원가입</div>
     </div>
   );
 };
