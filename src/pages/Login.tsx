@@ -9,11 +9,9 @@ const Login: React.FC = (props) => {
   const navigate = useNavigate();
   const checkLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!Id.current || !Pwd.current) {
-      return;
-    }
-    const checkId = IdCheck(Id.current.value);
-    const checkPw = PwCheck(Pwd.current.value);
+ 
+    const checkId = IdCheck(Id.current!.value);
+    const checkPw = PwCheck(Pwd.current!.value);
 
     if (!checkId || !checkPw) {
       alert("아이디 또는 비밀번호 형식이 틀립니다.");
