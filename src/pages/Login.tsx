@@ -9,9 +9,16 @@ const Login: React.FC = (props) => {
   const navigate = useNavigate();
   const checkLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
- 
-    const checkId = IdCheck(Id.current!.value);
-    const checkPw = PwCheck(Pwd.current!.value);
+ const curruntId = Id.current!.value; // 굳이 변수를 만든이유는 아래 if조건문에 trim 함수를 쓸려고할때 타입스크립트 에러발생하기때문
+ const currentPw = Pwd.current!.value;
+    const checkId = IdCheck(curruntId);
+    const checkPw = PwCheck(currentPw);
+
+    //빈칸 입력에 따른 조건처리
+if(curruntId.trim().length ===0 || currentPw.trim().length===0){
+   //throw an error
+   return;
+}
 
     if (!checkId || !checkPw) {
       alert("아이디 또는 비밀번호 형식이 틀립니다.");
