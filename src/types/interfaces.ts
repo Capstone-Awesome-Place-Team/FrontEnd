@@ -16,4 +16,22 @@ export interface PostPropsType {
     setCategory :Function
   }
 
+  export interface FavoritePropsType {
+    nickname: string,
+        like_list: [
+          {
+            restaurant_name: string,
+            img: string,
+            address: string,
+            star: number,
+            options: {
+              takeout: boolean,
+              parking: boolean,
+              pet: boolean,
+              nokids: boolean,
+            },
+          },
+        ],
+  }
+
   

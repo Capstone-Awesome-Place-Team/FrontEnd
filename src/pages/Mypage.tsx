@@ -1,24 +1,52 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Editprofile from "../components/mypage/EditProfile";
 import FavoriteList from "../components/mypage/FavoriteList";
 import FavoriteListMap from "../components/mypage/FavoriteListMap";
 
 import MypageCategory from "../components/mypage/MypageCategory";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/configStore";
+import { actionCreators } from "../redux/modules/favorite";
+//image
+import restaurant from '../static/image/header_profile.svg';
 
-
-
-const Mypage: React.FC =(props) =>{
-const [category, setCategory] = useState<string>('edit_profile');
-
-useEffect(()=>{
+const Mypage: React.FC = () => {
+  const dispatch = useDispatch();
+  const [category, setCategory] = useState<string>("edit_profile");
+  const info = useSelector((state: RootState) => state.favorite.list);
+  console.log(info);
+  useEffect(() => {
     // 모든 정보 get 요청 해서 redux 에 저장해놓기
-},[])
-    return(<div>
-        <MypageCategory setCategory={setCategory} category={category}/>
-        {category==='edit_profile'&&<Editprofile />}
-        {category==='favorite_list'&&<FavoriteList />}
-        {category==='favorite_list_map'&&<FavoriteListMap /> }
-    </div>)
-}
+    if (!info.length) {
+      dispatch(
+        actionCreators.getFavoriteList({
+          nickname: "test",
+          like_list: [
+            {
+              restaurant_name: "테스트 식당",
+              img: restaurant,
+              address: "서울특별시 어디가 좋을지 정하는 999",
+              star: 0,
+              options: {
+                takeout: false,
+                parking: true,
+                pet: false,
+                nokids: false,
+              },
+            },
+          ],
+        })
+      );
+    }
+  }, []);
+  return (
+    <div>
+      <MypageCategory setCategory={setCategory} category={category} />
+      {category === "edit_profile" && <Editprofile />}
+      {category === "favorite_list" && <FavoriteList {...info}/>}
+      {category === "favorite_list_map" && <FavoriteListMap {...info}/>}
+    </div>
+  );
+};
 
 export default Mypage;
