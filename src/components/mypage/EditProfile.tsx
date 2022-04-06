@@ -11,8 +11,8 @@ const Editprofile : React.FC = (props) => {
   
   const [Pwd, setPwd] = useState<string>();
   // const [PwdCheck, setPwdCheck] = useState();
-  const [nickName, setNickName] = useState<string>("초기닉네임");
-  const [changingNickName, setChangingNickName] = useState<string>(nickName);
+  const [nickName, setNickName] = useState<string>("초기닉네임"); // api 요청하여 초기값 넣어줄것
+  const [changingNickName, setChangingNickName] = useState<string>(); // 취소시 기존껄로 돌아가기위해 닉네임관련 변수 하나더 쓰는것
 
   const [PwMessage, setPwMessage] = useState<string>();
   const [NickMessage, setNickMessage] = useState<string>();
@@ -28,18 +28,19 @@ const Editprofile : React.FC = (props) => {
    //스피너 처리 나중에할것
   const edit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    const info = {
-      pw: Pwd,
-      nickname: nickName,
-    };
-    console.log(info);
-
+    
     if (PwMessageColor && NickMessageColor && PwCheckMessageColor) {
       console.log("요청모두 맞아서 api 호출");
       // API 호출
       // dispatch(SignUpDB(info)); // 닉네임, 비밀번호
-      setIsEdit(!isEdit); // 버튼 true/false
-      setNickName(changingNickName); // 실질적으로 내정보에서 보는 닉네임으로 최종 변경
+      
+      setNickName(changingNickName!); // 실질적으로 내정보에서 보는 닉네임으로 최종 변경
+      const info = {
+        pw: Pwd,
+        nickname: changingNickName,
+      };
+      resetAll();
+      console.log(info, changingNickName);
     }
   };
 
@@ -80,6 +81,18 @@ const Editprofile : React.FC = (props) => {
     }
   };
 
+  const resetAll = () =>{
+    setPwd('');
+      setChangingNickName('');
+      setNickMessageColor(false);
+      setPwMessageColor(false);
+      setPwdChekMessageColor(false);
+      setNickMessage('');
+      setPwMessage('');
+      setPwdChekMessage('');
+      setIsEdit(!isEdit); // 버튼 true/false
+  }
+
 
 
   
@@ -102,7 +115,7 @@ const Editprofile : React.FC = (props) => {
               <input
                 type="text"
                 id="nickname"
-                defaultValue={nickName}
+                defaultValue=''
                 onChange={nickNameCheck}
               ></input>
 
@@ -151,7 +164,7 @@ const Editprofile : React.FC = (props) => {
               <img src={edit_enter} alt="edit_enter" />
             </button>
             <button
-              onClick={() => setIsEdit(!isEdit)}
+              onClick={resetAll}
               style={{ border: "none", background: "none" }}
             >
               <img src={edit_cancel} alt="edit" />
