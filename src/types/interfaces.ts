@@ -31,7 +31,7 @@ export interface PostPropsType {
               nokids: boolean,
             },
           },
-        ],
+        ]
   }
 
   
