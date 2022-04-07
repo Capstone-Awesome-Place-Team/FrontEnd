@@ -8,14 +8,14 @@ const Post: React.FC<PostPropsType> = (props) => {
   return (
     <div style={{ display: "flex", justifyContent:"center", margin:"5px 0px", border:"1px solid black"}}>
       <img
-        src={header_profile}
+        src={props.img}
         alt="restaurant"
         width="89px"
         height="89px"
       ></img>
       <div className="content" style={{ margin:"5px 22px" }}>
         <div className="restaurant_name" style={{fontSize:"20px", fontWeight:"bold"}}>{props.restaurant_name}</div>
-        <div className="address">{props.address}</div>
+        <div className="address" style={{width:"237px"}}>{props.address}</div>
       </div>
       <div className="like" style={{ display:"flex", alignItems: "center" }}>
           <img src={heart_fill} alt="heart" />

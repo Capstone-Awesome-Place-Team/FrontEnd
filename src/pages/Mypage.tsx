@@ -19,23 +19,7 @@ const Mypage: React.FC = () => {
     // 모든 정보 get 요청 해서 redux 에 저장해놓기
     if (!info.length) {
       dispatch(
-        actionCreators.getFavoriteList({
-          nickname: "test",
-          like_list: [
-            {
-              restaurant_name: "테스트 식당",
-              img: restaurant,
-              address: "서울특별시 어디가 좋을지 정하는 999",
-              star: 0,
-              options: {
-                takeout: false,
-                parking: true,
-                pet: false,
-                nokids: false,
-              },
-            },
-          ],
-        })
+        actionCreators.getFavoriteListDB()
       );
     }
   }, []);
