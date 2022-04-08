@@ -1,27 +1,48 @@
 import React, { useState, useRef } from "react";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
 import { IdCheck, PwCheck, NicknameCheck } from "../shared/regex";
+import { actionCreators as userActions } from "../redux/modules/users";
+import { RootState } from "../redux/configStore";
+//image
+import example_logo from "../static/image/example_logo2.png";
+
+type Info = {
+  id: string;
+  pw: string;
+  nickname: string;
+};
 
 const Signup: React.FC = (props) => {
-  const [Id, setId] = useState();
-  const [Pwd, setPwd] = useState();
+  const dispatch = useDispatch();
+  const [Id, setId] = useState<string>();
+  const [Pwd, setPwd] = useState<string>();
   const [PwdCheck, setPwdCheck] = useState();
-  const [nickName, setNickName] = useState();
+  const [nickName, setNickName] = useState<string>();
 
-  const [IdMessage, setIdMessage] = useState<string>();
-  const [PwMessage, setPwMessage] = useState<string>();
-  const [NickMessage, setNickMessage] = useState<string>();
+  const [IdMessage, setIdMessage] = useState<string>(
+    "영문,숫자 15자 이내로 입력해주세요"
+  );
+  const [PwMessage, setPwMessage] = useState<string>(
+    "영대소문자, 숫자, 조합 8~15자로 입력해주세요."
+  );
+  const [NickMessage, setNickMessage] = useState<string>(
+    "한글, 영문, 숫자 15자 이내로 입력해주세요."
+  );
   const [PwCheckMessage, setPwdChekMessage] = useState<string>();
 
   const [IdMessageColor, setIdMessageColor] = useState<boolean>();
   const [PwMessageColor, setPwMessageColor] = useState<boolean>();
   const [NickMessageColor, setNickMessageColor] = useState<boolean>();
   const [PwCheckMessageColor, setPwdChekMessageColor] = useState<boolean>();
+
   const signUp = (event: any) => {
     event.preventDefault();
-    const info = {
-      id: Id,
-      pw: Pwd,
-      nickname: nickName,
+    const info: Info = {
+      id: Id!,
+      pw: Pwd!,
+      nickname: nickName!,
     };
     console.log(info);
 
@@ -33,50 +54,57 @@ const Signup: React.FC = (props) => {
     ) {
       console.log("요청모두 맞아서 api 호출");
       // API 호출
-      // dispatch(SignUpDB(info));
+      dispatch(userActions.SignUpDB(info));
     }
   };
   const idCheck = (event: any) => {
     const current_id = event.target.value;
     setId(current_id);
-    if (!IdCheck(current_id)) {
+    if (current_id.length < 1) {
+      setIdMessage("영문,숫자 15자 이내로 입력해주세요");
+    } else if (!IdCheck(current_id)) {
       setIdMessageColor(false);
-      setIdMessage("1~15자리 영대소문자,숫자 사용가능");
+      setIdMessage("유효하지않은 아이디입니다. 다시 입력해주세요.");
     } else {
       setIdMessageColor(true);
-      setIdMessage("규칙에 맞게 입력");
+      setIdMessage("사용능한 아이디입니다.");
     }
   };
-  const pwCheck = (event:any) => {
+  const pwCheck = (event: any) => {
     const current_pw = event.target.value;
     setPwd(current_pw);
-    console.log(PwCheck(current_pw));
-    if (!PwCheck(current_pw)) {
+    if (current_pw.length < 1) {
+      setPwMessage("영대소문자, 숫자, 조합 8~15자로 입력해주세요.");
+    } else if (!PwCheck(current_pw)) {
       setPwMessageColor(false);
-      setPwMessage("8~15자리 영대문자+숫자 조합으로 입력해주세요");
+      setPwMessage("유효하지않은 비밀번호입니다.");
     } else {
       setPwMessageColor(true);
-      setPwMessage("안전한 비밀번호");
+      setPwMessage("사용가능한 비밀번호입니다");
     }
   };
-  const pwDoubleCheck = (event : any) => {
+  const pwDoubleCheck = (event: any) => {
     const current_pwCheck = event.target.value;
     setPwdCheck(current_pwCheck);
-    if (current_pwCheck === Pwd) {
+    if (current_pwCheck < 1) {
+      setPwdChekMessage("");
+    } else if (current_pwCheck === Pwd) {
       setPwdChekMessageColor(true);
-      setPwdChekMessage("일치합니다.");
+      setPwdChekMessage("비밀번호가 동일합니다");
     } else {
       setPwdChekMessageColor(false);
-      setPwdChekMessage("불일치");
+      setPwdChekMessage("비밀번호가 일치하지 않습니다");
     }
   };
 
-  const nickNameCheck = (event : any) => {
+  const nickNameCheck = (event: any) => {
     const current_nickname = event.target.value;
     setNickName(current_nickname);
-    if (!NicknameCheck(current_nickname)) {
+    if (current_nickname.length < 1) {
+      setNickMessage("한글, 영문, 숫자 15자 이내로 입력해주세요");
+    } else if (!NicknameCheck(current_nickname)) {
       setNickMessageColor(false);
-      setNickMessage("영대소문자,숫자,한글 사용");
+      setNickMessage("유효하지않은 닉네임입니다.");
     } else {
       setNickMessageColor(true);
       setNickMessage("사용가능한 닉네임입니다.");
@@ -84,51 +112,180 @@ const Signup: React.FC = (props) => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        // height: "500px",
-        textAlign: "center",
-        border: "1px solid black",
-      }}
-    >
+    <Wrap>
+      <ImgWrap>
+        <img src={example_logo} alt="로고"></img>
+      </ImgWrap>
       <form onSubmit={signUp}>
-        <div className="IdInput">
-          <label htmlFor="Id">아이디 입력(영문/숫자)</label>
-          <br />
-          <input type="text" id="Id" onChange={idCheck}></input>
-          <div style={{ color: IdMessageColor ? "green" : "red" }}>
-            {IdMessage}
-          </div>
-        </div>
-        <div className="nickName">
-          <label htmlFor="nickname">닉네임</label>
-          <br />
-          <input type="text" id="nickname" onChange={nickNameCheck}></input>
-          <div style={{ color: NickMessageColor ? "green" : "red" }}>
-            {NickMessage}
-          </div>
-        </div>
-        <div className="PwdInput">
-          <label htmlFor="Pwd">비밀번호 입력</label>
-          <br />
-          <input type="password" id="Pwd" onChange={pwCheck}></input>
-          <div style={{ color: PwMessageColor ? "green" : "red" }}>
-            {PwMessage}
-          </div>
-        </div>
-        <div className="PwdCheckInput">
-          <label htmlFor="PwdCheck">비밀번호 확인</label>
-          <br />
-          <input type="password" id="PwdCheck" onChange={pwDoubleCheck}></input>
-          <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
-            {PwCheckMessage}
-          </div>
-        </div>
-        <button>확인</button>
+        <InputWrap>
+          <Div>
+            <Label htmlFor="Id">아이디 입력(영문/숫자)</Label>
+            <Input type="text" id="Id" onChange={idCheck} pw></Input>
+            {Id ? (
+              <div
+                style={{
+                  color: IdMessageColor ? "green" : "red",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                }}
+              >
+                {IdMessage}
+              </div>
+            ) : (
+              <div
+                style={{
+                  color: "#A0A0A0",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                }}
+              >
+                {IdMessage}
+              </div>
+            )}
+          </Div>
+          <Div>
+            <Label htmlFor="nickname">닉네임</Label>
+
+            <Input
+              type="text"
+              id="nickname"
+              onChange={nickNameCheck}
+              pw
+            ></Input>
+            {nickName ? (
+              <div
+                style={{
+                  color: NickMessageColor ? "green" : "red",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                }}
+              >
+                {NickMessage}
+              </div>
+            ) : (
+              <div
+                style={{
+                  color: "#A0A0A0",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                }}
+              >
+                {NickMessage}
+              </div>
+            )}
+          </Div>
+          <Div>
+            <Label htmlFor="Pwd">비밀번호</Label>
+
+            <Input type="password" id="Pwd" onChange={pwCheck} pw></Input>
+            {Pwd ? (
+              <div
+                style={{
+                  color: PwMessageColor ? "green" : "red",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                }}
+              >
+                {PwMessage}
+              </div>
+            ) : (
+              <div
+                style={{
+                  color: "#A0A0A0",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                }}
+              >
+                {PwMessage}
+              </div>
+            )}
+          </Div>
+          <Div check>
+            <Label htmlFor="PwdCheck">비밀번호 확인</Label>
+
+            <Input
+              type="password"
+              id="PwdCheck"
+              onChange={pwDoubleCheck}
+              pw
+            ></Input>
+            <div
+              style={{
+                color: PwCheckMessageColor ? "green" : "red",
+                fontSize: "10px",
+                fontWeight: "bold",
+              }}
+            >
+              {PwCheckMessage}
+            </div>
+          </Div>
+        </InputWrap>
+        <ButtonWrap>
+          <Button backColor>회원가입</Button>
+        </ButtonWrap>
       </form>
-    </div>
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  max-width: 481px;
+  height: 640px;
+  border: 1px solid #9f9f9f;
+  margin: auto;
+  @media (max-width: 576px) {
+    border: none;
+  }
+`;
+
+const ImgWrap = styled.div`
+  width: 186px;
+  margin: 40px auto;
+`;
+
+const InputWrap = styled.div`
+  width: 236px;
+  margin: auto;
+`;
+
+const Label = styled.label`
+  color: #747474;
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  display: block;
+  margin: ${(props: { pw: boolean }) => (props.pw ? `0px` : `0 0 35px 0`)};
+  width: 236px;
+  height: 30px;
+  border: solid 1px #747474;
+`;
+
+const ButtonWrap = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Button = styled.button`
+  width: 217px;
+  height: 32px;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: ${(props: { backColor: boolean }) =>
+    props.backColor ? `#E22F2F` : `#747474`};
+  border-radius: 17px;
+  margin: 89px 0px 16px 0px;
+  margin: ${(props: { MarginLogin: boolean }) =>
+    props.MarginLogin ? `89px 0px 16px 0px` : `0px 0px 23px 0px`};
+`;
+
+const Div = styled.div`
+  height: 71px;
+  height: ${(props: { check: boolean }) => (props.check ? `105px` : `71px`)};
+`;
 
 export default Signup;
