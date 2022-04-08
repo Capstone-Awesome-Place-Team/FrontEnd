@@ -1,5 +1,9 @@
 import React, { useState, useRef } from "react";
+import styled from "styled-components";
 import { IdCheck, PwCheck, NicknameCheck } from "../shared/regex";
+
+//image
+import example_logo from "../static/image/example_logo2.png";
 
 const Signup: React.FC = (props) => {
   const [Id, setId] = useState();
@@ -47,7 +51,7 @@ const Signup: React.FC = (props) => {
       setIdMessage("규칙에 맞게 입력");
     }
   };
-  const pwCheck = (event:any) => {
+  const pwCheck = (event: any) => {
     const current_pw = event.target.value;
     setPwd(current_pw);
     console.log(PwCheck(current_pw));
@@ -59,7 +63,7 @@ const Signup: React.FC = (props) => {
       setPwMessage("안전한 비밀번호");
     }
   };
-  const pwDoubleCheck = (event : any) => {
+  const pwDoubleCheck = (event: any) => {
     const current_pwCheck = event.target.value;
     setPwdCheck(current_pwCheck);
     if (current_pwCheck === Pwd) {
@@ -71,7 +75,7 @@ const Signup: React.FC = (props) => {
     }
   };
 
-  const nickNameCheck = (event : any) => {
+  const nickNameCheck = (event: any) => {
     const current_nickname = event.target.value;
     setNickName(current_nickname);
     if (!NicknameCheck(current_nickname)) {
@@ -84,51 +88,120 @@ const Signup: React.FC = (props) => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        // height: "500px",
-        textAlign: "center",
-        border: "1px solid black",
-      }}
-    >
+    <Wrap>
+      <ImgWrap>
+        <img src={example_logo} alt="로고"></img>
+      </ImgWrap>
       <form onSubmit={signUp}>
-        <div className="IdInput">
-          <label htmlFor="Id">아이디 입력(영문/숫자)</label>
-          <br />
-          <input type="text" id="Id" onChange={idCheck}></input>
-          <div style={{ color: IdMessageColor ? "green" : "red" }}>
-            {IdMessage}
-          </div>
-        </div>
-        <div className="nickName">
-          <label htmlFor="nickname">닉네임</label>
-          <br />
-          <input type="text" id="nickname" onChange={nickNameCheck}></input>
-          <div style={{ color: NickMessageColor ? "green" : "red" }}>
-            {NickMessage}
-          </div>
-        </div>
-        <div className="PwdInput">
-          <label htmlFor="Pwd">비밀번호 입력</label>
-          <br />
-          <input type="password" id="Pwd" onChange={pwCheck}></input>
-          <div style={{ color: PwMessageColor ? "green" : "red" }}>
-            {PwMessage}
-          </div>
-        </div>
-        <div className="PwdCheckInput">
-          <label htmlFor="PwdCheck">비밀번호 확인</label>
-          <br />
-          <input type="password" id="PwdCheck" onChange={pwDoubleCheck}></input>
-          <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
-            {PwCheckMessage}
-          </div>
-        </div>
-        <button>확인</button>
+        <InputWrap>
+          <Div>
+            <Label htmlFor="Id">아이디 입력(영문/숫자)</Label>
+            <Input type="text" id="Id" onChange={idCheck} pw></Input>
+            <div style={{ color: IdMessageColor ? "green" : "red" }}>
+              {IdMessage}
+            </div>
+          </Div>
+          <Div>
+            <Label htmlFor="nickname">닉네임</Label>
+
+            <Input
+              type="text"
+              id="nickname"
+              onChange={nickNameCheck}
+              pw
+            ></Input>
+            <div style={{ color: NickMessageColor ? "green" : "red" }}>
+              {NickMessage}
+            </div>
+          </Div>
+          <Div>
+            <Label htmlFor="Pwd">비밀번호 입력</Label>
+
+            <Input type="password" id="Pwd" onChange={pwCheck} pw></Input>
+            <div style={{ color: PwMessageColor ? "green" : "red" }}>
+              {PwMessage}
+            </div>
+          </Div>
+          <Div check>
+            <Label htmlFor="PwdCheck">비밀번호 확인</Label>
+
+            <Input
+              type="password"
+              id="PwdCheck"
+              onChange={pwDoubleCheck}
+              pw
+            ></Input>
+            <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
+              {PwCheckMessage}
+            </div>
+          </Div>
+        </InputWrap>
+        <ButtonWrap>
+          <Button backColor>회원가입</Button>
+        </ButtonWrap>
       </form>
-    </div>
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  max-width: 481px;
+  height: 640px;
+  border: 1px solid #9f9f9f;
+  margin: auto;
+  @media (max-width: 576px) {
+    border: none;
+  }
+`;
+
+const ImgWrap = styled.div`
+  width: 186px;
+  margin: 40px auto;
+`;
+
+const InputWrap = styled.div`
+  width: 236px;
+  margin: auto;
+`;
+
+const Label = styled.label`
+  color: #747474;
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  display: block;
+  margin: ${(props: { pw: boolean }) => (props.pw ? `0px` : `0 0 35px 0`)};
+  width: 236px;
+  height: 30px;
+  border: solid 1px #747474;
+`;
+
+const ButtonWrap = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Button = styled.button`
+  width: 217px;
+  height: 32px;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: ${(props: { backColor: boolean }) =>
+    props.backColor ? `#E22F2F` : `#747474`};
+  border-radius: 17px;
+  margin: 89px 0px 16px 0px;
+  margin: ${(props: { MarginLogin: boolean }) =>
+    props.MarginLogin ? `89px 0px 16px 0px` : `0px 0px 23px 0px`};
+`;
+
+const Div = styled.div`
+  height: 71px;
+  height: ${(props: { check: boolean }) => (props.check ? `105px` : `71px`)};
+`;
 
 export default Signup;
