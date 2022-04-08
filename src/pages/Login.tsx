@@ -59,11 +59,14 @@ const Wrap = styled.div`
   height: 640px;
   border: 1px solid #9f9f9f;
   margin: auto;
+  @media (max-width:576px){
+    border:none;
+  }
 `;
 
 const ImgWrap = styled.div`
   width: 186px;
-  margin: 44px auto;
+  margin: 40px auto;
 `;
 const InputWrap = styled.div`
   width: 236px;
@@ -80,12 +83,13 @@ const Label = styled.label`
   color: #747474;
   font-size: 14px;
   font-weight: bold;
+  
 `;
 //input button 재활용 element 로 나중에 다시 만들것
 const Input = styled.input`
   display: block;
   margin: ${(props: { pw: boolean }) =>
-    props.pw ? `0 0 5px 0` : `0 0 53px 0`};
+    props.pw ? `0px` : `0 0 35px 0`};
   width: 236px;
   height: 30px;
   border: solid 1px #747474;
@@ -95,6 +99,8 @@ const Button = styled.button`
   width: 217px;
   height: 32px;
   border: none;
+  font-size: 18px;
+  font-weight:bold;
   color: white;
   background: ${(props: { backColor: boolean }) =>
     props.backColor ? `#E22F2F` : `#747474`};
@@ -106,7 +112,8 @@ const Button = styled.button`
 
 const P = styled.p`
   text-align: center;
-  color: #a0a0a0;
+  color: #A0A0A0
+;
   font-size: 13px;
   font-weight: bold;
 `;
