@@ -3,18 +3,27 @@ import { IdCheck, PwCheck } from "../shared/regex";
 import example_logo from "../static/image/example_logo2.png";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/configStore";
+import { actionCreators as userActions } from "../redux/modules/users";
 const Login: React.FC = (props) => {
   const Id = useRef<HTMLInputElement>(null);
   const Pwd = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user_info = useSelector((state: RootState)=>(state.user.user))
+  console.log(user_info)
+
   const checkLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const curruntId = Id.current!.value; // 굳이 변수를 만든이유는 아래 if조건문에 trim 함수를 쓸려고할때 타입스크립트 에러발생하기때문
     const currentPw = Pwd.current!.value;
     const checkId = IdCheck(curruntId);
     const checkPw = PwCheck(currentPw);
-
+    const user = {
+      id:curruntId,
+      pw:currentPw
+    }
     //빈칸 입력에 따른 조건처리
     if (curruntId.trim().length === 0 || currentPw.trim().length === 0) {
       //throw an error
@@ -25,6 +34,7 @@ const Login: React.FC = (props) => {
       alert("아이디 또는 비밀번호 형식이 틀립니다.");
     } else {
       console.log("API 통신 보내기");
+      dispatch(userActions.LoginDB(user))
       // 로그인 API 보내기
     }
   };
@@ -72,8 +82,6 @@ const InputWrap = styled.div`
   width: 236px;
   margin: auto;
 `;
-
-
 
 const Label = styled.label`
   color: #747474;

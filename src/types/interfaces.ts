@@ -34,4 +34,15 @@ export interface PostPropsType {
         ]
   }
 
+  export interface SetUser {
+    id:string,
+    pw:string,
+  }
+  
+  export interface Signup {
+    id:string,
+    pw:string,
+    nickname:string
+  }
+
   
