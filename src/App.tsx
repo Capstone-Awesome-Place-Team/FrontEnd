@@ -11,14 +11,13 @@ const App: React.FC = () =>{
   return (
     <div>
     <Header />
-    <BodyGlobal>
+  
     <Routes>
       <Route path='/' element={<Main />} />
       <Route path="signin" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="mypage" element={<Mypage />} />
     </Routes>
-    </BodyGlobal>
     </div>
   );
 }

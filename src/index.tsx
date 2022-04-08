@@ -8,13 +8,16 @@ import App from './App';
 
 import Global from './shared/Global'
 import GlobalStyle from './shared/GlobalStyle'
+import BodyGlobal from './shared/BodyGlobal'
 
 ReactDOM.render(
   <Provider store={store}> 
   <BrowserRouter>
   <Global>
     <GlobalStyle />
+    <BodyGlobal>
     <App />
+    </BodyGlobal>
     </Global>
   </BrowserRouter>
   </Provider>,
