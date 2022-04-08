@@ -29,52 +29,52 @@ const Login: React.FC = (props) => {
     }
   };
   return (
-    <div
-      style={{
-        maxWidth: "481px",
-        height: "640px",
-        border: "1px solid #9F9F9F",
-        margin: "auto",
-      }}
-    >
-      <div style={{ width: "186px", margin: "44px auto" }}>
-        <img src={example_logo} alt="로고" width="186px"></img>
-      </div>
+    <Wrap>
+      <ImgWrap>
+        <img src={example_logo} alt="로고"></img>
+      </ImgWrap>
       <form onSubmit={checkLogin}>
-        <div style={{ width: "236px", margin: "auto" }}>
+        <InputWrap>
           <Label htmlFor="id">아이디 입력</Label>
           <Input type="text" id="id" ref={Id} placeholder="ID"></Input>
           <Label htmlFor="pwd">비밀번호 입력</Label>
           <Input type="text" id="pwd" ref={Pwd} placeholder="PW" pw></Input>
-        </div>
-        <div
-          style={{
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        </InputWrap>
+        <ButtonWrap>
           <Button type="submit" MarginLogin backColor>
             로그인
           </Button>
           <Button type="button" onClick={() => navigate("/signup")}>
             회원가입
           </Button>
-        </div>
-        <p
-          style={{
-            textAlign: "center",
-            color: "#A0A0A0",
-            fontSize: "13px",
-            fontWeight: "bold",
-          }}
-        >
-          회원가입하고 어썸플레이스의 다양한 서비스를 누려보세요!
-        </p>
+        </ButtonWrap>
+        <P>회원가입하고 어썸플레이스의 다양한 서비스를 누려보세요!</P>
       </form>
-    </div>
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  max-width: 481px;
+  height: 640px;
+  border: 1px solid #9f9f9f;
+  margin: auto;
+`;
+
+const ImgWrap = styled.div`
+  width: 186px;
+  margin: 44px auto;
+`;
+const InputWrap = styled.div`
+  width: 236px;
+  margin: auto;
+`;
+
+const ButtonWrap = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
 
 const Label = styled.label`
   color: #747474;
@@ -104,4 +104,10 @@ const Button = styled.button`
     props.MarginLogin ? `89px 0px 16px 0px` : `0px 0px 23px 0px`};
 `;
 
+const P = styled.p`
+  text-align: center;
+  color: #a0a0a0;
+  font-size: 13px;
+  font-weight: bold;
+`;
 export default Login;
