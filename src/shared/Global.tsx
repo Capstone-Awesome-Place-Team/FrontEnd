@@ -3,8 +3,8 @@ const Global: React.FC = (props) => {
     <div
       style={{
         width: "100%",
-        maxWidth: "700px",
-        minWidth: "350px",
+        maxWidth: "720px",
+        minWidth: "360px",
         margin: "auto",
         position: "fixed",
         right: "50%",
