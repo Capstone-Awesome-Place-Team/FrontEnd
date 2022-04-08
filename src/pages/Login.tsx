@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { IdCheck, PwCheck } from "../shared/regex";
 import example_logo from "../static/image/example_logo2.png";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const Login: React.FC = (props) => {
   const Id = useRef<HTMLInputElement>(null);
@@ -31,7 +32,7 @@ const Login: React.FC = (props) => {
     <div
       style={{
         maxWidth: "481px",
-        maxHeight: "649px",
+        height: "640px",
         border: "1px solid #9F9F9F",
         margin: "auto",
       }}
@@ -41,38 +42,10 @@ const Login: React.FC = (props) => {
       </div>
       <form onSubmit={checkLogin}>
         <div style={{ width: "236px", margin: "auto" }}>
-          <label htmlFor="id" style={{ color: "#747474" }}>
-            아이디 입력
-          </label>
-          <input
-            type="text"
-            id="id"
-            ref={Id}
-            placeholder="ID"
-            style={{
-              display: "block",
-              margin: "0px 0px 53px 0px",
-              width: "236px",
-              height: "30px",
-              border: "solid 1px #747474",
-            }}
-          ></input>
-          <label htmlFor="pwd" style={{ color: "#747474" }}>
-            비밀번호 입력
-          </label>
-          <input
-            type="text"
-            id="pwd"
-            ref={Pwd}
-            placeholder="PW"
-            style={{
-              display: "block",
-              margin: "5px 0px",
-              width: "236px",
-              height: "30px",
-              border: "solid 1px #747474",
-            }}
-          ></input>
+          <Label htmlFor="id">아이디 입력</Label>
+          <Input type="text" id="id" ref={Id} placeholder="ID"></Input>
+          <Label htmlFor="pwd">비밀번호 입력</Label>
+          <Input type="text" id="pwd" ref={Pwd} placeholder="PW" pw></Input>
         </div>
         <div
           style={{
@@ -81,40 +54,54 @@ const Login: React.FC = (props) => {
             flexDirection: "column",
           }}
         >
-          <button
-            type="submit"
-            style={{
-              width: "217px",
-              height: "32px",
-              border: "none",
-              color: "white",
-              background: "#E22F2F",
-              borderRadius: "17px",
-              margin: "89px 0px 16px 0px",
-            }}
-          >
+          <Button type="submit" MarginLogin backColor>
             로그인
-          </button>
-          <button
-            type="button"
-            style={{
-              width: "217px",
-              height: "32px",
-              border: "none",
-              color: "white",
-              background: "#747474",
-              borderRadius: "17px",
-              margin: "0px 0px 23px 0px"
-            }}
-            onClick={() => navigate("/signup")}
-          >
+          </Button>
+          <Button type="button" onClick={() => navigate("/signup")}>
             회원가입
-          </button>
+          </Button>
         </div>
-        <p style={{textAlign:"center", color:"#A0A0A0", fontSize:"13px", fontWeight:"bold"}}>회원가입하고 어썸플레이스의 다양한 서비스를 누려보세요!</p>
+        <p
+          style={{
+            textAlign: "center",
+            color: "#A0A0A0",
+            fontSize: "13px",
+            fontWeight: "bold",
+          }}
+        >
+          회원가입하고 어썸플레이스의 다양한 서비스를 누려보세요!
+        </p>
       </form>
     </div>
   );
 };
+
+const Label = styled.label`
+  color: #747474;
+  font-size: 14px;
+  font-weight: bold;
+`;
+//input button 재활용 element 로 나중에 다시 만들것
+const Input = styled.input`
+  display: block;
+  margin: ${(props: { pw: boolean }) =>
+    props.pw ? `0 0 5px 0` : `0 0 53px 0`};
+  width: 236px;
+  height: 30px;
+  border: solid 1px #747474;
+`;
+
+const Button = styled.button`
+  width: 217px;
+  height: 32px;
+  border: none;
+  color: white;
+  background: ${(props: { backColor: boolean }) =>
+    props.backColor ? `#E22F2F` : `#747474`};
+  border-radius: 17px;
+  margin: 89px 0px 16px 0px;
+  margin: ${(props: { MarginLogin: boolean }) =>
+    props.MarginLogin ? `89px 0px 16px 0px` : `0px 0px 23px 0px`};
+`;
 
 export default Login;
