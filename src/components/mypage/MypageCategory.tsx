@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MypageCategoryType } from "../../types/interfaces";
 
-
-
+//image
+import my_info_tab from "../../static/image/my_info_tab.svg"
+import favorite_tab from "../../static/image/favorite_list_tab.svg"
+import my_map_tab from "../../static/image/my_map_tab.svg"
  interface clickedType {
   clicked: string
  }
@@ -15,30 +17,34 @@ const MypageCategory: React.FC<MypageCategoryType> = (props) => {
     <div
       style={{
         display: "flex",
-        color: "#E22F2F",
-        fontSize: "25px",
-        fontWeight: "bold",
-        justifyContent: "center",
+        // color: "#E22F2F",
+        // fontSize: "25px",
+        // fontWeight: "bold",
+        // justifyContent: "center",
+        margin: "auto",
+        width: "528px",
       }}
     >
       <Element onClick={() => setCategory("edit_profile")} clicked={category}>
-        내 정보
+       <img src={my_info_tab} alt="my_info"></img>
       </Element>
       <Element onClick={() => setCategory("favorite_list")} clicked={category}>
-        내 찜 목록
+      <img src={favorite_tab} alt="my_info"></img>
       </Element>
       <Element
         onClick={() => setCategory("favorite_list_map")}
         clicked={category}
       >
-        나만의 맛집 지도
+        <img src={my_map_tab} alt="my_info"></img>
       </Element>
     </div>
   );
 };
 
 const Element = styled.div`
-  margin: 0 10px;
+/* width:176px, */
+  height: 53px;
+  /* margin: 0 10px; */
   &:hover {
     cursor: pointer;
   }
