@@ -11,7 +11,6 @@ const App: React.FC = () =>{
   return (
     <div>
     <Header />
-  
     <Routes>
       <Route path='/' element={<Main />} />
       <Route path="signin" element={<Login />} />

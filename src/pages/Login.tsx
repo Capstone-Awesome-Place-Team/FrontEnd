@@ -6,6 +6,9 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/configStore";
 import { actionCreators as userActions } from "../redux/modules/users";
+
+import back_arrow from '../static/image/back_arrow.svg'
+
 const Login: React.FC = (props) => {
   const Id = useRef<HTMLInputElement>(null);
   const Pwd = useRef<HTMLInputElement>(null);

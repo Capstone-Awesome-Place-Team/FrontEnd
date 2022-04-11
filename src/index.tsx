@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import store from './redux/configStore';
 import App from './App';
 
-
 import Global from './shared/Global'
 import GlobalStyle from './shared/GlobalStyle'
 import BodyGlobal from './shared/BodyGlobal'

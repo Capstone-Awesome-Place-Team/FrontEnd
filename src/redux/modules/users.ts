@@ -1,8 +1,9 @@
 import { apis } from "../../shared/api/apis";
 import { Dispatch } from "redux";
 import { createAction } from "redux-actions";
-
+// import { useNavigate } from "react-router-dom";
 import { SetUser, Signup } from "../../types/interfaces";
+import { useNavigate } from "react-router-dom";
 
 //actions
 
@@ -19,11 +20,13 @@ const initialState = {
 
 //Middleware
 
-const SignUpDB = (user: Signup) => {
-  return function (dispatch: Dispatch) {
+const SignUpDB = (user: Signup, navigate:any) => {
+  return async function (dispatch: Dispatch) {
     try {
+      
       console.log(user);
-      // const res = apis.signUp(user); // api생기면 넣기
+      // const res = await apis.signUp(user); // api생기면 넣기
+      navigate('/signin') //회원가입완료후 로그인화면으로
     } catch (error) {
       console.log(error);
     }

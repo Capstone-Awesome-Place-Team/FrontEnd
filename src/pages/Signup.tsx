@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { IdCheck, PwCheck, NicknameCheck } from "../shared/regex";
 import { actionCreators as userActions } from "../redux/modules/users";
 import { RootState } from "../redux/configStore";
 //image
 import example_logo from "../static/image/example_logo2.png";
+import back_arrow from "../static/image/back_arrow.svg";
 
 type Info = {
   id: string;
@@ -15,10 +16,11 @@ type Info = {
 };
 
 const Signup: React.FC = (props) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [Id, setId] = useState<string>();
   const [Pwd, setPwd] = useState<string>();
-  const [PwdCheck, setPwdCheck] = useState();
+  const [PwdCheck, setPwdCheck] = useState<string>("");
   const [nickName, setNickName] = useState<string>();
 
   const [IdMessage, setIdMessage] = useState<string>(
@@ -54,7 +56,7 @@ const Signup: React.FC = (props) => {
     ) {
       console.log("요청모두 맞아서 api 호출");
       // API 호출
-      dispatch(userActions.SignUpDB(info));
+      dispatch(userActions.SignUpDB(info, navigate));
     }
   };
   const idCheck = (event: any) => {
@@ -73,6 +75,11 @@ const Signup: React.FC = (props) => {
   const pwCheck = (event: any) => {
     const current_pw = event.target.value;
     setPwd(current_pw);
+    //비밀번호 다시 입력시 비밀번호확인 초기화
+    setPwdCheck("");
+    setPwdChekMessage("");
+    setPwdChekMessageColor(false);
+   
     if (current_pw.length < 1) {
       setPwMessage("영대소문자, 숫자, 조합 8~15자로 입력해주세요.");
     } else if (!PwCheck(current_pw)) {
@@ -88,6 +95,7 @@ const Signup: React.FC = (props) => {
     setPwdCheck(current_pwCheck);
     if (current_pwCheck < 1) {
       setPwdChekMessage("");
+      setPwdChekMessageColor(false);
     } else if (current_pwCheck === Pwd) {
       setPwdChekMessageColor(true);
       setPwdChekMessage("비밀번호가 동일합니다");
@@ -113,6 +121,12 @@ const Signup: React.FC = (props) => {
 
   return (
     <Wrap>
+      <img
+        src={back_arrow}
+        alt="뒤로가기"
+        onClick={() => navigate("/signin")}
+        style={{ margin: "15px 0 0 15px" }}
+      ></img>
       <ImgWrap>
         <img src={example_logo} alt="로고"></img>
       </ImgWrap>
@@ -124,9 +138,10 @@ const Signup: React.FC = (props) => {
             {Id ? (
               <div
                 style={{
-                  color: IdMessageColor ? "green" : "red",
+                  color: IdMessageColor ? "#59B200" : "#E22F2F",
                   fontSize: "10px",
                   fontWeight: "bold",
+                  textAlign: "right",
                 }}
               >
                 {IdMessage}
@@ -137,6 +152,7 @@ const Signup: React.FC = (props) => {
                   color: "#A0A0A0",
                   fontSize: "10px",
                   fontWeight: "bold",
+                  textAlign: "right",
                 }}
               >
                 {IdMessage}
@@ -155,9 +171,10 @@ const Signup: React.FC = (props) => {
             {nickName ? (
               <div
                 style={{
-                  color: NickMessageColor ? "green" : "red",
+                  color: NickMessageColor ? "#59B200" : "#E22F2F",
                   fontSize: "10px",
                   fontWeight: "bold",
+                  textAlign: "right",
                 }}
               >
                 {NickMessage}
@@ -168,6 +185,7 @@ const Signup: React.FC = (props) => {
                   color: "#A0A0A0",
                   fontSize: "10px",
                   fontWeight: "bold",
+                  textAlign: "right",
                 }}
               >
                 {NickMessage}
@@ -181,9 +199,10 @@ const Signup: React.FC = (props) => {
             {Pwd ? (
               <div
                 style={{
-                  color: PwMessageColor ? "green" : "red",
+                  color: PwMessageColor ? "#59B200" : "#E22F2F",
                   fontSize: "10px",
                   fontWeight: "bold",
+                  textAlign: "right",
                 }}
               >
                 {PwMessage}
@@ -207,13 +226,15 @@ const Signup: React.FC = (props) => {
               type="password"
               id="PwdCheck"
               onChange={pwDoubleCheck}
+              value={PwdCheck}
               pw
             ></Input>
             <div
               style={{
-                color: PwCheckMessageColor ? "green" : "red",
+                color: PwCheckMessageColor ? "#59B200" : "#E22F2F",
                 fontSize: "10px",
                 fontWeight: "bold",
+                textAlign: "right",
               }}
             >
               {PwCheckMessage}
@@ -240,7 +261,7 @@ const Wrap = styled.div`
 
 const ImgWrap = styled.div`
   width: 186px;
-  margin: 40px auto;
+  margin: 7px auto;
 `;
 
 const InputWrap = styled.div`
