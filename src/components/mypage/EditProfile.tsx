@@ -98,10 +98,10 @@ const Editprofile: React.FC = (props) => {
         height: "75vh",
         textAlign: "center",
         border: "2px solid #747474",
-        borderTop:"none",
+        borderTop: "none",
         boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
         // filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
-       
+        borderRadius:"0 0 20px 20px",
         padding: "5px",
         margin: "auto",
       }}
