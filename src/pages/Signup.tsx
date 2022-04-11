@@ -8,7 +8,8 @@ import { RootState } from "../redux/configStore";
 //image
 import example_logo from "../static/image/example_logo2.png";
 import back_arrow from "../static/image/back_arrow.svg";
-
+import check_line from "../static/image/check-line.svg";
+import close_line from "../static/image/close-line.svg"
 type Info = {
   id: string;
   pw: string;
@@ -138,13 +139,17 @@ const Signup: React.FC = (props) => {
             {Id ? (
               <div
                 style={{
+                 
                   color: IdMessageColor ? "#59B200" : "#E22F2F",
+                  display: "flex",
                   fontSize: "10px",
                   fontWeight: "bold",
-                  textAlign: "right",
+                  justifyContent: "right",
+                  alignItems:"center"
                 }}
               >
                 {IdMessage}
+                {IdMessage?IdMessageColor?<img src={check_line} alt="check"></img>:<img src={close_line} alt="close"></img>:null}
               </div>
             ) : (
               <div
@@ -172,12 +177,15 @@ const Signup: React.FC = (props) => {
               <div
                 style={{
                   color: NickMessageColor ? "#59B200" : "#E22F2F",
+                  display: "flex",
                   fontSize: "10px",
                   fontWeight: "bold",
-                  textAlign: "right",
+                  justifyContent: "right",
+                  alignItems:"center"
                 }}
               >
                 {NickMessage}
+                {NickMessage?NickMessageColor?<img src={check_line} alt="check"></img>:<img src={close_line} alt="close"></img>:null}
               </div>
             ) : (
               <div
@@ -189,6 +197,7 @@ const Signup: React.FC = (props) => {
                 }}
               >
                 {NickMessage}
+                
               </div>
             )}
           </Div>
@@ -200,12 +209,15 @@ const Signup: React.FC = (props) => {
               <div
                 style={{
                   color: PwMessageColor ? "#59B200" : "#E22F2F",
+                  display: "flex",
                   fontSize: "10px",
                   fontWeight: "bold",
-                  textAlign: "right",
+                  justifyContent: "right",
+                  alignItems:"center"
                 }}
               >
                 {PwMessage}
+                {PwMessage?PwMessageColor?<img src={check_line} alt="check"></img>:<img src={close_line} alt="close"></img>:null}
               </div>
             ) : (
               <div
@@ -232,12 +244,15 @@ const Signup: React.FC = (props) => {
             <div
               style={{
                 color: PwCheckMessageColor ? "#59B200" : "#E22F2F",
+                display: "flex",
                 fontSize: "10px",
                 fontWeight: "bold",
-                textAlign: "right",
+                justifyContent: "right",
+                alignItems:"center"
               }}
             >
               {PwCheckMessage}
+              {PwCheckMessage?PwCheckMessageColor?<img src={check_line} alt="check"></img>:<img src={close_line} alt="close"></img>:null}
             </div>
           </Div>
         </InputWrap>
