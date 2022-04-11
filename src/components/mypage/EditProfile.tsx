@@ -5,6 +5,7 @@ import { IdCheck, PwCheck, NicknameCheck } from "../../shared/regex";
 import edit_button from "../../static/image/edit_button.svg";
 import edit_enter from "../../static/image/edit_enter.svg";
 import edit_cancel from "../../static/image/edit_cancel.svg";
+import me_edit from "../../static/image/me_edit.png";
 
 const Editprofile: React.FC = (props) => {
   const [Pwd, setPwd] = useState<string>();
@@ -93,11 +94,16 @@ const Editprofile: React.FC = (props) => {
   return (
     <div
       style={{
-        width: "100%",
-        // height: "500px",
+        width: "528px",
+        height: "75vh",
         textAlign: "center",
-        border: "1px solid black",
+        border: "2px solid #747474",
+        borderTop: "none",
+        boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
+        // filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
+        borderRadius:"0 0 20px 20px",
         padding: "5px",
+        margin: "auto",
       }}
     >
       <Wrap>
@@ -169,7 +175,7 @@ const Editprofile: React.FC = (props) => {
             onClick={() => setIsEdit(!isEdit)}
             style={{ border: "none", background: "none" }}
           >
-            <img src={edit_button} width="68px" height="31px" alt="edit" />
+            <img src={me_edit} alt="edit" />
           </button>
         )}
       </Wrap>
