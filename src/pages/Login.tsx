@@ -37,7 +37,7 @@ const Login: React.FC = (props) => {
       alert("아이디 또는 비밀번호 형식이 틀립니다.");
     } else {
       console.log("API 통신 보내기");
-      dispatch(userActions.LoginDB(user))
+      dispatch(userActions.LoginDB(user, navigate))
       // 로그인 API 보내기
     }
   };
@@ -51,7 +51,7 @@ const Login: React.FC = (props) => {
           <Label htmlFor="id">아이디 입력</Label>
           <Input type="text" id="id" ref={Id} placeholder="ID"></Input>
           <Label htmlFor="pwd">비밀번호 입력</Label>
-          <Input type="text" id="pwd" ref={Pwd} placeholder="PW" pw></Input>
+          <Input type="password" id="pwd" ref={Pwd} placeholder="PW" pw></Input>
         </InputWrap>
         <ButtonWrap>
           <Button type="submit" MarginLogin backColor>

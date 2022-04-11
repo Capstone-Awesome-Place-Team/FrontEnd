@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { createAction } from "redux-actions";
 // import { useNavigate } from "react-router-dom";
 import { SetUser, Signup } from "../../types/interfaces";
-import { useNavigate } from "react-router-dom";
+
 
 //actions
 
@@ -20,7 +20,7 @@ const initialState = {
 
 //Middleware
 
-const SignUpDB = (user: Signup, navigate:any) => {
+const SignUpDB = (user: Signup, navigate:Function) => {
   return async function (dispatch: Dispatch) {
     try {
       
@@ -33,12 +33,13 @@ const SignUpDB = (user: Signup, navigate:any) => {
   };
 };
 
-const LoginDB = (user: SetUser) => {
-  return function (dispatch: Dispatch) {
+const LoginDB = (user: SetUser, navigate:Function) => {
+  return async function (dispatch: Dispatch) {
     try {
       console.log(user);
-      //  const res = apis.setUser(user); // api생기면 넣기
+      //  const res = await apis.setUser(user); // api생기면 넣기
       dispatch(set_user(user));
+      navigate('/')
     } catch (error) {
       console.log(error);
     }
