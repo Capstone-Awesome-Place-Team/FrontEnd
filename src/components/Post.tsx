@@ -6,7 +6,7 @@ import {PostPropsType} from '../types/interfaces'
 
 const Post: React.FC<PostPropsType> = (props) => {
   return (
-    <div style={{ display: "flex", justifyContent:"center", margin:"5px 0px", border:"1px solid black"}}>
+    <div style={{ display: "flex", justifyContent:"center", margin:"0 0 5px 0", border:"1px solid black"}}>
       <img
         src={props.img}
         alt="restaurant"

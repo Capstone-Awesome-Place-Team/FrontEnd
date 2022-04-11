@@ -92,23 +92,12 @@ const Editprofile: React.FC = (props) => {
   };
 
   return (
-    <div
-      style={{
-        width: "528px",
-        height: "75vh",
-        textAlign: "center",
-        border: "2px solid #747474",
-        borderTop: "none",
-        boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
-        // filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
-        borderRadius:"0 0 20px 20px",
-        padding: "5px",
-        margin: "auto",
-      }}
+    <Container
+      
     >
       <Wrap>
         <div className="nickName">
-          <label htmlFor="nickname">내 닉네임</label>
+          <Label htmlFor="nickname">내 닉네임</Label>
           <br />
           {isEdit ? (
             <>
@@ -134,7 +123,7 @@ const Editprofile: React.FC = (props) => {
         {isEdit ? (
           <>
             <div className="PwdInput">
-              <label htmlFor="Pwd">비밀번호</label>
+              <Label htmlFor="Pwd">비밀번호</Label>
               <br />
               <input type="password" id="Pwd" onChange={pwCheck}></input>
               <div style={{ color: PwMessageColor ? "green" : "red" }}>
@@ -142,7 +131,7 @@ const Editprofile: React.FC = (props) => {
               </div>
             </div>
             <div className="PwdCheckInput">
-              <label htmlFor="PwdCheck">비밀번호 확인</label>
+              <Label htmlFor="PwdCheck">비밀번호 확인</Label>
               <br />
               <input
                 type="password"
@@ -179,14 +168,14 @@ const Editprofile: React.FC = (props) => {
           </button>
         )}
       </Wrap>
-    </div>
+    </Container>
   );
 };
 
 const Wrap = styled.div`
   & input {
-    height: 25px;
-    width: 150px;
+    height: 47px;
+    width: 269px;
     border: 1px solid #c1c1c1;
     background: #f0f0f0;
     border-radius: 22px;
@@ -199,5 +188,24 @@ const Wrap = styled.div`
     margin: 5px;
   }
 `;
+
+const Container = styled.div`
+   width: 528px;
+        height: 75vh;
+        text-align: center;
+        border: 2px solid #747474;
+        border-top: none;
+        box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+         /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+        border-radius:0 0 20px 20px;
+        // padding: "5px",
+        margin: auto;
+`
+
+const Label =styled.label`
+  font-size:20px;
+  color:#747474;
+  font-weight:bold;
+`
 
 export default Editprofile;
