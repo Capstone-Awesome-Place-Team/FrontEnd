@@ -1,4 +1,5 @@
 export interface PostPropsType {
+    r_code: number,
     restaurant_name: string;
     img: string;
     address: string;
@@ -20,6 +21,7 @@ export interface PostPropsType {
     nickname: string,
         like_list: [
           {
+            r_code:number,
             restaurant_name: string,
             img: string,
             address: string,

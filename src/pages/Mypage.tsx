@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/configStore";
 import { actionCreators } from "../redux/modules/favorite";
 //image
-import restaurant from '../static/image/header_profile.svg';
+import restaurant from "../static/image/header_profile.svg";
 
 const Mypage: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,17 +18,15 @@ const Mypage: React.FC = () => {
   useEffect(() => {
     // 모든 정보 get 요청 해서 redux 에 저장해놓기
     if (!info.length) {
-      dispatch(
-        actionCreators.getFavoriteListDB()
-      );
+      dispatch(actionCreators.getFavoriteListDB());
     }
   }, []);
   return (
     <div>
       <MypageCategory setCategory={setCategory} category={category} />
       {category === "edit_profile" && <Editprofile />}
-      {category === "favorite_list" && <FavoriteList {...info}/>}
-      {category === "favorite_list_map" && <FavoriteListMap {...info}/>}
+      {category === "favorite_list" && <FavoriteList {...info} />}
+      {category === "favorite_list_map" && <FavoriteListMap {...info} />}
     </div>
   );
 };
