@@ -4,20 +4,22 @@ import { createAction } from "redux-actions";
 import { FavoritePropsType } from "../../types/interfaces";
 
 import { dummyfiles } from "../../shared/dummy";
-
+import {Edit_info} from "../../types/interfaces"
 //actions
 console.log(dummyfiles);
 const GET_FAVORITELIST = "GETFAVORITELIST";
 const CANCEL_FAVORITE = "CANCELFAVORITE";
+const EDIT_INFO ="EDITINFO";
 //action creators
 const getFavoriteList = createAction(
   GET_FAVORITELIST,
   (list: FavoritePropsType) => ({ list })
 ); // list이름은 일단 넣어놓고 다른 변수로 일치해야하면 다시바꿀것
-const cancelFavorite = createAction(
-  CANCEL_FAVORITE,
-  (r_code: number) => ({ r_code })
-);
+const cancelFavorite = createAction(CANCEL_FAVORITE, (r_code: number) => ({
+  r_code,
+}));
+
+const editInfo = createAction(EDIT_INFO, (nickanme:string)=>({nickanme}))
 // const getFavoriteList = (list: any) => ({
 //   type: GET_FAVORITELIST,
 //   list,
@@ -30,7 +32,7 @@ const initialState = {
     nickname: "",
     like_list: [
       {
-        r_code:0,
+        r_code: 0,
         restaurant_name: "",
         img: "",
         address: "",
@@ -62,11 +64,22 @@ const getFavoriteListDB = () => {
 };
 
 const cancelFavoriteDB = (r_code: number) => {
-  console.log(r_code)
+  console.log(r_code);
   return async function (dispatch: Dispatch) {
     try {
       // const res = await apis.cancelFavorite(r_code) //나중에 api 요청시 사용
       dispatch(cancelFavorite(r_code));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const editInfoDB = (info:{pw:string|undefined,nickname:string|undefined}) => { // |undefined 부분 수정할수있는지 나중에 검토, 하고 apis도 동일하게 검토
+  return async function (dispatch: Dispatch) {
+    try {
+    //  const res = await apis.editInfo(info);    //api 연결 추가
+    dispatch(editInfo(info.nickname))
     } catch (error) {
       console.log(error);
     }
@@ -87,6 +100,10 @@ export default function reducer(state = initialState, action: any) {
 
       return { list: { ...state.list, like_list: NewFavoriteList } };
     }
+    case EDIT_INFO: {
+      console.log(action.payload.nickanme)
+      return {list:{...state.list, nickname: action.payload.nickanme }}
+    }
     default:
       return state;
   }
@@ -95,6 +112,7 @@ export default function reducer(state = initialState, action: any) {
 const actionCreators = {
   getFavoriteListDB,
   cancelFavoriteDB,
+  editInfoDB,
 };
 
 export { actionCreators };

@@ -47,4 +47,8 @@ export interface PostPropsType {
     nickname:string
   }
 
+  export interface Edit_info{
+    nickname:string
+  }
+
   
