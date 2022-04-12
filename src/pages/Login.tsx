@@ -7,15 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/configStore";
 import { actionCreators as userActions } from "../redux/modules/users";
 
-import back_arrow from '../static/image/back_arrow.svg'
+import back_arrow from "../static/image/back_arrow.svg";
 
 const Login: React.FC = (props) => {
   const Id = useRef<HTMLInputElement>(null);
   const Pwd = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user_info = useSelector((state: RootState)=>(state.user.user))
-  console.log(user_info)
+  const user_info = useSelector((state: RootState) => state.user.user);
+  console.log(user_info);
 
   const checkLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,9 +24,9 @@ const Login: React.FC = (props) => {
     const checkId = IdCheck(curruntId);
     const checkPw = PwCheck(currentPw);
     const user = {
-      id:curruntId,
-      pw:currentPw
-    }
+      id: curruntId,
+      pw: currentPw,
+    };
     //빈칸 입력에 따른 조건처리
     if (curruntId.trim().length === 0 || currentPw.trim().length === 0) {
       //throw an error
@@ -37,14 +37,14 @@ const Login: React.FC = (props) => {
       alert("아이디 또는 비밀번호 형식이 틀립니다.");
     } else {
       console.log("API 통신 보내기");
-      dispatch(userActions.LoginDB(user, navigate))
+      dispatch(userActions.LoginDB(user, navigate));
       // 로그인 API 보내기
     }
   };
   return (
     <Wrap>
       <ImgWrap>
-        <img src={example_logo} alt="로고"></img>
+        <img src={example_logo} alt="로고" onClick={()=>navigate('/')}></img>
       </ImgWrap>
       <form onSubmit={checkLogin}>
         <InputWrap>
