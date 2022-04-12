@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { actionCreators as favoriteActions } from "../../redux/modules/favorite";
 import { IdCheck, PwCheck, NicknameCheck } from "../../shared/regex";
+import { Edit_info } from "../../types/interfaces";
 
 import edit_button from "../../static/image/edit_button.svg";
 import edit_enter from "../../static/image/edit_enter.svg";
 import edit_cancel from "../../static/image/edit_cancel.svg";
 import me_edit from "../../static/image/me_edit.png";
+import { useDispatch } from "react-redux";
 
-const Editprofile: React.FC = (props) => {
+const Editprofile: React.FC<Edit_info> = (props) => {
+  console.log(props)
+  const dispatch = useDispatch();
   const [Pwd, setPwd] = useState<string>();
   // const [PwdCheck, setPwdCheck] = useState();
-  const [nickName, setNickName] = useState<string>("초기닉네임"); // api 요청하여 초기값 넣어줄것
+  
   const [changingNickName, setChangingNickName] = useState<string>(); // 취소시 기존껄로 돌아가기위해 닉네임관련 변수 하나더 쓰는것
 
   const [PwMessage, setPwMessage] = useState<string>();
@@ -30,14 +35,15 @@ const Editprofile: React.FC = (props) => {
 
     if (PwMessageColor && NickMessageColor && PwCheckMessageColor) {
       console.log("요청모두 맞아서 api 호출");
-      // API 호출
-      // dispatch(SignUpDB(info)); // 닉네임, 비밀번호
-
-      setNickName(changingNickName!); // 실질적으로 내정보에서 보는 닉네임으로 최종 변경
+     
+      // 이부분 리덕스로 사용할경우 비즈니스로직 바꿔야됨, useState로 사용안하고 useSelector로 store 값 쓰기때문에 이중으로 nickname, changingNickName으로 안써도됨
+      // setNickName(changingNickName!); // 실질적으로 내정보에서 보는 닉네임으로 최종 변경
       const info = {
         pw: Pwd,
         nickname: changingNickName,
       };
+       // API 호출
+      dispatch(favoriteActions.editInfoDB(info)); // 닉네임, 비밀번호
       resetAll();
       console.log(info, changingNickName);
     }
@@ -114,7 +120,7 @@ const Editprofile: React.FC = (props) => {
             <div
               style={{ color: "blue", fontWeight: "bold", fontSize: "20px" }}
             >
-              {nickName}
+              {props.nickname}
             </div>
           )}
         </div>
