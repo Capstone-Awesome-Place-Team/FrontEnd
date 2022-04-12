@@ -4,7 +4,6 @@ import { createAction } from "redux-actions";
 // import { useNavigate } from "react-router-dom";
 import { SetUser, Signup } from "../../types/interfaces";
 
-
 //actions
 
 const SET_USER = "SETUSER";
@@ -20,26 +19,25 @@ const initialState = {
 
 //Middleware
 
-const SignUpDB = (user: Signup, navigate:Function) => {
+const SignUpDB = (user: Signup, navigate: Function) => {
   return async function (dispatch: Dispatch) {
     try {
-      
       console.log(user);
       // const res = await apis.signUp(user); // api생기면 넣기
-      navigate('/signin') //회원가입완료후 로그인화면으로
+      navigate("/signin"); //회원가입완료후 로그인화면으로
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-const LoginDB = (user: SetUser, navigate:Function) => {
+const LoginDB = (user: SetUser, navigate: Function) => {
   return async function (dispatch: Dispatch) {
     try {
       console.log(user);
       //  const res = await apis.setUser(user); // api생기면 넣기
       dispatch(set_user(user));
-      navigate('/')
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
