@@ -11,6 +11,7 @@ import { actionCreators } from "../redux/modules/favorite";
 import restaurant from "../static/image/header_profile.svg";
 
 const Mypage: React.FC = () => {
+  const is_login = localStorage.getItem("token"); //임시토큰 테스트 나중에 없애거나 수정할것
   const dispatch = useDispatch();
   const [category, setCategory] = useState<string>("edit_profile");
   const info = useSelector((state: RootState) => state.favorite.list);
@@ -23,10 +24,10 @@ const Mypage: React.FC = () => {
   }, []);
   return (
     <div>
-      <MypageCategory setCategory={setCategory} category={category} />
-      {category === "edit_profile" && <Editprofile nickname={info.nickname }/>}
-      {category === "favorite_list" && <FavoriteList {...info} />}
-      {category === "favorite_list_map" && <FavoriteListMap {...info} />}
+      <MypageCategory setCategory={setCategory} category={category}/>
+      {category === "edit_profile" && <Editprofile nickname={info.nickname } is_login={is_login}/>}
+      {category === "favorite_list" && <FavoriteList {...info} is_login={is_login}/>}
+      {category === "favorite_list_map" && <FavoriteListMap {...info} is_login={is_login}/>}
     </div>
   );
 };

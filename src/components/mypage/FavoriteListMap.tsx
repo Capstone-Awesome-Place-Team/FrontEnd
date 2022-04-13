@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-const FavoriteListMap: React.FC = (props) => {
-  return <Container>나만의 맛집 지도 컴포넌트</Container>;
+import { FavoritePropsType } from "../../types/interfaces";
+const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
+  return <Container>{props.is_login?`나만의 맛집 지도 컴포넌트`:`로그인후 이용 가능합니다.`}</Container>;
 };
 
 const Container = styled.div`

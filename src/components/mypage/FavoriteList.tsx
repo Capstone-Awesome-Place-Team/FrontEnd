@@ -34,7 +34,6 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   const post = () => {
     const result = [];
     for (let i = current_first_data; i < current_first_data + 4; i++) {
-      console.log(list[i]);
       if (list[i] === undefined) {
         console.log("Dd");
         break;
@@ -51,7 +50,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   };
 
   return (
-    <Container>
+    <Container minHeight={props.is_login ? true : false}>
       <div
         style={{
           display: "flex",
@@ -63,7 +62,22 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
       >
         내 찜목록
       </div>
-      {post()}
+      {props.is_login ? (
+        post()
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            margin: "auto",
+            width: "fit-content",
+            height: "300px",
+            alignItems: "center",
+            fontWeight: "bold",
+          }}
+        >
+          로그인후 이용가능합니다
+        </div>
+      )}
       {/* <hr style={{width:"80%", margin:"15px 15px 0 15px"}}></hr> */}
       <div
         style={{
@@ -97,7 +111,8 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
 const Container = styled.div`
   width: 528px;
   height: 75vh;
-  min-height: 565px;
+  min-height: ${(props: { minHeight: boolean }) =>
+    props.minHeight ? `565px;` : null};
   max-height: 600px;
   /* text-align: center; */
   border: 2px solid #747474;

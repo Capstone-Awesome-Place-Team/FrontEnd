@@ -14,7 +14,8 @@ export interface PostPropsType {
 
   export interface MypageCategoryType {
     category : string,
-    setCategory :Function
+    setCategory :Function,
+    
   }
 
   export interface FavoritePropsType {
@@ -34,6 +35,7 @@ export interface PostPropsType {
             },
           },
         ]
+        is_login:string
   }
 
   export interface SetUser {
@@ -48,7 +50,8 @@ export interface PostPropsType {
   }
 
   export interface Edit_info{
-    nickname:string
+    nickname:string,
+    is_login:string|null,
   }
 
   
