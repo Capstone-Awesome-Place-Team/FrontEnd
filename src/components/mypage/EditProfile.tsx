@@ -11,15 +11,18 @@ import me_edit from "../../static/image/me_edit.png";
 import { useDispatch } from "react-redux";
 
 const Editprofile: React.FC<Edit_info> = (props) => {
- 
   const dispatch = useDispatch();
   const [Pwd, setPwd] = useState<string>();
-  // const [PwdCheck, setPwdCheck] = useState();
-  
+  const [PwdCheck, setPwdCheck] = useState<string>();
+
   const [changingNickName, setChangingNickName] = useState<string>(); // 취소시 기존껄로 돌아가기위해 닉네임관련 변수 하나더 쓰는것
 
-  const [PwMessage, setPwMessage] = useState<string>();
-  const [NickMessage, setNickMessage] = useState<string>();
+  const [PwMessage, setPwMessage] = useState<string>(
+    "영대소문자, 숫자 조합 8~15자 이내로 입력해주세요."
+  );
+  const [NickMessage, setNickMessage] = useState<string>(
+    "한글, 영문, 숫자 15자 이내로 입력해주세요."
+  );
   const [PwCheckMessage, setPwdChekMessage] = useState<string>();
 
   const [PwMessageColor, setPwMessageColor] = useState<boolean>();
@@ -35,14 +38,14 @@ const Editprofile: React.FC<Edit_info> = (props) => {
 
     if (PwMessageColor && NickMessageColor && PwCheckMessageColor) {
       console.log("요청모두 맞아서 api 호출");
-     
+
       // 이부분 리덕스로 사용할경우 비즈니스로직 바꿔야됨, useState로 사용안하고 useSelector로 store 값 쓰기때문에 이중으로 nickname, changingNickName으로 안써도됨
       // setNickName(changingNickName!); // 실질적으로 내정보에서 보는 닉네임으로 최종 변경
       const info = {
         pw: Pwd,
         nickname: changingNickName,
       };
-       // API 호출
+      // API 호출
       dispatch(favoriteActions.editInfoDB(info)); // 닉네임, 비밀번호
       resetAll();
       console.log(info, changingNickName);
@@ -52,33 +55,43 @@ const Editprofile: React.FC<Edit_info> = (props) => {
   const pwCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const current_pw = event.target.value;
     setPwd(current_pw);
-    console.log(PwCheck(current_pw));
-    if (!PwCheck(current_pw)) {
+    //비밀번호 다시 입력시 비밀번호확인 초기화
+    setPwdCheck("");
+    setPwdChekMessage("");
+    if (current_pw.length < 1) {
+      setPwMessage("8~15자리 영대문자+숫자 조합으로 입력해주세요.");
+    }
+    else if (!PwCheck(current_pw)) {
       setPwMessageColor(false);
-      setPwMessage("8~15자리 영대문자+숫자 조합으로 입력해주세요");
+      setPwMessage("유효하지않은 비밀번호입니다.");
     } else {
       setPwMessageColor(true);
-      setPwMessage("안전한 비밀번호");
+      setPwMessage("사용가능한 비밀번호입니다.");
     }
   };
   const pwDoubleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const current_pwCheck = event.target.value;
-    // setPwdCheck(current_pwCheck);
-    if (current_pwCheck === Pwd) {
+    setPwdCheck(current_pwCheck);
+    if(current_pwCheck.length<1){
+      setPwdChekMessage("")
+    }
+    else if (current_pwCheck === Pwd) {
       setPwdChekMessageColor(true);
-      setPwdChekMessage("일치합니다.");
+      setPwdChekMessage("비밀번호가 동일합니다.");
     } else {
       setPwdChekMessageColor(false);
-      setPwdChekMessage("불일치");
+      setPwdChekMessage("비밀번호가 일치하지 않습니다.");
     }
   };
 
   const nickNameCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const current_nickname = event.target.value;
     setChangingNickName(current_nickname);
-    if (!NicknameCheck(current_nickname)) {
+    if (current_nickname.length < 1) {
+      setNickMessage("한글, 영문, 숫자 15자 이내로 입력해주세요.");
+    } else if (!NicknameCheck(current_nickname)) {
       setNickMessageColor(false);
-      setNickMessage("영대소문자,숫자,한글 사용");
+      setNickMessage("유효하지않은 닉네임입니다.");
     } else {
       setNickMessageColor(true);
       setNickMessage("사용가능한 닉네임입니다.");
@@ -88,12 +101,13 @@ const Editprofile: React.FC<Edit_info> = (props) => {
   const resetAll = () => {
     setPwd("");
     setChangingNickName("");
+    setPwdCheck("")
     setNickMessageColor(false);
     setPwMessageColor(false);
     setPwdChekMessageColor(false);
-    setNickMessage("");
-    setPwMessage("");
     setPwdChekMessage("");
+    setNickMessage("한글, 영문, 숫자 15자 이내로 입력해주세요.");
+    setPwMessage("8~15자리 영대문자+숫자 조합으로 입력해주세요.");
     setIsEdit(!isEdit); // 버튼 true/false
   };
 
@@ -101,8 +115,13 @@ const Editprofile: React.FC<Edit_info> = (props) => {
     <Container>
       <Wrap>
         <div className="nickName">
-          <Label htmlFor="nickname">내 닉네임</Label>
-          <br />
+          <Label
+            htmlFor="nickname"
+            style={{ display: "block", }}
+          >
+            내 닉네임
+          </Label>
+
           {isEdit ? (
             <>
               <input
@@ -110,17 +129,49 @@ const Editprofile: React.FC<Edit_info> = (props) => {
                 id="nickname"
                 defaultValue=""
                 onChange={nickNameCheck}
+                style={{ margin: "20px 0 15px" }}
               ></input>
-
-              <div style={{ color: NickMessageColor ? "green" : "red" }}>
-                {NickMessage}
-              </div>
+              {changingNickName ? (
+                <div
+                  style={{
+                    color: NickMessageColor ? "#59B200" : "#E22F2F",
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {NickMessage}
+                </div>
+              ) : (
+                <div
+                  style={{
+                    color: "#A0A0A0",
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {NickMessage}
+                </div>
+              )}
             </>
           ) : (
             <div
-              style={{ color: "blue", fontWeight: "bold", fontSize: "20px" }}
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+              }}
             >
-              {props.nickname}
+              <div
+                style={{
+                  fontSize: "20px",
+                  margin: "32px 0 0 0",
+                  border: "1px solid black",
+                  width: "fit-content",
+                  padding: "3px",
+                }}
+              >
+                {props.nickname}
+              </div>
             </div>
           )}
         </div>
@@ -130,9 +181,15 @@ const Editprofile: React.FC<Edit_info> = (props) => {
               <Label htmlFor="Pwd">비밀번호</Label>
               <br />
               <input type="password" id="Pwd" onChange={pwCheck}></input>
-              <div style={{ color: PwMessageColor ? "green" : "red" }}>
+              { Pwd?
+              <div style={{ color: PwMessageColor ? "#59B200" : "#E22F2F",  fontSize: "13px",
+              fontWeight: "bold", }}>
+                {PwMessage}
+              </div>: <div style={{ color:"#A0A0A0",  fontSize: "13px",
+                    fontWeight: "bold", }}>
                 {PwMessage}
               </div>
+}
             </div>
             <div className="PwdCheckInput">
               <Label htmlFor="PwdCheck">비밀번호 확인</Label>
@@ -141,6 +198,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
                 type="password"
                 id="PwdCheck"
                 onChange={pwDoubleCheck}
+                value={PwdCheck}
               ></input>
               <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
                 {PwCheckMessage}
@@ -166,11 +224,16 @@ const Editprofile: React.FC<Edit_info> = (props) => {
         ) : (
           <button
             onClick={() => setIsEdit(!isEdit)}
-            style={{ border: "none", background: "none" }}
+            style={{
+              border: "none",
+              background: "none",
+              margin: "69px 0 90px 0",
+            }}
           >
             <img src={me_edit} alt="edit" />
           </button>
         )}
+        <div>로그아웃</div>
       </Wrap>
     </Container>
   );
@@ -194,9 +257,12 @@ const Wrap = styled.div`
 `;
 
 const Container = styled.div`
+  display: flex;
   width: 528px;
   height: 75vh;
   text-align: center;
+  align-items: center;
+  justify-content: center;
   border: 2px solid #747474;
   border-top: none;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
