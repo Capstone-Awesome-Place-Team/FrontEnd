@@ -11,7 +11,7 @@ import me_edit from "../../static/image/me_edit.png";
 import { useDispatch } from "react-redux";
 
 const Editprofile: React.FC<Edit_info> = (props) => {
-  console.log(props)
+ 
   const dispatch = useDispatch();
   const [Pwd, setPwd] = useState<string>();
   // const [PwdCheck, setPwdCheck] = useState();

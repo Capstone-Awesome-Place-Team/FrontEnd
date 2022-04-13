@@ -31,7 +31,7 @@ export const dummyfiles = {
         r_code:2,
         restaurant_name: "테스트 레스토랑3",
         img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
-        address: "서울특별시 어디가 좋을지 정하는 999",
+        address: "서울특별시 어디가 좋을지 정하는 999dsfsdfdsf",
         star: 0,
         options: {
           takeout: true,
