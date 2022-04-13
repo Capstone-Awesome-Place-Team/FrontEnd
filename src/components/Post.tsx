@@ -16,19 +16,26 @@ const Post: React.FC<PostPropsType> = (props) => {
       style={{
         display: "flex",
         justifyContent: "center",
-        margin: "0 0 5px 0",
-        border: "1px solid black",
+        width: "493px",
       }}
     >
-      <img src={props.img} alt="restaurant" width="89px" height="89px"></img>
-      <div className="content" style={{ margin: "5px 22px" }}>
+      <img src={props.img} alt="restaurant" width="100px" height="100px"></img>
+      <div className="content" style={{ margin: "0 14px" }}>
         <div
           className="restaurant_name"
-          style={{ fontSize: "20px", fontWeight: "bold" }}
+          style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}
         >
           {props.restaurant_name}
         </div>
-        <div className="address" style={{ width: "237px" }}>
+        <div
+          className="address"
+          style={{
+            width: "300px",
+            color: "#9C9C9C",
+            fontSize: "15px",
+            fontWeight: "bold",
+          }}
+        >
           {props.address}
         </div>
       </div>

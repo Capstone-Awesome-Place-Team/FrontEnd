@@ -6,7 +6,7 @@ import { FavoritePropsType } from "../../types/interfaces";
 import { dummyfiles } from "../../shared/dummy";
 import {Edit_info} from "../../types/interfaces"
 //actions
-console.log(dummyfiles);
+
 const GET_FAVORITELIST = "GETFAVORITELIST";
 const CANCEL_FAVORITE = "CANCELFAVORITE";
 const EDIT_INFO ="EDITINFO";
@@ -52,7 +52,7 @@ const initialState = {
 
 const getFavoriteListDB = () => {
   // 내 찜목록 리스트 가져오기
-  console.log(dummyfiles);
+ 
   return async function (dispatch: Dispatch) {
     try {
       // const res = await apis.getFavorite(); //나중에 서버 생기면 넣을것

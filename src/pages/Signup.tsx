@@ -73,13 +73,13 @@ const Signup: React.FC = (props) => {
       setIdMessage("사용능한 아이디입니다.");
     }
   };
-  const pwCheck = (event: any) => {
+  const pwCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const current_pw = event.target.value;
     setPwd(current_pw);
     //비밀번호 다시 입력시 비밀번호확인 초기화
     setPwdCheck("");
     setPwdChekMessage("");
-    setPwdChekMessageColor(false);
+    // setPwdChekMessageColor(false);
 
     if (current_pw.length < 1) {
       setPwMessage("영대소문자, 숫자, 조합 8~15자로 입력해주세요.");
@@ -88,21 +88,21 @@ const Signup: React.FC = (props) => {
       setPwMessage("유효하지않은 비밀번호입니다.");
     } else {
       setPwMessageColor(true);
-      setPwMessage("사용가능한 비밀번호입니다");
+      setPwMessage("사용가능한 비밀번호입니다.");
     }
   };
-  const pwDoubleCheck = (event: any) => {
+  const pwDoubleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const current_pwCheck = event.target.value;
     setPwdCheck(current_pwCheck);
-    if (current_pwCheck < 1) {
+    if (current_pwCheck.length < 1) {
       setPwdChekMessage("");
       setPwdChekMessageColor(false);
     } else if (current_pwCheck === Pwd) {
       setPwdChekMessageColor(true);
-      setPwdChekMessage("비밀번호가 동일합니다");
+      setPwdChekMessage("비밀번호가 동일합니다.");
     } else {
       setPwdChekMessageColor(false);
-      setPwdChekMessage("비밀번호가 일치하지 않습니다");
+      setPwdChekMessage("비밀번호가 일치하지 않습니다.");
     }
   };
 
@@ -110,7 +110,7 @@ const Signup: React.FC = (props) => {
     const current_nickname = event.target.value;
     setNickName(current_nickname);
     if (current_nickname.length < 1) {
-      setNickMessage("한글, 영문, 숫자 15자 이내로 입력해주세요");
+      setNickMessage("한글, 영문, 숫자 15자 이내로 입력해주세요.");
     } else if (!NicknameCheck(current_nickname)) {
       setNickMessageColor(false);
       setNickMessage("유효하지않은 닉네임입니다.");
@@ -148,13 +148,11 @@ const Signup: React.FC = (props) => {
                 }}
               >
                 {IdMessage}
-                {IdMessage ? (
-                  IdMessageColor ? (
-                    <img src={check_line} alt="check"></img>
-                  ) : (
-                    <img src={close_line} alt="close"></img>
-                  )
-                ) : null}
+                {IdMessageColor ? (
+                  <img src={check_line} alt="check"></img>
+                ) : (
+                  <img src={close_line} alt="close"></img>
+                )}
               </div>
             ) : (
               <div
