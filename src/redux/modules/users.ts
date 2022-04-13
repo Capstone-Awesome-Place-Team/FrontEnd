@@ -7,11 +7,12 @@ import { SetUser, Signup } from "../../types/interfaces";
 //actions
 
 const SET_USER = "SETUSER";
+// const LOG_OUT ="LOGOUT";
 
 //action creators
 
 const set_user = createAction(SET_USER, (user: SetUser) => ({ user }));
-
+// const log_out= createAction(LOG_OUT,)
 //init
 const initialState = {
   user: {},
@@ -43,6 +44,11 @@ const LoginDB = (user: SetUser, navigate: Function) => {
     }
   };
 };
+
+const Logout =(navigate:Function)=>{
+  localStorage.removeItem("token");
+  navigate("/");
+}
 //Reducer
 
 export default function reducer(state = initialState, action: any) {
@@ -58,4 +64,5 @@ export default function reducer(state = initialState, action: any) {
 export const actionCreators = {
   SignUpDB,
   LoginDB,
+  Logout
 };

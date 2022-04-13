@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { actionCreators as favoriteActions } from "../../redux/modules/favorite";
+import { actionCreators as userActions } from "../../redux/modules/users";
 import { IdCheck, PwCheck, NicknameCheck } from "../../shared/regex";
 import { Edit_info } from "../../types/interfaces";
+
+
 
 import edit_button from "../../static/image/edit_button.svg";
 import edit_enter from "../../static/image/edit_enter.svg";
 import edit_cancel from "../../static/image/edit_cancel.svg";
 import me_edit from "../../static/image/me_edit.png";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const Editprofile: React.FC<Edit_info> = (props) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const is_login = localStorage.getItem("token");
   const [Pwd, setPwd] = useState<string>();
   const [PwdCheck, setPwdCheck] = useState<string>();
 
@@ -111,7 +118,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
   // 나중에 isEdit 부분을 한번에 묶어서 정리할것 너무 각각의 태그조건일대 하는데 결국 내가 수정버튼을 눌렀나 안눌렀나에 따라 달라지는거니
   return (
     <Container textAlign={isEdit ? false : true}>
-      <Wrap>
+      {is_login?<Wrap>
         {isEdit ? (
           <div
             style={{ color: "#E22F2F", fontSize: "25px", fontWeight: "bold" }}
@@ -261,17 +268,36 @@ const Editprofile: React.FC<Edit_info> = (props) => {
             <img src={me_edit} alt="edit" />
           </button>
         )}
-        {isEdit ? null : ( // 나중에 토큰 여부나 isLogin 리덕스 상태값에 따라 조건한번더 넣어줘야함 로그아웃이 있는지 아니면 없는지
+        {isEdit ? null : ( // 나중에 토큰 여부 나중에 전체 조건으로 주기, 토큰이 있다면 내정보가 보이게
           <div
             style={{ color: "#747474", fontSize: "15px", fontWeight: "bold" }}
+            onClick={()=>dispatch(userActions.Logout(navigate))}
           >
             로그아웃
           </div>
         )}
-      </Wrap>
+      </Wrap>:<div>로그인후 이용가능합니다.</div>}
+      
     </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  width: 528px;
+  height: 75vh;
+  text-align: ${(props: { textAlign: boolean }) =>
+    props.textAlign ? `center;` : null};
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #747474;
+  border-top: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+  border-radius: 0 0 20px 20px;
+  // padding: "5px",
+  margin: auto;
+`;
 
 const Wrap = styled.div`
   & input {
@@ -290,22 +316,7 @@ const Wrap = styled.div`
   }
 `;
 
-const Container = styled.div`
-  display: flex;
-  width: 528px;
-  height: 75vh;
-  text-align: ${(props: { textAlign: boolean }) =>
-    props.textAlign ? `center;` : null};
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #747474;
-  border-top: none;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
-  border-radius: 0 0 20px 20px;
-  // padding: "5px",
-  margin: auto;
-`;
+
 
 const Label = styled.label`
   font-size: 20px;
