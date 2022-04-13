@@ -41,10 +41,10 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
       }
 
       result.push(
-        <>
-          <Post key={i} {...list[i]} />
+        <React.Fragment key={i}>
+          <Post {...list[i]} />
           <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
-        </>
+        </React.Fragment>
       );
     }
     return result;
@@ -79,7 +79,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
           alt="prev"
           width="16px"
           height="25px"
-          style={{margin:"0 10px"}}
+          style={{ margin: "0 10px" }}
         ></img>
         <img
           src={next}
@@ -87,7 +87,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
           alt="next"
           width="16px"
           height="25px"
-          style={{margin:"0 10px"}}
+          style={{ margin: "0 10px" }}
         ></img>
       </div>
     </Container>
