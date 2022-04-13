@@ -60,8 +60,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
     setPwdChekMessage("");
     if (current_pw.length < 1) {
       setPwMessage("8~15자리 영대문자+숫자 조합으로 입력해주세요.");
-    }
-    else if (!PwCheck(current_pw)) {
+    } else if (!PwCheck(current_pw)) {
       setPwMessageColor(false);
       setPwMessage("유효하지않은 비밀번호입니다.");
     } else {
@@ -72,10 +71,9 @@ const Editprofile: React.FC<Edit_info> = (props) => {
   const pwDoubleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     const current_pwCheck = event.target.value;
     setPwdCheck(current_pwCheck);
-    if(current_pwCheck.length<1){
-      setPwdChekMessage("")
-    }
-    else if (current_pwCheck === Pwd) {
+    if (current_pwCheck.length < 1) {
+      setPwdChekMessage("");
+    } else if (current_pwCheck === Pwd) {
       setPwdChekMessageColor(true);
       setPwdChekMessage("비밀번호가 동일합니다.");
     } else {
@@ -101,7 +99,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
   const resetAll = () => {
     setPwd("");
     setChangingNickName("");
-    setPwdCheck("")
+    setPwdCheck("");
     setNickMessageColor(false);
     setPwMessageColor(false);
     setPwdChekMessageColor(false);
@@ -110,95 +108,125 @@ const Editprofile: React.FC<Edit_info> = (props) => {
     setPwMessage("8~15자리 영대문자+숫자 조합으로 입력해주세요.");
     setIsEdit(!isEdit); // 버튼 true/false
   };
-
+  // 나중에 isEdit 부분을 한번에 묶어서 정리할것 너무 각각의 태그조건일대 하는데 결국 내가 수정버튼을 눌렀나 안눌렀나에 따라 달라지는거니
   return (
-    <Container>
+    <Container textAlign={isEdit ? false : true}>
       <Wrap>
-        <div className="nickName">
-          <Label
-            htmlFor="nickname"
-            style={{ display: "block", }}
+        {isEdit ? (
+          <div
+            style={{ color: "#E22F2F", fontSize: "25px", fontWeight: "bold" }}
           >
-            내 닉네임
-          </Label>
+            내 정보 수정
+          </div>
+        ) : null}
+        <Label
+          htmlFor="nickname"
+          style={{ display: "block", margin: "20px 0 0 10px" }}
+        >
+          내 닉네임
+        </Label>
 
-          {isEdit ? (
-            <>
-              <input
-                type="text"
-                id="nickname"
-                defaultValue=""
-                onChange={nickNameCheck}
-                style={{ margin: "20px 0 15px" }}
-              ></input>
-              {changingNickName ? (
-                <div
-                  style={{
-                    color: NickMessageColor ? "#59B200" : "#E22F2F",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {NickMessage}
-                </div>
-              ) : (
-                <div
-                  style={{
-                    color: "#A0A0A0",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {NickMessage}
-                </div>
-              )}
-            </>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "center",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "20px",
-                  margin: "32px 0 0 0",
-                  border: "1px solid black",
-                  width: "fit-content",
-                  padding: "3px",
-                }}
-              >
-                {props.nickname}
-              </div>
-            </div>
-          )}
-        </div>
         {isEdit ? (
           <>
-            <div className="PwdInput">
-              <Label htmlFor="Pwd">비밀번호</Label>
-              <br />
-              <input type="password" id="Pwd" onChange={pwCheck}></input>
-              { Pwd?
-              <div style={{ color: PwMessageColor ? "#59B200" : "#E22F2F",  fontSize: "13px",
-              fontWeight: "bold", }}>
-                {PwMessage}
-              </div>: <div style={{ color:"#A0A0A0",  fontSize: "13px",
-                    fontWeight: "bold", }}>
+            <input
+              type="text"
+              id="nickname"
+              defaultValue=""
+              onChange={nickNameCheck}
+              style={{ margin: "10px 0 7px" }}
+            ></input>
+            {changingNickName ? (
+              <div
+                style={{
+                  color: NickMessageColor ? "#59B200" : "#E22F2F",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  margin: "0 0 19px 10px",
+                }}
+              >
+                {NickMessage}
+              </div>
+            ) : (
+              <div
+                style={{
+                  color: "#A0A0A0",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  margin: "0 0 19px 10px",
+                }}
+              >
+                {NickMessage}
+              </div>
+            )}
+          </>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "20px",
+                margin: "32px 0 0 0",
+                border: "1px solid black",
+                width: "fit-content",
+                padding: "3px",
+              }}
+            >
+              {props.nickname}
+            </div>
+          </div>
+        )}
+
+        {isEdit ? (
+          <>
+            <Label htmlFor="Pwd" style={{ margin: "0 0 10px 10px" }}>
+              비밀번호
+            </Label>
+            <br />
+            <input
+              type="password"
+              id="Pwd"
+              onChange={pwCheck}
+              style={{ margin: "10px 0 7px" }}
+            ></input>
+            {Pwd ? (
+              <div
+                style={{
+                  color: PwMessageColor ? "#59B200" : "#E22F2F",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  margin: "0 0 20px",
+                }}
+              >
                 {PwMessage}
               </div>
-}
-            </div>
+            ) : (
+              <div
+                style={{
+                  color: "#A0A0A0",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                }}
+              >
+                {PwMessage}
+              </div>
+            )}
+
             <div className="PwdCheckInput">
-              <Label htmlFor="PwdCheck">비밀번호 확인</Label>
+              <Label htmlFor="PwdCheck" style={{ margin: "0 0 0 10px" }}>
+                비밀번호 확인
+              </Label>
               <br />
               <input
                 type="password"
                 id="PwdCheck"
                 onChange={pwDoubleCheck}
                 value={PwdCheck}
+                style={{ margin: "10px 0 7px" }}
               ></input>
               <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
                 {PwCheckMessage}
@@ -207,7 +235,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
           </>
         ) : null}
         {isEdit ? (
-          <div>
+          <div style={{ margin: "10px 0" }}>
             <button
               onClick={edit}
               style={{ border: "none", background: "none" }}
@@ -233,7 +261,13 @@ const Editprofile: React.FC<Edit_info> = (props) => {
             <img src={me_edit} alt="edit" />
           </button>
         )}
-        <div>로그아웃</div>
+        {isEdit ? null : ( // 나중에 토큰 여부나 isLogin 리덕스 상태값에 따라 조건한번더 넣어줘야함 로그아웃이 있는지 아니면 없는지
+          <div
+            style={{ color: "#747474", fontSize: "15px", fontWeight: "bold" }}
+          >
+            로그아웃
+          </div>
+        )}
       </Wrap>
     </Container>
   );
@@ -246,7 +280,7 @@ const Wrap = styled.div`
     border: 1px solid #c1c1c1;
     background: #f0f0f0;
     border-radius: 22px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    /* box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); */
     margin: 5px 0px;
     padding: 0px 10px;
     box-sizing: border-box;
@@ -260,7 +294,8 @@ const Container = styled.div`
   display: flex;
   width: 528px;
   height: 75vh;
-  text-align: center;
+  text-align: ${(props: { textAlign: boolean }) =>
+    props.textAlign ? `center;` : null};
   align-items: center;
   justify-content: center;
   border: 2px solid #747474;
