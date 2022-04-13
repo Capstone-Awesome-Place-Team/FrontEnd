@@ -6,14 +6,11 @@ import { actionCreators as userActions } from "../../redux/modules/users";
 import { IdCheck, PwCheck, NicknameCheck } from "../../shared/regex";
 import { Edit_info } from "../../types/interfaces";
 
-
-
 import edit_button from "../../static/image/edit_button.svg";
 import edit_enter from "../../static/image/edit_enter.svg";
 import edit_cancel from "../../static/image/edit_cancel.svg";
 import me_edit from "../../static/image/me_edit.png";
 import { useNavigate } from "react-router-dom";
-
 
 const Editprofile: React.FC<Edit_info> = (props) => {
   const navigate = useNavigate();
@@ -117,167 +114,182 @@ const Editprofile: React.FC<Edit_info> = (props) => {
   };
   // 나중에 isEdit 부분을 한번에 묶어서 정리할것 너무 각각의 태그조건일대 하는데 결국 내가 수정버튼을 눌렀나 안눌렀나에 따라 달라지는거니
   return (
-    <Container textAlign={isEdit ? false : true}>
-      {is_login?<Wrap>
-        {isEdit ? (
-          <div
-            style={{ color: "#E22F2F", fontSize: "25px", fontWeight: "bold" }}
-          >
-            내 정보 수정
-          </div>
-        ) : null}
-        <Label
-          htmlFor="nickname"
-          style={{ display: "block", margin: "20px 0 0 10px" }}
-        >
-          내 닉네임
-        </Label>
-
-        {isEdit ? (
-          <>
-            <input
-              type="text"
-              id="nickname"
-              defaultValue=""
-              onChange={nickNameCheck}
-              style={{ margin: "10px 0 7px" }}
-            ></input>
-            {changingNickName ? (
-              <div
-                style={{
-                  color: NickMessageColor ? "#59B200" : "#E22F2F",
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  margin: "0 0 19px 10px",
-                }}
-              >
-                {NickMessage}
-              </div>
-            ) : (
-              <div
-                style={{
-                  color: "#A0A0A0",
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  margin: "0 0 19px 10px",
-                }}
-              >
-                {NickMessage}
-              </div>
-            )}
-          </>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              justifyContent: "center",
-            }}
-          >
+    <Container
+      textAlign={isEdit ? false : true}
+      alignItems={isEdit ? false : true}
+      justifyContent={isEdit ? false : true}
+    >
+      {is_login ? (
+        <Wrap>
+          {isEdit ? (
             <div
               style={{
-                fontSize: "20px",
-                margin: "32px 0 0 0",
-                border: "1px solid black",
-                width: "fit-content",
-                padding: "3px",
+                color: "#E22F2F",
+                fontSize: "25px",
+                fontWeight: "bold",
+                margin: "64px 0 0",
               }}
             >
-              {props.nickname}
+              내 정보 수정
             </div>
-          </div>
-        )}
+          ) : null}
+          <Label
+            htmlFor="nickname"
+            style={{ display: "block", margin: "20px 0 0 10px" }}
+          >
+            내 닉네임
+          </Label>
 
-        {isEdit ? (
-          <>
-            <Label htmlFor="Pwd" style={{ margin: "0 0 10px 10px" }}>
-              비밀번호
-            </Label>
-            <br />
-            <input
-              type="password"
-              id="Pwd"
-              onChange={pwCheck}
-              style={{ margin: "10px 0 7px" }}
-            ></input>
-            {Pwd ? (
+          {isEdit ? (
+            <>
+              <input
+                type="text"
+                id="nickname"
+                defaultValue=""
+                onChange={nickNameCheck}
+                style={{ margin: "10px 0 7px" }}
+              ></input>
+              {changingNickName ? (
+                <div
+                  style={{
+                    color: NickMessageColor ? "#59B200" : "#E22F2F",
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    margin: "0 0 19px 10px",
+                  }}
+                >
+                  {NickMessage}
+                </div>
+              ) : (
+                <div
+                  style={{
+                    color: "#A0A0A0",
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    margin: "0 0 19px 10px",
+                  }}
+                >
+                  {NickMessage}
+                </div>
+              )}
+            </>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+              }}
+            >
               <div
                 style={{
-                  color: PwMessageColor ? "#59B200" : "#E22F2F",
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  margin: "0 0 20px",
+                  fontSize: "20px",
+                  margin: "32px 0 0 0",
+                  border: "1px solid black",
+                  width: "fit-content",
+                  padding: "3px",
                 }}
               >
-                {PwMessage}
+                {props.nickname}
               </div>
-            ) : (
-              <div
-                style={{
-                  color: "#A0A0A0",
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                }}
-              >
-                {PwMessage}
-              </div>
-            )}
+            </div>
+          )}
 
-            <div className="PwdCheckInput">
-              <Label htmlFor="PwdCheck" style={{ margin: "0 0 0 10px" }}>
-                비밀번호 확인
+          {isEdit ? (
+            <>
+              <Label htmlFor="Pwd" style={{ margin: "0 0 10px 10px" }}>
+                내 비밀번호
               </Label>
               <br />
               <input
                 type="password"
-                id="PwdCheck"
-                onChange={pwDoubleCheck}
-                value={PwdCheck}
+                id="Pwd"
+                onChange={pwCheck}
                 style={{ margin: "10px 0 7px" }}
               ></input>
-              <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
-                {PwCheckMessage}
+              {Pwd ? (
+                <div
+                  style={{
+                    color: PwMessageColor ? "#59B200" : "#E22F2F",
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    margin: "0 0 20px",
+                  }}
+                >
+                  {PwMessage}
+                </div>
+              ) : (
+                <div
+                  style={{
+                    color: "#A0A0A0",
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    margin: "0 0 20px",
+                  }}
+                >
+                  {PwMessage}
+                </div>
+              )}
+
+              <div className="PwdCheckInput">
+                <Label htmlFor="PwdCheck" style={{ margin: "0 0 0 10px" }}>
+                  비밀번호 확인
+                </Label>
+                <br />
+                <input
+                  type="password"
+                  id="PwdCheck"
+                  onChange={pwDoubleCheck}
+                  value={PwdCheck}
+                  style={{ margin: "10px 0 7px" }}
+                ></input>
+                <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
+                  {PwCheckMessage}
+                </div>
               </div>
+            </>
+          ) : null}
+          {isEdit ? (
+            <div
+              style={{ margin: "50px 0", position: "absolute", bottom: "0px" }}
+            >
+              <button
+                onClick={edit}
+                style={{ border: "none", background: "none" }}
+              >
+                <img src={edit_enter} alt="edit_enter" />
+              </button>
+              <button
+                onClick={resetAll}
+                style={{ border: "none", background: "none" }}
+              >
+                <img src={edit_cancel} alt="edit" />
+              </button>
             </div>
-          </>
-        ) : null}
-        {isEdit ? (
-          <div style={{ margin: "10px 0" }}>
+          ) : (
             <button
-              onClick={edit}
-              style={{ border: "none", background: "none" }}
+              onClick={() => setIsEdit(!isEdit)}
+              style={{
+                border: "none",
+                background: "none",
+                margin: "69px 0 90px 0",
+              }}
             >
-              <img src={edit_enter} alt="edit_enter" />
+              <img src={me_edit} alt="edit" />
             </button>
-            <button
-              onClick={resetAll}
-              style={{ border: "none", background: "none" }}
+          )}
+          {isEdit ? null : ( // 나중에 토큰 여부 나중에 전체 조건으로 주기, 토큰이 있다면 내정보가 보이게
+            <div
+              style={{ color: "#747474", fontSize: "15px", fontWeight: "bold" }}
+              onClick={() => dispatch(userActions.Logout(navigate))}
             >
-              <img src={edit_cancel} alt="edit" />
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={() => setIsEdit(!isEdit)}
-            style={{
-              border: "none",
-              background: "none",
-              margin: "69px 0 90px 0",
-            }}
-          >
-            <img src={me_edit} alt="edit" />
-          </button>
-        )}
-        {isEdit ? null : ( // 나중에 토큰 여부 나중에 전체 조건으로 주기, 토큰이 있다면 내정보가 보이게
-          <div
-            style={{ color: "#747474", fontSize: "15px", fontWeight: "bold" }}
-            onClick={()=>dispatch(userActions.Logout(navigate))}
-          >
-            로그아웃
-          </div>
-        )}
-      </Wrap>:<div>로그인후 이용가능합니다.</div>}
-      
+              로그아웃
+            </div>
+          )}
+        </Wrap>
+      ) : (
+        <div>로그인후 이용가능합니다.</div>
+      )}
     </Container>
   );
 };
@@ -286,9 +298,12 @@ const Container = styled.div`
   display: flex;
   width: 528px;
   height: 75vh;
+  min-height: 565px;
+  max-height: 600px;
   text-align: ${(props: { textAlign: boolean }) =>
     props.textAlign ? `center;` : null};
-  align-items: center;
+  align-items: ${(props: { alignItems: boolean }) =>
+    props.alignItems ? `center;` : null};
   justify-content: center;
   border: 2px solid #747474;
   border-top: none;
@@ -312,11 +327,9 @@ const Wrap = styled.div`
     box-sizing: border-box;
   }
   & button {
-    margin: 5px;
+    margin: 0 5px;
   }
 `;
-
-
 
 const Label = styled.label`
   font-size: 20px;
