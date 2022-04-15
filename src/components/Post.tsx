@@ -15,15 +15,25 @@ const Post: React.FC<PostPropsType> = (props) => {
     <div
       style={{
         display: "flex",
-        justifyContent: "center",
+        // justifyContent: props.isMap?"":"center",
         width: "493px",
+        margin: "10px 10px",
       }}
     >
-      <img src={props.img} alt="restaurant" width="100px" height="100px"></img>
+      <img
+        src={props.img}
+        alt="restaurant"
+        width={props.isMap ? "74px" : "100px"}
+        height={props.isMap ? "74px" : "100px"}
+      ></img>
       <div className="content" style={{ margin: "0 14px" }}>
         <div
           className="restaurant_name"
-          style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}
+          style={{
+            fontSize: props.isMap ? "15px" : "20px",
+            fontWeight: "bold",
+            marginBottom: "10px",
+          }}
         >
           {props.restaurant_name}
         </div>
@@ -39,9 +49,11 @@ const Post: React.FC<PostPropsType> = (props) => {
           {props.address}
         </div>
       </div>
-      <div className="like" style={{ display: "flex", alignItems: "center" }}>
-        <img src={heart_fill} alt="heart" onClick={cancelFavorite} />
-      </div>
+      {props.isMap ? null : (
+        <div className="like" style={{ display: "flex", alignItems: "center" }}>
+          <img src={heart_fill} alt="heart" onClick={cancelFavorite} />
+        </div>
+      )}
     </div>
   );
 };
