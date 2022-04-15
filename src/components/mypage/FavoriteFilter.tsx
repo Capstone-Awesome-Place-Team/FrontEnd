@@ -56,36 +56,15 @@ const FavoriteFilter: React.FC<{
         margin: "0 20px",
       }}
     >
-      <div
-        onClick={() => setActive(!isActive)}
-        style={{
-          display: "flex",
-          border: "1px solid black",
-          width: "100px",
-          height: "30px",
-          borderRadius: "10px",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "15px",
-        }}
-      >
-        <span style={{ margin: "0 20px" }}>{selected}</span>
-        <img
-          src={arrow_drop}
-          alt="arrow"
-          style={{ justifyContent: "end" }}
-        ></img>
-      </div>
-      <Ul className="dept01" isActive={isActive}>
+      <Container onClick={() => setActive(!isActive)}>
+        <Span>{selected}</Span>
+        <img src={arrow_drop} alt="arrow"></img>
+      </Container>
+      <Ul isActive={isActive}>
         {district.map((item, idx) => (
-          <li
-            key={idx}
-            id="nop"
-            style={{ borderBottom: "1px solid #9C9C9C", padding: "6px 0" }}
-            onClick={() => selectOne(item)}
-          >
+          <List key={idx} onClick={() => selectOne(item)}>
             {item}
-          </li>
+          </List>
         ))}
       </Ul>
     </div>
@@ -112,6 +91,31 @@ const Ul = styled.ul`
   ::-webkit-scrollbar {
     display: none;
   }
+  :hover {
+    cursor: pointer;
+  }
+`;
+const Container = styled.div`
+  display: flex;
+  border: 1px solid black;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  :hover {
+    cursor: pointer;
+  }
+`;
+const Span = styled.span`
+  width: 100px;
+  text-align: center;
+  padding: 0 0 0 20px;
+`;
+const List = styled.li`
+  border-bottom: 1px solid #9c9c9c;
+  padding: 6px 0;
 `;
 
 export default FavoriteFilter;
