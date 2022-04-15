@@ -10,43 +10,68 @@ import next from "../../static/image/arrow-next.svg";
 import arrow_drop from "../../static/image/arrow-dropdown.svg";
 
 const FavoriteList: React.FC<FavoritePropsType> = (props) => {
+  const list = props.like_list;
+  const [selected, setSelected] = useState("전체");
   const [current_page_count, setPageCount] = useState(0); // 페이지를 넘길때마다 증가할수, 초기값 1 페이지로 시작
- 
+
   //useSelector 로 내찜목록 정보 가져오기
   //스피너 처리 나중에할것
-  const list = props.like_list;
- 
 
   // 페이지 구현을위한 코드 정리
-  const total_data = list.length;
-  const total_page = Math.ceil(total_data / 4);
+  let total_data: number = list.length;
+  let total_page = Math.ceil(total_data / 4);
   const current_first_data = current_page_count * 4; // 해당 페이지에서 for시켜줄 첫 데이터
+
   const nextPage = () => {
     if (current_page_count === total_page - 1) {
       return;
     }
     setPageCount((prev) => prev + 1);
   };
+
   const prevPage = () => {
     if (current_page_count === 0) {
       return;
     }
     setPageCount((prev) => prev - 1);
   };
+
   const post = () => {
     const result = [];
-    for (let i = current_first_data; i < current_first_data + 4; i++) {
-      if (list[i] === undefined) {
-        break;
-      }
+    if (selected === "전체") {
+      for (let i = current_first_data; i < current_first_data + 4; i++) {
+        if (list[i] === undefined) {
+          break;
+        }
 
-      result.push(
-        <React.Fragment key={i}>
-          <Post {...list[i]} />
-          <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
-        </React.Fragment>
+        result.push(
+          <React.Fragment key={i}>
+            <Post {...list[i]} />
+            <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
+          </React.Fragment>
+        );
+      }
+    } else {
+      // 해당 구에 대한 filter 및 리스트 출력 페이지 구현
+      const filteredlist = list.filter((item) =>
+        item.address.includes(selected)
       );
+      total_data = filteredlist.length;
+      total_page = Math.ceil(total_data / 4);
+
+      for (let i = current_first_data; i < current_first_data + 4; i++) {
+        if (filteredlist[i] === undefined) {
+          break;
+        }
+        result.push(
+          <React.Fragment>
+            <Post {...filteredlist[i]} />
+            <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
+          </React.Fragment>
+        );
+      }
     }
+
     return result;
   };
 
@@ -62,47 +87,11 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
         }}
       >
         내 찜목록
-        <FavoriteFilter />
-        {/* <div style={{background: `url(${arrow_drop}) no-repeat 73px 50%`  }}> */}
-        {/* <select 
-          style={{
-            border: "2px solid #9C9C9C",
-            borderRadius: "10px",
-            width: "100px",
-            height: "30px",
-            textAlign: "center",
-            fontSize: "15px",
-            color: "#7C7C7C",
-            fontWeight:"bold",
-            background: "transparent",
-            // padding: "0 50px 0 5px",
-            // boxSizing:"border-box",
-            appearance: "none",
-            WebkitAppearance:"none",
-            MozAppearance:"none",
-
-          }}
-          
-        >
-          <option value="all">전체</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-          <option value="은평구">은평구</option>
-        </select> */}
-        {/* </div> */}
+        <FavoriteFilter
+          selected={selected}
+          setSelected={setSelected}
+          setPageCount={setPageCount}
+        />
       </div>
       {props.is_login ? (
         post()
