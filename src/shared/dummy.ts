@@ -288,7 +288,7 @@ export const dummyfiles = {
         },
       },
       {
-        r_code:4,
+        r_code:22,
         restaurant_name: "테스트 레스토랑23",
         img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
         address: "서울특별시 송파구",
@@ -301,7 +301,7 @@ export const dummyfiles = {
         },
       },
       {
-        r_code:22,
+        r_code:23,
         restaurant_name: "테스트 레스토랑24",
         img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
         address: "서울특별시 강동구",
@@ -314,7 +314,7 @@ export const dummyfiles = {
         },
       },
       {
-        r_code:23,
+        r_code:24,
         restaurant_name: "테스트 레스토랑25",
         img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
         address: "서울특별시 종로구",
@@ -327,7 +327,7 @@ export const dummyfiles = {
         },
       },
       {
-        r_code:24,
+        r_code:25,
         restaurant_name: "테스트 레스토랑26",
         img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
         address: "서울특별시 종로구",
@@ -340,7 +340,7 @@ export const dummyfiles = {
         },
       },
       {
-        r_code:25,
+        r_code:26,
         restaurant_name: "테스트 레스토랑27",
         img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
         address: "서울특별시 종로구",
@@ -353,7 +353,7 @@ export const dummyfiles = {
         },
       },
       {
-        r_code:26,
+        r_code:27,
         restaurant_name: "테스트 레스토랑28",
         img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
         address: "서울특별시 종로구",
@@ -366,7 +366,7 @@ export const dummyfiles = {
         },
       },
       {
-        r_code:27,
+        r_code:28,
         restaurant_name: "테스트 레스토랑29",
         img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
         address: "서울특별시 종로구",

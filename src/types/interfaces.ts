@@ -10,6 +10,7 @@ export interface PostPropsType {
         pet: boolean;
         nokids: boolean;
   }
+  isMap:boolean;
   }
 
   export interface MypageCategoryType {

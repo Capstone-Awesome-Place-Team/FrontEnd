@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { resourceLimits } from "worker_threads";
 import { FavoritePropsType } from "../../types/interfaces";
 import Post from "../Post";
 import FavoriteFilter from "./FavoriteFilter";
 //image
 import prev from "../../static/image/arrow-prev.svg";
 import next from "../../static/image/arrow-next.svg";
-import arrow_drop from "../../static/image/arrow-dropdown.svg";
+
 
 const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   const list = props.like_list;
@@ -54,7 +53,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
 
         result.push(
           <React.Fragment key={list[i].r_code}>
-            <Post {...list[i]} />
+            <Post {...list[i]} isMap={false}/>
             <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
           </React.Fragment>
         );
@@ -73,7 +72,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
         }
         result.push(
           <React.Fragment key={filteredlist[i].r_code}>
-            <Post {...filteredlist[i]} />
+            <Post {...filteredlist[i]} isMap={false}/>
             <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
           </React.Fragment>
         );
@@ -153,7 +152,7 @@ const Container = styled.div`
   width: 528px;
   height: 75vh;
   min-height: ${(props: { minHeight: boolean }) =>
-    props.minHeight ? `565px;` : null};
+    props.minHeight ? `585px;` : null};
   max-height: 600px;
   /* text-align: center; */
   border: 2px solid #747474;
