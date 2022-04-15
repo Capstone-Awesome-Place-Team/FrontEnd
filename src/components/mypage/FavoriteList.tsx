@@ -45,7 +45,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
         }
 
         result.push(
-          <React.Fragment key={i}>
+          <React.Fragment key={list[i].r_code}>
             <Post {...list[i]} />
             <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
           </React.Fragment>
@@ -64,7 +64,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
           break;
         }
         result.push(
-          <React.Fragment>
+          <React.Fragment key={filteredlist[i].r_code}>
             <Post {...filteredlist[i]} />
             <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
           </React.Fragment>
