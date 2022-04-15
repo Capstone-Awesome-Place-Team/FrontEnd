@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 import styled from "styled-components";
 
-const FavoriteFilter : React.FC<{selected:string, setSelected:Function, setPageCount:Function}> = (props) =>{
-    const {selected, setSelected, setPageCount} =props;
-    const [isActive, setActive] = useState(false);
+const FavoriteFilter : React.FC<{selected:string, setSelected:Function, setPageCount:Function, isActive:boolean, setActive:Function}> = (props) =>{
+    const {selected, setSelected, setPageCount, isActive, setActive} =props;
+ 
     const district = [
         "전체",
         "종로구",
