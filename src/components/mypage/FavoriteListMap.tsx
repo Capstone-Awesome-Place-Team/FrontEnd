@@ -4,23 +4,19 @@ import { FavoritePropsType } from "../../types/interfaces";
 import Post from "../Post";
 import map from "../../static/image/map.svg";
 const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
-  console.log(props.like_list);
   return (
     <Container>
       {props.is_login ? (
         <div>
-          <div
-            className="image-wrap"
-            style={{ padding: "20px", textAlign: "center" }}
-          >
+          <ImgWrap>
             <img src={map} width="400px" alt="map"></img>
-          </div>
+          </ImgWrap>
           <ListBox>
             <ScrollBarBox>
               {props.like_list.map((item) => {
                 return (
-                  <React.Fragment>
-                    <Post {...item} key={item.r_code} isMap />
+                  <React.Fragment key={item.r_code}>
+                    <Post {...item} isMap />
                   </React.Fragment>
                 );
               })}
@@ -71,7 +67,11 @@ const ScrollBarBox = styled.div`
   ::-webkit-scrollbar-track {
     background-color: #ededed;
     border-radius: 4.5px;
-    
   }
+`;
+
+const ImgWrap = styled.div`
+  padding: 20px;
+  text-align: center;
 `;
 export default FavoriteListMap;
