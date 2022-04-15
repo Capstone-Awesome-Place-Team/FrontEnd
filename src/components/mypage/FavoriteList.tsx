@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { resourceLimits } from "worker_threads";
 import { FavoritePropsType } from "../../types/interfaces";
 import Post from "../Post";
-
+import FavoriteFilter from "./FavoriteFilter";
 //image
 import prev from "../../static/image/arrow-prev.svg";
 import next from "../../static/image/arrow-next.svg";
@@ -11,10 +11,11 @@ import arrow_drop from "../../static/image/arrow-dropdown.svg";
 
 const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   const [current_page_count, setPageCount] = useState(0); // 페이지를 넘길때마다 증가할수, 초기값 1 페이지로 시작
-  const [isActive, setActive] = useState(false);
+ 
   //useSelector 로 내찜목록 정보 가져오기
   //스피너 처리 나중에할것
   const list = props.like_list;
+ 
 
   // 페이지 구현을위한 코드 정리
   const total_data = list.length;
@@ -32,7 +33,6 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
     }
     setPageCount((prev) => prev - 1);
   };
-
   const post = () => {
     const result = [];
     for (let i = current_first_data; i < current_first_data + 4; i++) {
@@ -62,65 +62,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
         }}
       >
         내 찜목록
-        <div
-          style={{
-            width: "30px",
-            position: "relative",
-            // zIndex: "2",
-            color: "black",
-          }}
-        >
-          <div
-            style={{
-              listStyle: "none",
-              // position: "relative",
-              width: "100%",
-              // height: "40px",
-            }}
-          >
-            <span
-              onClick={() => setActive(!isActive)}
-              style={{
-                display: "flex",
-                border: "1px solid black",
-                width: "100px",
-                height: "30px",
-                borderRadius: "10px",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: "15px",
-              }}
-            >
-              전체
-            </span>
-            <Ul className="dept01" isActive={isActive}>
-              <li
-                id="nop"
-                style={{ borderBottom: "1px solid #9C9C9C", padding: "6px 0" }}
-              >
-                은평구
-              </li>
-              <li
-                id="nop"
-                style={{ borderBottom: "1px solid #9C9C9C", padding: "6px 0" }}
-              >
-                노원구
-              </li>
-              <li
-                id="nop"
-                style={{ borderBottom: "1px solid #9C9C9C", padding: "6px 0" }}
-              >
-                강남구
-              </li>
-              <li
-                id="nop"
-                style={{ borderBottom: "1px solid #9C9C9C", padding: "6px 0" }}
-              >
-                송파구
-              </li>
-            </Ul>
-          </div>
-        </div>
+        <FavoriteFilter />
         {/* <div style={{background: `url(${arrow_drop}) no-repeat 73px 50%`  }}> */}
         {/* <select 
           style={{
@@ -230,7 +172,7 @@ const Ul = styled.ul`
   list-style: none;
   border: 1px solid #9c9c9c;
   border-radius: 10px;
-  height: 100px;
+  height: 150px;
   text-align: center;
   overflow-y: auto;
   display: ${(props: { isActive: boolean }) =>
@@ -240,9 +182,9 @@ const Ul = styled.ul`
   font-size: 15px;
   overflow: auto;
   scrollbar-width: none;
-  -ms-overflow-style:none;
+  -ms-overflow-style: none;
   ::-webkit-scrollbar {
-    display:none;
+    display: none;
   }
 `;
 export default FavoriteList;
