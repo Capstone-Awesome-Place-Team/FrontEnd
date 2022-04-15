@@ -60,15 +60,15 @@ const ScrollBarBox = styled.div`
   height: 180px;
   overflow-y: auto;
   overflow-x: hidden;
-  &::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 9px;
   }
-  &::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     background-color: #bebebe;
     height: 53px;
     border-radius: 4.5px;
   }
-  &::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     background-color: #ededed;
     border-radius: 4.5px;
     

@@ -15,7 +15,6 @@ interface clickedType {
 
 const MypageCategory: React.FC<MypageCategoryType> = (props) => {
   const { setCategory, category } = props;
-
   return (
     <div
       style={{
