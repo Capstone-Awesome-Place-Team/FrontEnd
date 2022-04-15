@@ -13,7 +13,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   const list = props.like_list;
   const [selected, setSelected] = useState("전체");
   const [current_page_count, setPageCount] = useState(0); // 페이지를 넘길때마다 증가할수, 초기값 1 페이지로 시작
-
+  const [isActive, setActive] =useState(false);
   //useSelector 로 내찜목록 정보 가져오기
   //스피너 처리 나중에할것
 
@@ -35,6 +35,14 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
     }
     setPageCount((prev) => prev - 1);
   };
+
+
+  const closeDropDown= () =>{
+    if(isActive===true){
+      setActive(false)
+     
+    }
+  }
 
   const post = () => {
     const result = [];
@@ -76,7 +84,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   };
 
   return (
-    <Container minHeight={props.is_login ? true : false}>
+    <Container minHeight={props.is_login ? true : false} onClick={()=>closeDropDown()}>
       <div
         style={{
           display: "flex",
@@ -91,6 +99,8 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
           selected={selected}
           setSelected={setSelected}
           setPageCount={setPageCount}
+          isActive={isActive}
+          setActive={setActive}
         />
       </div>
       {props.is_login ? (
