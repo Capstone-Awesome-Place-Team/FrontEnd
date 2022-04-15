@@ -7,7 +7,7 @@ import FavoriteFilter from "./FavoriteFilter";
 //image
 import prev from "../../static/image/arrow-prev.svg";
 import next from "../../static/image/arrow-next.svg";
-import arrow_drop from "../../static/image/arrow-dropdown.svg";
+
 
 const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   const list = props.like_list;

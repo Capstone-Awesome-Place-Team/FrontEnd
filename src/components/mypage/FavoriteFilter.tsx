@@ -1,83 +1,96 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const FavoriteFilter : React.FC<{selected:string, setSelected:Function, setPageCount:Function, isActive:boolean, setActive:Function}> = (props) =>{
-    const {selected, setSelected, setPageCount, isActive, setActive} =props;
- 
-    const district = [
-        "전체",
-        "종로구",
-        "중구",
-        "용산구",
-        "성동구",
-        "광진구",
-        "동대문구",
-        "중랑구",
-        "성북구",
-        "강북구",
-        "도봉구",
-        "노원구",
-        "은평구",
-        "서대문구",
-        "마포구",
-        "양천구",
-        "강서구",
-        "구로구",
-        "금천구",
-        "영등포구",
-        "동작구",
-        "관악구",
-        "서초구",
-        "강남구",
-        "송파구",
-        "강동구",
-      ];
+import arrow_drop from "../../static/image/arrow-dropdown.svg";
+const FavoriteFilter: React.FC<{
+  selected: string;
+  setSelected: Function;
+  setPageCount: Function;
+  isActive: boolean;
+  setActive: Function;
+}> = (props) => {
+  const { selected, setSelected, setPageCount, isActive, setActive } = props;
 
-      const selectOne = (props:string) =>{
-        setSelected(props)
-        setActive(!isActive);
-        setPageCount(0);
-      }
+  const district = [
+    "전체",
+    "종로구",
+    "중구",
+    "용산구",
+    "성동구",
+    "광진구",
+    "동대문구",
+    "중랑구",
+    "성북구",
+    "강북구",
+    "도봉구",
+    "노원구",
+    "은평구",
+    "서대문구",
+    "마포구",
+    "양천구",
+    "강서구",
+    "구로구",
+    "금천구",
+    "영등포구",
+    "동작구",
+    "관악구",
+    "서초구",
+    "강남구",
+    "송파구",
+    "강동구",
+  ];
 
-    return (<div
+  const selectOne = (item: string) => {
+    setSelected(item);
+    setActive(!isActive);
+    setPageCount(0);
+  };
+
+  return (
+    <div
+      style={{
+        width: "fit-content",
+        position: "relative",
+        // zIndex: "2",
+        color: "black",
+        margin: "0 20px",
+      }}
+    >
+      <div
+        onClick={() => setActive(!isActive)}
         style={{
-          width: "30px",
-          position: "relative",
-          // zIndex: "2",
-          color: "black",
-          margin: "0 20px",
+          display: "flex",
+          border: "1px solid black",
+          width: "100px",
+          height: "30px",
+          borderRadius: "10px",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "15px",
         }}
       >
-        <span
-          onClick={() => setActive(!isActive)}
-          style={{
-            display: "flex",
-            border: "1px solid black",
-            width: "100px",
-            height: "30px",
-            borderRadius: "10px",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: "15px",
-          }}
-    
-        >
-          {selected}
-        </span>
-        <Ul className="dept01" isActive={isActive}>
-          {district.map((item,idx)=>(
-            <li
+        <span style={{ margin: "0 20px" }}>{selected}</span>
+        <img
+          src={arrow_drop}
+          alt="arrow"
+          style={{ justifyContent: "end" }}
+        ></img>
+      </div>
+      <Ul className="dept01" isActive={isActive}>
+        {district.map((item, idx) => (
+          <li
             key={idx}
             id="nop"
             style={{ borderBottom: "1px solid #9C9C9C", padding: "6px 0" }}
-            onClick={()=>selectOne(item)}
+            onClick={() => selectOne(item)}
           >
             {item}
           </li>
-          ))}
-        </Ul>
-      </div>)
-}
+        ))}
+      </Ul>
+    </div>
+  );
+};
 
 const Ul = styled.ul`
   background: white;
