@@ -16,7 +16,7 @@ const Login: React.FC = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user_info = useSelector((state: RootState) => state.user.user);
-  console.log(user_info,"테스트");
+  console.log(user_info,"테스트메세지");
 
   const checkLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
