@@ -10,7 +10,7 @@ import { actionCreators as userActions } from "../redux/modules/users";
 import back_arrow from "../static/image/back_arrow.svg";
 
 const Login: React.FC = (props) => {
-  localStorage.setItem("token", "test메세지") // 임시 토큰생성 나중에 없애면됨
+  localStorage.setItem("token", "test") // 임시 토큰생성 나중에 없애면됨
   const Id = useRef<HTMLInputElement>(null);
   const Pwd = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
