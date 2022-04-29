@@ -1,16 +1,70 @@
-import React from "react";
+import React, { useRef, useEffect, ReactEventHandler } from "react";
 import styled from "styled-components";
 import { FavoritePropsType } from "../../types/interfaces";
 import Post from "../Post";
+import AreaInclude from "./AreaInclude";
 import map from "../../static/image/map.svg";
+import mark from "../../static/image/mark.svg";
+import { disconnect } from "process";
 const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
+  const dummyArea = [
+    "은평구",
+    "강북구",
+    "도봉구",
+    "노원구",
+    "강서구",
+    "성북구",
+    "서대문구",
+    "마포구",
+    "용산구",
+    "중구",
+    "동대문구",
+    "성동구",
+    "중랑구",
+    "광진구",
+    "양천구",
+    "영등포구",
+    "동작구",
+    "금천구",
+    "관악구",
+    "서초구",
+    "강남구",
+    "송파구",
+    "강동구",
+    "종로구",
+    "구로구"
+  ];
+  const clickMap = useRef<HTMLImageElement>(null);
+  const mapclick = (e: any) => {
+    console.log(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+    if (
+      e.nativeEvent.offsetX >= 145 &&
+      e.nativeEvent.offsetX <= 170 &&
+      e.nativeEvent.offsetY >= 70 &&
+      e.nativeEvent.offsetY <= 120
+    ) {
+      console.log("은평구");
+    }
+  };
   return (
     <Container>
       {props.is_login ? (
         <div>
-          <ImgWrap>
-            <img src={map} width="400px" alt="map"></img>
-          </ImgWrap>
+          <div
+            style={{
+              backgroundImage: `url(${map})`,
+              backgroundSize: "400px 325px",
+              width: "400px",
+              height: "325px",
+              margin: "auto",
+            }}
+            ref={clickMap}
+            onClick={(e) => mapclick(e)}
+            id="img"
+          >
+            <AreaInclude dummyArea={dummyArea}></AreaInclude>
+          </div>
+
           <ListBox>
             <ScrollBarBox>
               {props.like_list.map((item) => {
