@@ -9,7 +9,7 @@ export const apis = {
   //EditInfo
   editInfo: (info:{pw:string|undefined,nickname:string|undefined})=> instance.put(`/user_edit`,{info}),
     //Signup
-  signUp: (user: Signup) => instance.post(`/signup`, { user }),
+  signUp: (user: Signup) => instance.post(`/signup`, { ...user }),
   //Login
-  setUser: (user: SetUser) => instance.post(`/signin`, { user }),
+  setUser: (user: SetUser) => instance.post(`/signin`, { ...user }),
 };

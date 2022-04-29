@@ -7,7 +7,7 @@ import map from "../../static/image/map.svg";
 import mark from "../../static/image/mark.svg";
 import { disconnect } from "process";
 const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
-  const dummyArea = [
+  const dummyArea = [ // 실제 데이터가 생기면 이거 지우고 쓸것 대신 추가해야할게 split 으로 주소 나눠서 찾아야할듯
     "은평구",
     "강북구",
     "도봉구",
@@ -34,18 +34,8 @@ const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
     "종로구",
     "구로구"
   ];
-  const clickMap = useRef<HTMLImageElement>(null);
-  const mapclick = (e: any) => {
-    console.log(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
-    if (
-      e.nativeEvent.offsetX >= 145 &&
-      e.nativeEvent.offsetX <= 170 &&
-      e.nativeEvent.offsetY >= 70 &&
-      e.nativeEvent.offsetY <= 120
-    ) {
-      console.log("은평구");
-    }
-  };
+ 
+ 
   return (
     <Container>
       {props.is_login ? (
@@ -58,9 +48,6 @@ const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
               height: "325px",
               margin: "auto",
             }}
-            ref={clickMap}
-            onClick={(e) => mapclick(e)}
-            id="img"
           >
             <AreaInclude dummyArea={dummyArea}></AreaInclude>
           </div>
