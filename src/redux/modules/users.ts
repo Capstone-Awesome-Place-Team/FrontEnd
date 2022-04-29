@@ -24,7 +24,7 @@ const SignUpDB = (user: Signup, navigate: Function) => {
   return async function (dispatch: Dispatch) {
     try {
       console.log(user);
-      // const res = await apis.signUp(user); // api생기면 넣기
+      const res= await apis.signUp(user); // api생기면 넣기
       navigate("/signin"); //회원가입완료후 로그인화면으로
     } catch (error) {
       console.log(error);
@@ -36,7 +36,8 @@ const LoginDB = (user: SetUser, navigate: Function) => {
   return async function (dispatch: Dispatch) {
     try {
       console.log(user);
-      //  const res = await apis.setUser(user); // api생기면 넣기
+       const res:any = await apis.setUser(user); // api생기면 넣기
+       localStorage.setItem("token", res.token) // 임시 토큰생성 나중에 없애면됨
       dispatch(set_user(user));
       navigate("/");
     } catch (error) {

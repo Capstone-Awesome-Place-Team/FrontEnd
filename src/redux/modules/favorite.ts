@@ -55,8 +55,10 @@ const getFavoriteListDB = () => {
  
   return async function (dispatch: Dispatch) {
     try {
-      // const res = await apis.getFavorite(); //나중에 서버 생기면 넣을것
-      dispatch(getFavoriteList(dummyfiles));
+      const res:any = await apis.getFavorite(); //나중에 서버 생기면 넣을것
+      // dispatch(getFavoriteList(dummyfiles));
+      console.log(res)
+      dispatch(getFavoriteList(res));
     } catch (error) {
       console.log(error);
     }

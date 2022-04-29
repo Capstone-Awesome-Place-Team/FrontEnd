@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://웹서버domain.com",
+  baseURL: "http://18.209.226.79",
   timeout: 3000, // 3초이후에 연결없으면 timout시킴
 });
 
