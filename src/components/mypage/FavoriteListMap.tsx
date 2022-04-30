@@ -1,41 +1,27 @@
-import React, { useRef, useEffect, ReactEventHandler } from "react";
+import React, { useRef, useEffect, ReactEventHandler, useState } from "react";
 import styled from "styled-components";
 import { FavoritePropsType } from "../../types/interfaces";
 import Post from "../Post";
 import AreaInclude from "./AreaInclude";
 import map from "../../static/image/map.svg";
-import mark from "../../static/image/mark.svg";
-import { disconnect } from "process";
+
 const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
-  const dummyArea = [ // 실제 데이터가 생기면 이거 지우고 쓸것 대신 추가해야할게 split 으로 주소 나눠서 찾아야할듯
-    "은평구",
-    "강북구",
-    "도봉구",
-    "노원구",
-    "강서구",
-    "성북구",
-    "서대문구",
-    "마포구",
-    "용산구",
-    "중구",
-    "동대문구",
-    "성동구",
-    "중랑구",
-    "광진구",
-    "양천구",
-    "영등포구",
-    "동작구",
-    "금천구",
-    "관악구",
-    "서초구",
-    "강남구",
-    "송파구",
-    "강동구",
-    "종로구",
-    "구로구"
-  ];
- 
- 
+  const [selectedArea, setSelectedArea] = useState<any>([]);
+  const includedArea: string[] = [];
+
+  //주소에서 구만 추출하여 includedArea에 저장
+  props.like_list.forEach((item) => {
+    const arr = item.address.split(" ")[1];
+    includedArea.push(arr);
+  });
+  
+  const selectOne = (area: string) => {
+    const filteredlist = props.like_list.filter((item) =>
+      item.address.includes(area)
+    );
+    setSelectedArea(filteredlist);
+  };
+
   return (
     <Container>
       {props.is_login ? (
@@ -49,18 +35,38 @@ const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
               margin: "auto",
             }}
           >
-            <AreaInclude dummyArea={dummyArea}></AreaInclude>
+            <AreaInclude
+              includedArea={includedArea}
+              selectOne={selectOne}
+            ></AreaInclude>
           </div>
 
           <ListBox>
             <ScrollBarBox>
-              {props.like_list.map((item) => {
-                return (
-                  <React.Fragment key={item.r_code}>
-                    <Post {...item} isMap />
-                  </React.Fragment>
-                );
-              })}
+              {selectedArea.length > 0 ? (
+                selectedArea.map((item: any) => {
+                  return (
+                    <React.Fragment key={item.r_code}>
+                      <Post {...item} isMap />
+                    </React.Fragment>
+                  );
+                })
+              ) : (
+                <div style={{ textAlign: "center" }}>
+                  <p>지역을 클릭하여 저장한 맛집 정보를 확인할 수 있어요!</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      fontSize: "20px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "150px",
+                    }}
+                  >
+                    리스트가 없습니다.
+                  </div>
+                </div>
+              )}
             </ScrollBarBox>
           </ListBox>
         </div>

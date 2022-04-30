@@ -15,10 +15,11 @@ const Mypage: React.FC = () => {
   const dispatch = useDispatch();
   const [category, setCategory] = useState<string>("edit_profile");
   const info = useSelector((state: RootState) => state.favorite.list);
-  // console.log(info);
+
   useEffect(() => {
     // 모든 정보 get 요청 해서 redux 에 저장해놓기
-    if (!info.length) {
+    
+    if (!info.nickname.length) {
       dispatch(actionCreators.getFavoriteListDB());
     }
   }, []);
