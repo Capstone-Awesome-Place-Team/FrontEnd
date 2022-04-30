@@ -55,10 +55,10 @@ const getFavoriteListDB = () => {
 
   return async function (dispatch: Dispatch) {
     try {
-      // const res:any = await apis.getFavorite(); //나중에 서버 생기면 넣을것
-      dispatch(getFavoriteList(dummyfiles));
-      // console.log(res)
-      // dispatch(getFavoriteList(res));
+      const res:any = await apis.getFavorite(); //나중에 서버 생기면 넣을것
+      // dispatch(getFavoriteList(dummyfiles));
+      console.log(res)
+      dispatch(getFavoriteList(res));
     } catch (error: any) {
       console.log(error.message);
     }
@@ -66,10 +66,12 @@ const getFavoriteListDB = () => {
 };
 
 const cancelFavoriteDB = (r_code: number) => {
+  console.log(r_code)
   return async function (dispatch: Dispatch) {
     try {
-      // const res = await apis.cancelFavorite(r_code) //나중에 api 요청시 사용
+      const res = await apis.cancelFavorite(r_code) //나중에 api 요청시 사용
       dispatch(cancelFavorite(r_code));
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +85,7 @@ const editInfoDB = (info: {
   // |undefined 부분 수정할수있는지 나중에 검토, 하고 apis도 동일하게 검토
   return async function (dispatch: Dispatch) {
     try {
-      //  const res = await apis.editInfo(info);    //api 연결 추가
+       const res = await apis.editInfo(info);    //api 연결 추가
       dispatch(editInfo(info.nickname));
     } catch (error) {
       console.log(error);

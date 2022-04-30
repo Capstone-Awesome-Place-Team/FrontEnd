@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { actionCreators as favoriteActions } from "../redux/modules/favorite";
 
-import header_profile from "../static/image/header_profile.svg";
 import heart_fill from "../static/image/heart-fill.svg";
 import { PostPropsType } from "../types/interfaces";
 

@@ -15,7 +15,6 @@ const AreaInclude: React.FC<{ includedArea: string[]; selectOne: Function }> = (
           visibility: includedArea.includes("은평구") ? "visible" : "hidden",
           cursor: "pointer",
         }}
-
         alt="mark"
         onClick={() => selectOne("은평구")}
       ></img>
