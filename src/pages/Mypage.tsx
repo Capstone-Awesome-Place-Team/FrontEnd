@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/configStore";
 import { actionCreators } from "../redux/modules/favorite";
 //image
-import restaurant from "../static/image/header_profile.svg";
+// import restaurant from "../static/image/header_profile.svg";
 
 const Mypage: React.FC = () => {
   const is_login = localStorage.getItem("token"); //임시토큰 테스트 나중에 없애거나 수정할것
