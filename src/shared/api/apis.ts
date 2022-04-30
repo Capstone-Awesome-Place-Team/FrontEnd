@@ -11,5 +11,5 @@ export const apis = {
     //Signup
   signUp: (user: Signup) => instance.post(`/signup`, { ...user }),
   //Login
-  setUser: (user: SetUser) => instance.post(`/signin`, { ...user }),
+  setUser: (user: SetUser) => instance.post(`/signin`, { ...user }),  
 };

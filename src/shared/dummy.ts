@@ -378,5 +378,18 @@ export const dummyfiles = {
           nokids: false,
         },
       },
+      {
+        r_code:29,
+        restaurant_name: "테스트 레스토랑30",
+        img: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
+        address: "서울특별시 도봉구",
+        star: 0,
+        options: {
+          takeout: true,
+          parking: false,
+          pet: false,
+          nokids: false,
+        },
+      },
     ]
   }
