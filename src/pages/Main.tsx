@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CategoryList from "../components/main/CategoryList";
+import Entertains from "../components/main/Entertains";
+import ThemeList from "../components/main/ThemeList";
 import { RootState } from "../redux/configStore";
 import { actionCreators as mainActions } from "../redux/modules/main";
 const Main: React.FC = (props) => {
@@ -8,28 +11,18 @@ const Main: React.FC = (props) => {
   const theme_detail = useSelector(
     (state: RootState) => state.main.theme_detail
   );
-  console.log(theme_detail);
+ 
   useEffect(() => {
     dispatch(mainActions.getThemeListDB());
   }, []);
+  
   return (
     <div>
-      메인 페이지
-      <div
-        style={{ width: "300px", height: "100px", background: "red" }}
-        onClick={() =>
-          dispatch(mainActions.getThemeDetail(theme_list[0].theme_title))
-        }
-      ></div>
-      <div>{theme_detail.theme_title}</div>
-      <div>{theme_detail.theme_content}</div>
-      {theme_detail.restaurant_info.map((item: any) => (
-        <div>
-          {item.address}
-          {item.img}
-          {item.intro}
-          </div>
-      ))}
+      <Entertains></Entertains>
+      <hr />
+      <CategoryList></CategoryList>
+      <hr />
+      <ThemeList></ThemeList>
     </div>
   );
 };
