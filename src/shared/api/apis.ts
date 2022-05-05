@@ -16,5 +16,7 @@ export const apis = {
   //Main
   getMain: () => instance.get(`/main`),
   //theme Detail
-  getThemeDetail: (theme_title:string)=> instance.get(`/theme_list/${theme_title}`)
+  getThemeDetail: (theme_title:string)=> instance.get(`/theme_list/${theme_title}`),
+  //search result
+  getSearchInfo: (search:string)=>instance.post(`/search`,{ search })
 };
