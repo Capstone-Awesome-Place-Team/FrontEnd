@@ -71,6 +71,17 @@ const getThemeDetail = (theme_title: string) => {
   };
 };
 
+const getSearchDB = (search:string, navigate:Function)=>{
+  return async function (dispatch:Dispatch){
+    try{
+      const res:any = await apis.getSearchInfo(search);
+      navigate(`/list/${search}`)
+    } catch (error:any){
+      console.log(error.message);
+    }
+  }
+}
+
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_THEME: {
@@ -87,6 +98,7 @@ export default function reducer(state = initialState, action: any) {
 const actionCreators = {
   getThemeListDB,
   getThemeDetail,
+  getSearchDB
 };
 
 export { actionCreators };
