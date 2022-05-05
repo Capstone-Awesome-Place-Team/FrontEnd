@@ -22,13 +22,14 @@ const Entertains: React.FC<{}>  = () => {
           fontSize: "30px",
           color: "#E22F2F",
           fontFamily: "IBM Plex Sans KR",
+          margin:"0 0 28px 0"
         }}
       >
         오늘 뭐먹지? 선택이 어려울때!
       </p>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
+      <div style={{ display: "flex", justifyContent: "space-around", margin:"0 0 42px 0" }}>
         <div>
-          <img src={game_choose_font} alt="" style={{ margin: "0 0 15px 0",}}></img>
+          <img src={game_choose_font} alt="" style={{ margin: "0 0 15px 0"}}></img>
           <div
             style={{
               width: "170px",

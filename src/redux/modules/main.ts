@@ -7,7 +7,7 @@ const GET_THEME = "GETTHEME";
 const GET_THEME_DETAIL = "GETTHEMEDETAIL";
 const getThemeList = createAction(
   GET_THEME,
-  (list: { theme_title: string; theme_img: string }) => ({ list })
+  (list: { theme_title: string; theme_img: string }[]) => ({ list })
 ); // list이름은 일단 넣어놓고 다른 변수로 일치해야하면 다시바꿀것
 const getThemeDetailList = createAction(
   GET_THEME_DETAIL,
@@ -43,10 +43,11 @@ const initialState = {
       },
     ],
   },
+  isLoading:true,
 };
 
 const getThemeListDB = () => {
-  // 내 찜목록 리스트 가져오기
+  // 메인 테마리스트 가져오기
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getMain(); //나중에 서버 생기면 넣을것
@@ -59,7 +60,6 @@ const getThemeListDB = () => {
 };
 
 const getThemeDetail = (theme_title: string) => {
-  console.log(theme_title);
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getThemeDetail(theme_title); //나중에 서버 생기면 넣을것
@@ -74,10 +74,10 @@ const getThemeDetail = (theme_title: string) => {
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_THEME: {
-      return { ...state, list: action.payload.list };
+      return { ...state, list: action.payload.list,isLoading:false };
     }
     case GET_THEME_DETAIL: {
-      return {...state, theme_detail: action.payload.list};
+      return {...state, theme_detail: action.payload.list, };
     }
     default:
       return state;
