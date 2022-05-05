@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://44.192.125.43",
+  baseURL: process.env.REACT_APP_BASE_URL,
   timeout: 3000, // 3초이후에 연결없으면 timout시킴
 });
 

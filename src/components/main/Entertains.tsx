@@ -1,8 +1,11 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import game_choose from "../../static/image/game_choose.svg";
 import random_game from "../../static/image/random_game.jpg"
 import random_game_font from "../../static/image/random_game_font.svg";
 import game_choose_font from "../../static/image/game_choose_font.svg";
 const Entertains: React.FC<{}>  = () => {
+  const navigate = useNavigate();
   return (
     <>
       <p
@@ -37,6 +40,7 @@ const Entertains: React.FC<{}>  = () => {
               backgroundImage: `url(${game_choose})`,
               margin:"0 auto",
             }}
+            // onClick={()=>)}
           ></div>
           
         </div>

@@ -5,14 +5,13 @@ import Login from "./pages/Login";
 import Header from "./components/Header";
 import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
-import BodyGlobal from "./shared/BodyGlobal";
 import Main from "./pages/Main";
 import Theme from "./pages/Theme";
 const App: React.FC = () =>{
   return (
     <div>
     <Header />
-    <div style={{height:"87vh", overflowY:"auto"}}>
+    <div style={{height:"100vh", overflowY:"auto"}}>
     <Routes>
       <Route path='/' element={<Main />} />
       <Route path="signin" element={<Login />} />
