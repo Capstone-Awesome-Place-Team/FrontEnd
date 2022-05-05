@@ -2,10 +2,12 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import header_profile from "../static/image/header_profile.svg";
+import awesome from "../static/image/awesome place_font.svg"
 
 const Header: React.FC = (props) => {
   const navigate = useNavigate();
   const location = useLocation().pathname;
+  const isLogin = localStorage.getItem("token");
   return (
     <>
       {location === "/signin" || location === "/signup" ? null : (
@@ -27,11 +29,17 @@ const Header: React.FC = (props) => {
             boxSizing: "border-box",
           }}
         >
-          <Box onClick={() => navigate("/")}>Awesome Place</Box>
-     
+          <img onClick={() => navigate("/")} src={awesome} alt=""></img>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Box onClick={() => navigate("/signin")}>로그인</Box>
-            <Box onClick={() => navigate("/mypage")}>마이페이지</Box>
+          {isLogin?.length === undefined && (
+              <Box onClick={() => navigate("/signin")}>로그인</Box>
+            )}
+            {isLogin?.length === undefined && (
+              <Box onClick={() => navigate("/signup")}>회원가입</Box>
+            )}
+            {isLogin?.length && (
+              <Box onClick={() => navigate("/mypage")}>마이페이지</Box>
+            )}
             <img src={header_profile} alt="profile"></img>
           </div>
         </div>
@@ -42,6 +50,7 @@ const Header: React.FC = (props) => {
 
 const Box = styled.div`
   margin: 0px 5px;
+  background-image: url(${(props:any)=>props.imgUrl});
   &:hover {
     cursor: pointer;
   }
