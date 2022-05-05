@@ -28,7 +28,7 @@ const Header: React.FC = (props) => {
           }}
         >
           <Box onClick={() => navigate("/")}>Awesome Place</Box>
-          <div>logo</div>
+     
           <div style={{ display: "flex", alignItems: "center" }}>
             <Box onClick={() => navigate("/signin")}>로그인</Box>
             <Box onClick={() => navigate("/mypage")}>마이페이지</Box>

@@ -8,15 +8,9 @@ import { RootState } from "../redux/configStore";
 import { actionCreators as mainActions } from "../redux/modules/main";
 const Main: React.FC = (props) => {
   const dispatch = useDispatch();
-  const theme_list = useSelector((state: RootState) => state.main.list);
-  const theme_detail = useSelector(
-    (state: RootState) => state.main.theme_detail
-  );
+
  
-  useEffect(() => {
-    dispatch(mainActions.getThemeListDB());
-  }, []);
-  
+
   return (
     <div>
       <SearchArea></SearchArea>
