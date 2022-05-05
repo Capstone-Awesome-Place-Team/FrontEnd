@@ -1,6 +1,8 @@
 import React from "react";
 import main_background from "../../static/image/main_background.svg";
 import main_search_font from "../../static/image/main_search_font.svg";
+import search_boundry from "../../static/image/search_boundry.svg";
+import search_button from "../../static/image/search_button.svg";
 const SearchArea: React.FC<{}> = () => {
   return (
     <>
@@ -14,13 +16,36 @@ const SearchArea: React.FC<{}> = () => {
             padding: "108px 0",
           }}
         >
-             <div>
-          <img src={main_search_font} alt=""></img>
-         
-          <input type="text" placeholder="지역, 식당, 음식으로 댕꿀맛집 찾기 GOGO!!"></input>
+          <div>
+            <img
+              src={main_search_font}
+              alt=""
+              style={{ display: "block", margin: "0 auto 10px auto", }}
+            ></img>
+            <div
+              style={{
+                display: "flex",
+                backgroundImage: `url(${search_boundry})`,
+                width: "408px",
+                height: "41px",
+              }}
+            >
+              <input
+                type="text"
+                placeholder="지역, 식당, 음식으로 댕꿀맛집 찾기 GOGO!!"
+                style={{
+                  border: "none",
+                  backgroundColor: "white",
+                  width: "250px",
+                  height: "31px",
+                  margin: "5px 24px",
+                  position: "relative",
+                }}
+              ></input>
+              <img src={search_button} alt=""></img>
+            </div>
           </div>
         </div>
-        
       </div>
     </>
   );
