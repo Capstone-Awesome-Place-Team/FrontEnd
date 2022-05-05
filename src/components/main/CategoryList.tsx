@@ -12,9 +12,9 @@ const CategoryList: React.FC<{}>  = () => {
           justifyContent: "center",
         }}
       >
-        {arr.map(() => {
+        {arr.map((item, idx) => {
           return (
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center" }} key={idx}>
               <div
                 style={{
                   width: "82px",
@@ -35,9 +35,9 @@ const CategoryList: React.FC<{}>  = () => {
           justifyContent: "center",
         }}
       >
-        {arr.map(() => {
+        {arr.map((item, idx) => {
           return (
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center" }} key={idx}>
               <div
                 style={{
                   width: "82px",

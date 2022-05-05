@@ -38,7 +38,7 @@ const ThemeList: React.FC<{}> = () => {
       <div style={{ width: "fit-content", margin: "43px auto" }}>
         <img src={theme_font} alt=""></img>
       </div>
-      {list.map((item: { theme_title: string; theme_img: string }) => {
+      {list.map((item: { theme_title: string; theme_img: string }, idx) => {
         return (
           <div
             style={{
@@ -49,6 +49,7 @@ const ThemeList: React.FC<{}> = () => {
               margin: "19px auto",
             }}
             onClick={() => navigate(`/theme_list/${item.theme_title}`)}
+            key={idx}
           ></div>
         );
       })}
