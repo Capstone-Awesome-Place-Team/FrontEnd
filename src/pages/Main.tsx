@@ -6,15 +6,14 @@ import SearchArea from "../components/main/SearchArea";
 import ThemeList from "../components/main/ThemeList";
 import { RootState } from "../redux/configStore";
 import { actionCreators as mainActions } from "../redux/modules/main";
-const Main: React.FC = (props) => {
+const Main: React.FC<{chooseGame:Function}> = (props) => {
+  const {chooseGame} = props
   const dispatch = useDispatch();
-
- 
 
   return (
     <div>
       <SearchArea></SearchArea>
-      <Entertains></Entertains>
+      <Entertains chooseGame={chooseGame}/> 
       <hr />
       <CategoryList></CategoryList>
       <hr />

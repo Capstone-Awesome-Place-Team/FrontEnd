@@ -10,6 +10,7 @@ const Global: React.FC = (props) => {
         right: "50%",
         top: "0%",
         transform: "translate(50%, 0%)",
+        
       }}
     >
       {props.children}
