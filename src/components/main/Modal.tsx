@@ -1,9 +1,11 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import ChooseFood from "./ChooseFood";
 import RandomGame from "./RandomGame";
-
-const Modal: React.FC<{ setOpenModal: Function,games:boolean }> = ({ setOpenModal, games }) => {
-    
+import close_line from "../../static/image/close-line2.svg";
+const Modal: React.FC<{ setOpenModal: Function; games: boolean }> = ({
+  setOpenModal,
+  games,
+}) => {
   return (
     <div
       className="modalBackground"
@@ -29,7 +31,7 @@ const Modal: React.FC<{ setOpenModal: Function,games:boolean }> = ({ setOpenModa
           boxShadow: "rgba(0,0,0, 0.35) 0 5px 15px",
           // display: "flex",
           // flexDirection:"column",
-          padding: "26px", // 모달창안의 여백
+          padding: "18px", // 모달창안의 여백
         }}
       >
         <div
@@ -42,14 +44,14 @@ const Modal: React.FC<{ setOpenModal: Function,games:boolean }> = ({ setOpenModa
             onClick={() => setOpenModal(false)}
             style={{
               border: "none",
-              backgroundColor: "",
+              backgroundColor: "transparent",
             }}
           >
-            X
+            <img src={close_line} alt=""></img>
           </button>
         </div>
-        {games===true&&<ChooseFood />}
-        {games===false&&<RandomGame />}
+        {games === true && <ChooseFood />}
+        {games === false && <RandomGame />}
       </div>
     </div>
   );
