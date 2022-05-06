@@ -112,7 +112,6 @@ const ChooseFood: React.FC = () => {
             );
           })}
         </div>
-
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div>
             <button style={{ border: "none", backgroundColor: "transparent" }}>
