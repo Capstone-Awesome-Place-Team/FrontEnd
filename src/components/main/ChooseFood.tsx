@@ -17,7 +17,7 @@ const ChooseFood: React.FC = () => {
     "분식",
   ];
   const [chosenOne, setChosenOne] = useState("시작!");
-  const pick_list=[];
+  const [pick_list, setPick_list]=useState<any>([]);
   while (pick_list.length < 8) {
     // 카테고리는 총 12개인데 8개만 나오기때문에 길이가 8이될때까지 while문 돌리고
     const rPick = Math.floor(Math.random() * food.length);
@@ -83,6 +83,7 @@ const ChooseFood: React.FC = () => {
                       fontSize: "20px",
                       fontFamily: "IBM Plex Sans KR",
                     }}
+                    onClick={()=>setChosenOne(item)}
                   >
                     {item}
                   </div>
@@ -105,9 +106,8 @@ const ChooseFood: React.FC = () => {
                   fontSize: "20px",
                   fontFamily: "IBM Plex Sans KR",
                 }}
-                // onMouseDown= {()=> setHover(true)}
-                // onMouseUp={()=>setHover(false)}
                 key={idx}
+                onClick={()=>setChosenOne(item)}
               >
                 {item}
               </Item>
@@ -139,7 +139,10 @@ const ChooseFood: React.FC = () => {
 
 const Item = styled.div`
   background-color: #ffdcdc;
-  &:active {
+  :hover{
+    cursor:pointer;
+  }
+  :active {
     background-color: #ff7373;
   }
 `;
