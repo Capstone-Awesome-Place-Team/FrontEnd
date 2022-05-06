@@ -8,6 +8,7 @@ import Mypage from "./pages/Mypage";
 import Main from "./pages/Main";
 import Theme from "./pages/Theme";
 import Modal from "./components/main/Modal";
+import styled from "styled-components";
 const App: React.FC = () =>{
   const [openModal, setOpenModal] = useState(false); //나중에 contextAPI 활용해볼것
   const [games,setGames]=useState(true);
@@ -25,7 +26,7 @@ const App: React.FC = () =>{
     <div>
     <Header />
    
-    <div style={{height:"100vh", overflowY:"auto", overflowX:"hidden"}}>
+    <Overflow style={{height:"100vh", overflowY:"auto", overflowX:"hidden", scrollbarColor:"red"}}>
     {openModal&&<Modal setOpenModal={setOpenModal} games={games}/>} 
     <Routes>
       <Route path='/' element={<Main chooseGame={chooseGame}/>} />
@@ -34,9 +35,13 @@ const App: React.FC = () =>{
       <Route path="mypage" element={<Mypage />} />
       <Route path="theme_list/:theme_title" element={<Theme />} />
     </Routes>
-    </div>
+    </Overflow>
     </div>
   );
 }
-
+const Overflow = styled.div`
+    ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 export default App;
