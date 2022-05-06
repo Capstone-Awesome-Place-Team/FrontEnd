@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import arrow_line from "../../static/image/arrow-line .svg";
 const ChooseFood: React.FC = () => {
   const food = [
@@ -16,7 +17,7 @@ const ChooseFood: React.FC = () => {
     "분식",
   ];
   const [chosenOne, setChosenOne] = useState("시작!");
-  const pick_list = [];
+  const pick_list=[];
   while (pick_list.length < 8) {
     // 카테고리는 총 12개인데 8개만 나오기때문에 길이가 8이될때까지 while문 돌리고
     const rPick = Math.floor(Math.random() * food.length);
@@ -33,13 +34,13 @@ const ChooseFood: React.FC = () => {
           marginTop: "5px",
         }}
       >
-        <h1 style={{ color: "#E22F2F" }}>선택장애 추천 이름</h1>
+        <h1 style={{ color: "#E22F2F" }}>선택장애를 위한 선택!</h1>
         <p
           style={{
             marginTop: "8px",
           }}
         >
-          선택장애 추천 문구
+          끌리는게 있다면 클릭하세요!
         </p>
         <div
           style={{
@@ -49,7 +50,7 @@ const ChooseFood: React.FC = () => {
             margin: "29px auto",
           }}
         >
-          {pick_list.map((item, idx) => {
+          {pick_list.map((item: any, idx: any) => {
             if (idx === 4) {
               return (
                 <React.Fragment key={idx}>
@@ -92,12 +93,11 @@ const ChooseFood: React.FC = () => {
               return null;
             }
             return (
-              <div
+              <Item
                 style={{
                   display: "flex",
                   width: "72px",
                   height: "72px",
-                  backgroundColor: "#FFDCDC",
                   border: "1px solid white",
                   color: "#727272",
                   alignItems: "center",
@@ -105,10 +105,12 @@ const ChooseFood: React.FC = () => {
                   fontSize: "20px",
                   fontFamily: "IBM Plex Sans KR",
                 }}
+                // onMouseDown= {()=> setHover(true)}
+                // onMouseUp={()=>setHover(false)}
                 key={idx}
               >
                 {item}
-              </div>
+              </Item>
             );
           })}
         </div>
@@ -135,4 +137,10 @@ const ChooseFood: React.FC = () => {
   );
 };
 
+const Item = styled.div`
+  background-color: #ffdcdc;
+  &:active {
+    background-color: #ff7373;
+  }
+`;
 export default ChooseFood;
