@@ -1,28 +1,83 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { first_category, meat, korea_food, japanes_food, american_food,bunsik,noodle,chinese_food,soup } from "../../shared/lists";
 import arrow_line from "../../static/image/arrow-line .svg";
 const ChooseFood: React.FC = () => {
-  const food = [
-    "한식",
-    "중국식",
-    "일식",
-    "뷔페식",
-    "경양식",
-    "찜탕",
-    "족발보쌈",
-    "회",
-    "고기구이",
-    "국수",
-    "치킨",
-    "분식",
-  ];
   const [chosenOne, setChosenOne] = useState("시작!");
-  const [pick_list, setPick_list]=useState<any>([]);
+  let [pick_list, setPick_list]=useState<Array<string>>([]);
+  let [pick_list2, setPick_list2] =useState<Array<string>>([]);
+  console.log(pick_list,pick_list2)
   while (pick_list.length < 8) {
     // 카테고리는 총 12개인데 8개만 나오기때문에 길이가 8이될때까지 while문 돌리고
-    const rPick = Math.floor(Math.random() * food.length);
-    if (pick_list.indexOf(food[rPick]) === -1) {
-      pick_list.push(food[rPick]);
+    const rPick = Math.floor(Math.random() * first_category.length);
+    if (pick_list.indexOf(first_category[rPick]) === -1) {
+      pick_list.push(first_category[rPick]);
+    }
+  }
+
+  const second_category =(food:string)=>{
+    setChosenOne(food)
+ const save_list=[...pick_list];
+ const second_list:Array<any>=[];
+ console.log(save_list,second_list)
+    while(second_list.length<8&&pick_list2.length===0){
+      console.log(pick_list2)
+      if(food==="한식"){
+        const rPick = Math.floor(Math.random() * korea_food.length);
+        if (second_list.indexOf(korea_food[rPick]) === -1) {
+          second_list.push(korea_food[rPick]);
+        }
+      }
+      else if(food==="일식"){
+        const rPick = Math.floor(Math.random() * japanes_food.length);
+        if (second_list.indexOf(japanes_food[rPick]) === -1) {
+          second_list.push(japanes_food[rPick]);
+        }
+      }
+      else if(food==="중국식"){
+        const rPick = Math.floor(Math.random() * chinese_food.length);
+        if (second_list.indexOf(chinese_food[rPick]) === -1) {
+          second_list.push(chinese_food[rPick]);
+        }
+      }
+      else if(food==="경양식"){
+        const rPick = Math.floor(Math.random() * american_food.length);
+        if (second_list.indexOf(american_food[rPick]) === -1) {
+          second_list.push(american_food[rPick]);
+        }
+      }
+      else if(food==="찜탕"){
+        const rPick = Math.floor(Math.random() * soup.length);
+        if (second_list.indexOf(soup[rPick]) === -1) {
+          second_list.push(soup[rPick]);
+        }
+      }
+      else if(food==="국수"){
+        const rPick = Math.floor(Math.random() * noodle.length);
+        if (second_list.indexOf(noodle[rPick]) === -1) {
+          second_list.push(noodle[rPick]);
+        }
+      }
+      else if(food==="치킨"|| food==="고기구이"){
+        const rPick = Math.floor(Math.random() * meat.length);
+        if (second_list.indexOf(meat[rPick]) === -1) {
+          second_list.push(meat[rPick]);
+        }
+      }
+      else if(food==="분식"){
+        const rPick = Math.floor(Math.random() * bunsik.length);
+        if (second_list.indexOf(bunsik[rPick]) === -1) {
+          second_list.push(bunsik[rPick]);
+        }
+      }
+    }
+    if(pick_list2.length===0){
+      console.log("dd")
+      setPick_list(second_list);
+      setPick_list2(save_list)
+    }
+    else {
+      console.log(food)
     }
   }
   return (
@@ -83,7 +138,7 @@ const ChooseFood: React.FC = () => {
                       fontSize: "20px",
                       fontFamily: "IBM Plex Sans KR",
                     }}
-                    onClick={()=>setChosenOne(item)}
+                    onClick={()=>second_category(item)}
                   >
                     {item}
                   </div>
@@ -107,12 +162,14 @@ const ChooseFood: React.FC = () => {
                   fontFamily: "IBM Plex Sans KR",
                 }}
                 key={idx}
-                onClick={()=>setChosenOne(item)}
+                onClick={()=>second_category(item)}
               >
                 {item}
               </Item>
             );
           })}
+
+
         </div>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div>

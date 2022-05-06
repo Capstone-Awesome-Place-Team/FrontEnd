@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import district from "../../shared/lists";
+import {district} from "../../shared/lists";
 
 import arrow_drop from "../../static/image/arrow-dropdown.svg";
 const FavoriteFilter: React.FC<{

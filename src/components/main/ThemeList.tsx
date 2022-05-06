@@ -10,7 +10,6 @@ const ThemeList: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme_list = useSelector((state: RootState) => state.main.list);
-  console.log(theme_list);
   const isLoading = useSelector((state: RootState) => state.main.isLoading);
   const LIMIT = 5;
   const [list, setList] = useState([]); //새로운 테마리스트 추가하기위한 변수
