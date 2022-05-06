@@ -19,7 +19,6 @@ const initialState = {
 };
 
 //Middleware
-
 const SignUpDB = (user: Signup, navigate: Function) => {
   return async function (dispatch: Dispatch) {
     try {
