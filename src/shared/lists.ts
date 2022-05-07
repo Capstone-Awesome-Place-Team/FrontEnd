@@ -35,7 +35,6 @@ export const first_category = [
   "경양식",
   "찜탕",
   "족발보쌈",
-  "회",
   "고기구이",
   "국수",
   "치킨",
@@ -106,6 +105,15 @@ export const korea_food=[
   "감자탕"
 ]
 export const buffet = [ // 부페는 한번에 검색되게 할것
+"음식1",
+"음식2",
+"음식3",
+"음식4",
+"음식5",
+"음식6",
+"음식7",
+"음식8",
+
 ] 
 export const soup =[
   "곰탕",
@@ -124,7 +132,14 @@ export const soup =[
 ]
 
 export const jokbal=[ //이것도 한번에
-  
+"음식1",
+"음식2",
+"음식3",
+"음식4",
+"음식5",
+"음식6",
+"음식7",
+"음식8",
 ]
 export const bunsik=[ 
   "막국수",
