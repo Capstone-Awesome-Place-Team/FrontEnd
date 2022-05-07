@@ -24,10 +24,13 @@ const ChooseFood: React.FC = () => {
   const navigate = useNavigate();
   const [chosenOne, setChosenOne] = useState("시작!");
   let [pick_list, setPick_list] = useState<Array<string>>([]);
-  let [pick_list2, setPick_list2] = useState<Array<string>>([]);
+  let [saveList, setSaveList] = useState<Array<string>>([]);
   const [final_food, setFinal_food] = useState<boolean>(false);
-  console.log(pick_list, pick_list2);
+  const [prevStep, setPreStep] = useState<boolean>(false);
+  
+  console.log(pick_list, saveList);
   while (pick_list.length < 8) {
+    console.log("dd")
     // 카테고리는 총 12개인데 8개만 나오기때문에 길이가 8이될때까지 while문 돌리고
     const rPick = Math.floor(Math.random() * first_category.length);
     if (pick_list.indexOf(first_category[rPick]) === -1) {
@@ -40,11 +43,11 @@ const ChooseFood: React.FC = () => {
 
   const second_category = (food: string) => {
     setChosenOne(food);
+    setPreStep(true);
     const save_list = [...pick_list];
     const second_list: Array<any> = [];
-    console.log(save_list, second_list);
-    while (second_list.length < 8 && pick_list2.length === 0) {
-      console.log(pick_list2);
+
+    while (second_list.length < 8 && saveList.length === 0) {
       if (food === "한식") {
         const rPick = Math.floor(Math.random() * korea_food.length);
         if (second_list.indexOf(korea_food[rPick]) === -1) {
@@ -97,9 +100,9 @@ const ChooseFood: React.FC = () => {
         }
       }
     }
-    if (pick_list2.length === 0) {
+    if (saveList.length === 0) {
       setPick_list(second_list);
-      setPick_list2(save_list);
+      setSaveList(save_list);
     } else {
       console.log(food);
       setFinal_food(true);
@@ -110,8 +113,15 @@ const ChooseFood: React.FC = () => {
     setChosenOne("시작!");
     setFinal_food(false);
     setPick_list([]);
-    setPick_list2([]);
+    setSaveList([]);
   };
+
+  const prev = ()=>{
+    setPreStep(false);
+    setPick_list([]);
+    setSaveList([]);
+  }
+
   return (
     <>
       {final_food ? (
@@ -146,7 +156,9 @@ const ChooseFood: React.FC = () => {
                 color: "white",
                 fontFamily: "IBM Plex Sans KR",
               }}
-              onClick={()=>dispatch(searchActions.getSearchDB(chosenOne, navigate))}
+              onClick={() =>
+                dispatch(searchActions.getSearchDB(chosenOne, navigate))
+              }
             >
               {chosenOne}
             </div>
@@ -250,26 +262,18 @@ const ChooseFood: React.FC = () => {
             })}
           </div>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div>
-              <button
-                style={{ border: "none", backgroundColor: "transparent" }}
-              >
-                <img src={arrow_line} alt=""></img>
-              </button>
-              <p>이전단계</p>
-            </div>
-            <div>
-              <button
-                style={{ border: "none", backgroundColor: "transparent" }}
-              >
-                <img
-                  src={arrow_line}
-                  alt=""
-                  style={{ transform: "rotate(180deg)" }}
-                ></img>
-              </button>
-              <p>다음단계</p>
-            </div>
+            {prevStep && (
+              <div>
+                <button
+                  style={{ border: "none", backgroundColor: "transparent" }}
+                  onClick={()=> prev()}
+                >
+                  <img src={arrow_line} alt=""></img>
+                </button>
+                <p>뒤로가기</p>
+              </div>
+            )}
+
           </div>
         </div>
       )}
