@@ -14,8 +14,7 @@ const SearchArea: React.FC<{}> = () => {
   const searching = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const currentInput = search.current!.value;
-    console.log(currentInput);
-    dispatch(searchActions.getSearchDB(currentInput, navigate)  )
+    dispatch(searchActions.getSearchDB(currentInput, navigate));
   };
 
   return (

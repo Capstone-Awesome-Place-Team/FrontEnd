@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { actionCreators as searchActions } from "../../redux/modules/main";
 import sushi from "../../static/image/sushi.svg";
 import chosen_guide from "../../static/image/chosen_guide.svg";
 import restart_bttn from "../../static/image/restart.svg";
@@ -17,6 +20,8 @@ import {
 } from "../../shared/lists";
 import arrow_line from "../../static/image/arrow-line .svg";
 const ChooseFood: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [chosenOne, setChosenOne] = useState("시작!");
   let [pick_list, setPick_list] = useState<Array<string>>([]);
   let [pick_list2, setPick_list2] = useState<Array<string>>([]);
@@ -141,6 +146,7 @@ const ChooseFood: React.FC = () => {
                 color: "white",
                 fontFamily: "IBM Plex Sans KR",
               }}
+              onClick={()=>dispatch(searchActions.getSearchDB(chosenOne, navigate))}
             >
               {chosenOne}
             </div>
