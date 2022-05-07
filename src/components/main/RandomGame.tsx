@@ -1,9 +1,10 @@
-import arrow_line from "../../static/image/arrow-line .svg";
-const RandomGame:React.FC = ()=>{
-    return (<> <div
+import start_btn from "../../static/image/start_btn.svg";
+const RandomGame: React.FC = () => {
+  return (
+    <>
+      <div
         className="title"
         style={{
-          // display:"inline-block",
           textAlign: "center",
           marginTop: "5px",
         }}
@@ -14,28 +15,15 @@ const RandomGame:React.FC = ()=>{
           <p>내용</p>
         </div>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <div>
-            <button
-              style={{ border: "none", backgroundColor: "transparent" }}
-            >
-              <img src={arrow_line} alt=""></img>
-            </button>
-            <p>이전단계</p>
-          </div>
-          <div>
-            <button
-              style={{ border: "none", backgroundColor: "transparent" }}
-            >
-              <img
-                src={arrow_line}
-                alt=""
-                style={{ transform: "rotate(180deg)" }}
-              ></img>
-            </button>
-            <p>다음단계</p>
-          </div>
+          <img
+            src={start_btn}
+            alt=""
+            onClick={() => console.log("클릭시 애니메이션")}
+          ></img>
         </div>
-      </div></>)
-}
+      </div>
+    </>
+  );
+};
 
 export default RandomGame;
