@@ -27,10 +27,9 @@ const ChooseFood: React.FC = () => {
   let [saveList, setSaveList] = useState<Array<string>>([]);
   const [final_food, setFinal_food] = useState<boolean>(false);
   const [prevStep, setPreStep] = useState<boolean>(false);
-  
+
   console.log(pick_list, saveList);
   while (pick_list.length < 8) {
-    console.log("dd")
     // 카테고리는 총 12개인데 8개만 나오기때문에 길이가 8이될때까지 while문 돌리고
     const rPick = Math.floor(Math.random() * first_category.length);
     if (pick_list.indexOf(first_category[rPick]) === -1) {
@@ -101,10 +100,11 @@ const ChooseFood: React.FC = () => {
       }
     }
     if (saveList.length === 0) {
+      //선택한적이없어 saveList값이 없다면 리스트 업데이트, saveList값 업데이트
       setPick_list(second_list);
       setSaveList(save_list);
     } else {
-      console.log(food);
+      //한번 선택하여 saveList값이 존재한다면 선택시 마지막 음식출력
       setFinal_food(true);
     }
   };
@@ -114,14 +114,8 @@ const ChooseFood: React.FC = () => {
     setFinal_food(false);
     setPick_list([]);
     setSaveList([]);
-  };
-
-  const prev = ()=>{
     setPreStep(false);
-    setPick_list([]);
-    setSaveList([]);
-  }
-
+  };
   return (
     <>
       {final_food ? (
@@ -266,14 +260,13 @@ const ChooseFood: React.FC = () => {
               <div>
                 <button
                   style={{ border: "none", backgroundColor: "transparent" }}
-                  onClick={()=> prev()}
+                  onClick={() => restart()}
                 >
                   <img src={arrow_line} alt=""></img>
                 </button>
                 <p>뒤로가기</p>
               </div>
             )}
-
           </div>
         </div>
       )}
