@@ -277,7 +277,7 @@ const Container = styled.div`
     border: none;
     box-shadow: none;
     width: 360px;
-    /* align-items: normal; */
+    align-items: normal;
   }
 `;
 
