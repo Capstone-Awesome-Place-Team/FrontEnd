@@ -233,12 +233,10 @@ const Editprofile: React.FC<Edit_info> = (props) => {
           ) : (
             <Button
               onClick={() => setIsEdit(!isEdit)}
-              style={{
-                margin: "69px 0 90px 0",
-              }}
+            
               beforeEdit
             >
-              <img src={me_edit} alt="edit" />
+              <MyEditButtonImg src={me_edit} alt="edit" />
             </Button>
           )}
           {isEdit ? null : ( // 나중에 토큰 여부 나중에 전체 조건으로 주기, 토큰이 있다면 내정보가 보이게
@@ -279,6 +277,7 @@ const Container = styled.div`
     border: none;
     box-shadow: none;
     width: 360px;
+    /* align-items: normal; */
   }
 `;
 
@@ -327,11 +326,22 @@ const EditButtonWrap = styled.div`
   }
 `;
 
+const MyEditButtonImg = styled.img`
+  @media (max-width: 576px) {
+    /* font-size:20px; */
+    width: 191px;
+    height: 34px;
+  }
+`
 const Button = styled.button`
   margin: ${(props: { beforeEdit: boolean }) =>
     props.beforeEdit === true ? `69px 0 90px 0` : `0 5px`};
   border: none;
   background: none;
+  @media(max-width: 576px){
+    margin: ${(props: { beforeEdit: boolean }) =>
+    props.beforeEdit === true ? `40px 0 50px 0` : `0 5px`};
+  }
 `;
 
 const Img = styled.img`
