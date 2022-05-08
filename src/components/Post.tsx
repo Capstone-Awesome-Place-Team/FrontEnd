@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { actionCreators as favoriteActions } from "../redux/modules/favorite";
-
+import styled from "styled-components";
 import heart_fill from "../static/image/heart-fill.svg";
 import { PostPropsType } from "../types/interfaces";
 
@@ -19,42 +19,55 @@ const Post: React.FC<PostPropsType> = (props) => {
         margin: "10px 10px",
       }}
     >
-      <img
-        src={props.img}
-        alt="restaurant"
-        width={props.isMap ? "74px" : "100px"}
-        height={props.isMap ? "74px" : "100px"}
-      ></img>
+      <PostImg src={props.img} alt="restaurant" isMap={props.isMap}></PostImg>
       <div className="content" style={{ margin: "0 14px" }}>
-        <div
-          className="restaurant_name"
-          style={{
-            fontSize: props.isMap ? "15px" : "20px",
-            fontWeight: "bold",
-            marginBottom: "10px",
-          }}
-        >
+        <RestaurantName className="restaurant_name" isMap={props.isMap}>
           {props.restaurant_name}
-        </div>
-        <div
+        </RestaurantName>
+        <Address
           className="address"
-          style={{
-            width: "300px",
-            color: "#9C9C9C",
-            fontSize: "15px",
-            fontWeight: "bold",
-          }}
         >
           {props.address}
-        </div>
+        </Address>
       </div>
       {props.isMap ? null : (
         <div className="like" style={{ display: "flex", alignItems: "center" }}>
-          <img src={heart_fill} alt="heart" onClick={cancelFavorite} />
+          <HeartImg src={heart_fill} alt="heart" onClick={cancelFavorite} />
         </div>
       )}
     </div>
   );
 };
 
+const PostImg = styled.img`
+  width: ${(props: { isMap: boolean }) => (props.isMap ? `74px` : `100px`)};
+  height: ${(props: { isMap: boolean }) => (props.isMap ? `74px` : `100px`)};
+  @media (max-width: 576px) {
+    width: ${(props: { isMap: boolean }) => (props.isMap ? `50px` : `71px`)};
+    height: ${(props: { isMap: boolean }) => (props.isMap ? `50px` : `71px`)};
+  }
+`;
+const RestaurantName = styled.div`
+  font-size: ${(props: { isMap: boolean }) => (props.isMap ? "15px" : "20px")};
+  font-weight: bold;
+  margin-bottom: 10px;
+  @media (max-width: 576px) {
+    font-size: 15px;
+  }
+`;
+const Address = styled.div`
+  width: 300px;
+  color: #9c9c9c;
+  font-size: 15px;
+  font-weight: bold;
+  @media(max-width:576px){
+    width: 200px; //
+  }
+`;
+const HeartImg = styled.img`
+  @media(max-width:576px){
+    width:27px;
+    height:25px;
+  }
+`;
 export default Post;

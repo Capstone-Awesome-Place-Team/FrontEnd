@@ -118,13 +118,13 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
           로그인후 이용가능합니다
         </div>
       )}
-      {/* <hr style={{width:"80%", margin:"15px 15px 0 15px"}}></hr> */}
+  
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           height: "40px",
-          // alignItems: "center",
+       
         }}
       >
         <img
@@ -162,6 +162,11 @@ const Container = styled.div`
   border-radius: 0 0 20px 20px;
   // padding: "5px",
   margin: auto;
+  @media(max-width:576px){
+    border:none;
+    box-shadow:none;
+    width:100%;
+  }
 `;
 
 const Ul = styled.ul`
