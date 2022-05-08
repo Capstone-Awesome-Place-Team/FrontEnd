@@ -6,6 +6,7 @@ import { actionCreators as searchActions } from "../../redux/modules/main";
 import sushi from "../../static/image/sushi.svg";
 import chosen_guide from "../../static/image/chosen_guide.svg";
 import restart_bttn from "../../static/image/restart.svg";
+import cantchoose_font from "../../static/image/cantchoose_font.svg" 
 import {
   first_category,
   meat,
@@ -175,7 +176,7 @@ const ChooseFood: React.FC = () => {
             marginTop: "5px",
           }}
         >
-          <h1 style={{ color: "#E22F2F" }}>선택장애를 위한 선택!</h1>
+          <img src={cantchoose_font} alt=""></img>
           <p
             style={{
               marginTop: "8px",

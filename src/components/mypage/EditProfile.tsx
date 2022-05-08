@@ -187,9 +187,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
                 style={{ margin: "10px 0 7px" }}
               ></Input>
               {Pwd ? (
-                <MessageDiv
-                MessageColor={PwMessageColor}
-                >
+                <MessageDiv MessageColor={PwMessageColor}>
                   {PwMessage}
                 </MessageDiv>
               ) : (
@@ -213,9 +211,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
                   onChange={pwDoubleCheck}
                   value={PwdCheck}
                 ></Input>
-                <MessageDiv
-                  MessageColor={PwCheckMessageColor}
-                >
+                <MessageDiv MessageColor={PwCheckMessageColor}>
                   {PwCheckMessage}
                 </MessageDiv>
               </div>
@@ -231,11 +227,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
               </Button>
             </EditButtonWrap>
           ) : (
-            <Button
-              onClick={() => setIsEdit(!isEdit)}
-            
-              beforeEdit
-            >
+            <Button onClick={() => setIsEdit(!isEdit)} beforeEdit>
               <MyEditButtonImg src={me_edit} alt="edit" />
             </Button>
           )}
@@ -332,15 +324,15 @@ const MyEditButtonImg = styled.img`
     width: 191px;
     height: 34px;
   }
-`
+`;
 const Button = styled.button`
   margin: ${(props: { beforeEdit: boolean }) =>
     props.beforeEdit === true ? `69px 0 90px 0` : `0 5px`};
   border: none;
   background: none;
-  @media(max-width: 576px){
+  @media (max-width: 576px) {
     margin: ${(props: { beforeEdit: boolean }) =>
-    props.beforeEdit === true ? `40px 0 50px 0` : `0 5px`};
+      props.beforeEdit === true ? `40px 0 50px 0` : `0 5px`};
   }
 `;
 
