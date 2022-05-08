@@ -121,18 +121,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
     >
       {is_login ? (
         <Wrap>
-          {isEdit ? (
-            <div
-              style={{
-                color: "#E22F2F",
-                fontSize: "25px",
-                fontWeight: "bold",
-                margin: "64px 0 0",
-              }}
-            >
-              내 정보 수정
-            </div>
-          ) : null}
+          {isEdit ? <EditProfileFont>내 정보 수정</EditProfileFont> : null}
           <Label
             htmlFor="nickname"
             style={{ display: "block", margin: "20px 0 0 10px" }}
@@ -142,35 +131,25 @@ const Editprofile: React.FC<Edit_info> = (props) => {
 
           {isEdit ? (
             <>
-              <input
+              <Input
                 type="text"
                 id="nickname"
                 defaultValue=""
                 onChange={nickNameCheck}
-                style={{ margin: "10px 0 7px" }}
-              ></input>
+                // style={{ margin: "10px 0 7px" }}
+              ></Input>
               {changingNickName ? (
-                <div
-                  style={{
-                    color: NickMessageColor ? "#59B200" : "#E22F2F",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    margin: "0 0 19px 10px",
-                  }}
-                >
+                <MessageDiv MessageColor={NickMessageColor}>
                   {NickMessage}
-                </div>
+                </MessageDiv>
               ) : (
-                <div
+                <MessageDiv
                   style={{
                     color: "#A0A0A0",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    margin: "0 0 19px 10px",
                   }}
                 >
                   {NickMessage}
-                </div>
+                </MessageDiv>
               )}
             </>
           ) : (
@@ -201,34 +180,26 @@ const Editprofile: React.FC<Edit_info> = (props) => {
                 내 비밀번호
               </Label>
               <br />
-              <input
+              <Input
                 type="password"
                 id="Pwd"
                 onChange={pwCheck}
                 style={{ margin: "10px 0 7px" }}
-              ></input>
+              ></Input>
               {Pwd ? (
-                <div
-                  style={{
-                    color: PwMessageColor ? "#59B200" : "#E22F2F",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    margin: "0 0 20px",
-                  }}
+                <MessageDiv
+                MessageColor={PwMessageColor}
                 >
                   {PwMessage}
-                </div>
+                </MessageDiv>
               ) : (
-                <div
+                <MessageDiv
                   style={{
                     color: "#A0A0A0",
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    margin: "0 0 20px",
                   }}
                 >
                   {PwMessage}
-                </div>
+                </MessageDiv>
               )}
 
               <div className="PwdCheckInput">
@@ -236,47 +207,39 @@ const Editprofile: React.FC<Edit_info> = (props) => {
                   비밀번호 확인
                 </Label>
                 <br />
-                <input
+                <Input
                   type="password"
                   id="PwdCheck"
                   onChange={pwDoubleCheck}
                   value={PwdCheck}
-                  style={{ margin: "10px 0 7px" }}
-                ></input>
-                <div style={{ color: PwCheckMessageColor ? "green" : "red" }}>
+                ></Input>
+                <MessageDiv
+                  MessageColor={PwCheckMessageColor}
+                >
                   {PwCheckMessage}
-                </div>
+                </MessageDiv>
               </div>
             </>
           ) : null}
           {isEdit ? (
-            <div
-              style={{ margin: "50px 0", position: "absolute", bottom: "0px" }}
-            >
-              <button
-                onClick={edit}
-                style={{ border: "none", background: "none" }}
-              >
-                <img src={edit_enter} alt="edit_enter" />
-              </button>
-              <button
-                onClick={resetAll}
-                style={{ border: "none", background: "none" }}
-              >
-                <img src={edit_cancel} alt="edit" />
-              </button>
-            </div>
+            <EditButtonWrap>
+              <Button onClick={edit}>
+                <Img src={edit_enter} alt="edit_enter" />
+              </Button>
+              <Button onClick={resetAll}>
+                <Img src={edit_cancel} alt="edit" />
+              </Button>
+            </EditButtonWrap>
           ) : (
-            <button
+            <Button
               onClick={() => setIsEdit(!isEdit)}
               style={{
-                border: "none",
-                background: "none",
                 margin: "69px 0 90px 0",
               }}
+              beforeEdit
             >
               <img src={me_edit} alt="edit" />
-            </button>
+            </Button>
           )}
           {isEdit ? null : ( // 나중에 토큰 여부 나중에 전체 조건으로 주기, 토큰이 있다면 내정보가 보이게
             <div
@@ -312,29 +275,80 @@ const Container = styled.div`
   border-radius: 0 0 20px 20px;
   // padding: "5px",
   margin: auto;
+  @media (max-width: 576px) {
+    border: none;
+    box-shadow: none;
+    width: 360px;
+  }
 `;
 
-const Wrap = styled.div`
-  & input {
-    height: 47px;
-    width: 269px;
-    border: 1px solid #c1c1c1;
-    background: #f0f0f0;
-    border-radius: 22px;
-    /* box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); */
-    margin: 5px 0px;
-    padding: 0px 10px;
-    box-sizing: border-box;
-  }
-  & button {
-    margin: 0 5px;
-  }
-`;
+const Wrap = styled.div``;
 
 const Label = styled.label`
   font-size: 20px;
   color: #747474;
   font-weight: bold;
+  @media (max-width: 576px) {
+    font-size: 15px;
+  }
+`;
+const EditProfileFont = styled.div`
+  color: E22F2F;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 64px 0 0;
+  @media (max-width: 576px) {
+    margin: 20px 0 0;
+    font-size: 20px;
+  }
 `;
 
+const Input = styled.input`
+  height: 47px;
+  width: 269px;
+  border: 1px solid #c1c1c1;
+  background: #f0f0f0;
+  border-radius: 22px;
+  /* box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); */
+  margin: 10px 0 7px;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  @media (max-width: 576px) {
+    /* font-size:20px; */
+    width: 191px;
+    height: 34px;
+  }
+`;
+
+const EditButtonWrap = styled.div`
+  margin: 50px 0;
+  @media (max-width: 576px) {
+    margin: 30px 0;
+  }
+`;
+
+const Button = styled.button`
+  margin: ${(props: { beforeEdit: boolean }) =>
+    props.beforeEdit === true ? `69px 0 90px 0` : `0 5px`};
+  border: none;
+  background: none;
+`;
+
+const Img = styled.img`
+  @media (max-width: 576px) {
+    width: 91px;
+    height: 32px;
+  }
+`;
+
+const MessageDiv = styled.div`
+  color: ${(props: { MessageColor: boolean }) =>
+    props.MessageColor ? "#59B200" : "#E22F2F"};
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0 0 20px 10px;
+  @media (max-width: 576px) {
+    font-size: 10px;
+  }
+`;
 export default Editprofile;
