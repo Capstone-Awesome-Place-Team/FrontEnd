@@ -57,9 +57,6 @@ const Element = styled.div`
 
 const Img = styled.img`
 width:100%;
-   /* @media (max-width: 576px) {
-    width:120px;
-  } */
 `
 
 export default MypageCategory;

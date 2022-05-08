@@ -14,7 +14,7 @@ const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
     const arr = item.address.split(" ")[1];
     includedArea.push(arr);
   });
-  
+
   const selectOne = (area: string) => {
     const filteredlist = props.like_list.filter((item) =>
       item.address.includes(area)
@@ -26,20 +26,12 @@ const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
     <Container>
       {props.is_login ? (
         <div>
-          <div
-            style={{
-              backgroundImage: `url(${map})`,
-              backgroundSize: "400px 325px",
-              width: "400px",
-              height: "325px",
-              margin: "auto",
-            }}
-          >
+          <Map>
             <AreaInclude
               includedArea={includedArea}
               selectOne={selectOne}
             ></AreaInclude>
-          </div>
+          </Map>
 
           <ListBox>
             <ScrollBarBox>
@@ -80,14 +72,29 @@ const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
 const Container = styled.div`
   width: 528px;
   height: 75vh;
-  /* text-align: center; */
   border: 2px solid #747474;
   border-top: none;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
   border-radius: 0 0 20px 20px;
-  // padding: "5px",
-  margin: auto;
+  margin: 0 auto;
+  @media(max-width:576px){
+    width:100%;
+    border:none;
+    box-shadow:none;
+  }
+`;
+
+const Map = styled.div`
+  background-image: url(${map});
+  background-size: 400px 325px;
+  width: 400px;
+  height: 325px;
+  margin: 0 auto;
+  @media(max-width:576px){
+    background-size: 300px 243px;
+    width:300px;
+    height: 243px;
+  }
 `;
 
 const ListBox = styled.div`
@@ -96,6 +103,10 @@ const ListBox = styled.div`
   height: 190px;
   margin: auto;
   border-radius: 10px;
+  @media(max-width:576px){
+    width: 330px;
+  height: 130px;
+  }
 `;
 const ScrollBarBox = styled.div`
   margin: 5px 0;
