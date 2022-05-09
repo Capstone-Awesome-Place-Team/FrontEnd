@@ -10,11 +10,10 @@ const Modal: React.FC<{ setOpenModal: Function; games: boolean }> = ({
     <div
       className="modalBackground"
       style={{
-        width: "720px",
+        width: "100%",
         height: "100vh",
         backgroundColor: "rgba(0,0,0, 0.5)",
         position: "fixed",
-        // top: "0px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
