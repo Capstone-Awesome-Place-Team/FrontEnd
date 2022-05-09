@@ -7,6 +7,7 @@ import theme_font from "../../static/image/theme_font.svg";
 import { actionCreators as mainActions } from "../../redux/modules/main";
 import LoadMore from "./LoadMore";
 import spicy from "../../static/image/spicy.jpg";
+import styled from "styled-components";
 const ThemeList: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,26 +36,53 @@ const ThemeList: React.FC<{}> = () => {
 
   return (
     <>
-      <div style={{ width: "fit-content", margin: "43px auto" }}>
-        <img src={theme_font} alt=""></img>
-      </div>
+      <Font>
+        <FontImg src={theme_font} alt=""></FontImg>
+      </Font>
+      <div style={{ display:"flex" ,textAlign:"center", justifyContent:"center",alignItems:"center", flexDirection:"column",  }}>
       {list.map((item: { theme_title: string; theme_img: string }, idx) => {
         return (
-          <div
+          <ThemeImg
             style={{
-              width: "460px",
-              height: "130px",
+              backgroundSize:"contain",
               backgroundImage: `url(${spicy})`,
-              margin: "19px auto",
+      
+              backgroundRepeat:"no-repeat"
             }}
             onClick={() => navigate(`/theme_list/${item.theme_title}`)}
             key={idx}
-          ></div>
+          ></ThemeImg>
         );
       })}
-      {showMore && <LoadMore loadMore={loadMore}>더보기</LoadMore>}
+      </div>
+      {showMore && <LoadMore loadMore={loadMore}></LoadMore>}
     </>
   );
 };
 
+const ThemeImg = styled.div`
+ width: 460px;
+              height: 130px;
+              margin: 10px auto;
+  @media(max-width:576px){
+    width: 330px;
+    height: 95px;
+    margin: 10px auto;
+  }
+`
+
+
+const Font = styled.div`
+  margin: 40px auto;
+  width: fit-content;
+  @media (max-width: 576px) {
+    margin: 20px auto;
+  }
+`;
+
+const FontImg = styled.img`
+  @media (max-width: 576px) {
+    width: 151px;
+  }
+`;
 export default ThemeList;
