@@ -71,7 +71,6 @@ const RandomGame: React.FC = () => {
       clearTimeout(closetrigger);
     };
   }, [trigger]);
-  console.log(arrayAnimation);
   return (
     <>
       <div
