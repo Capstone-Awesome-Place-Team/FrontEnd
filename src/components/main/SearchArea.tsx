@@ -24,14 +24,12 @@ const SearchArea: React.FC<{}> = () => {
         <ContentWrap>
           <div>
             <SearchFont src={main_search_font} alt=""></SearchFont>
-            <Div>
-              <Searchboundary>
-                <Form onSubmit={searching}>
-                  <SearchInput type="text" ref={search}></SearchInput>
-                  <input type="image" src={search_button} alt=""></input>
-                </Form>
-              </Searchboundary>
-            </Div>
+            <Searchboundary>
+              <Form onSubmit={searching}>
+                <SearchInput type="text" ref={search}></SearchInput>
+                <input type="image" src={search_button} alt=""></input>
+              </Form>
+            </Searchboundary>
           </div>
         </ContentWrap>
       </Searchbackground>
@@ -66,7 +64,7 @@ const Searchboundary = styled.div`
   background-image: url(${search_boundry});
   width: 408px;
   @media (max-width: 576px) {
-    width: 280px;
+    width: 300px;
   }
 `;
 const SearchInput = styled.input.attrs({
@@ -86,11 +84,14 @@ const SearchInput = styled.input.attrs({
 
 const Div = styled.div`
   @media (max-width: 576px) {
-    width: 300px;
+    /* width: 280px; */
   }
 `;
 
 const Form = styled.form`
   display: flex;
+  @media (max-width: 576px) {
+    width: 320px;
+  }
 `;
 export default SearchArea;
