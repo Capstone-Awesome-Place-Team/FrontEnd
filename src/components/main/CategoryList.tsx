@@ -1,58 +1,98 @@
 import React from "react";
-import category_font from "../../static/image/category_font.svg"
-const CategoryList: React.FC<{}>  = () => {
-  const arr = [0, 0, 0, 0, 0];
+import styled from "styled-components";
+import category_font from "../../static/image/category_font.svg";
+const CategoryList: React.FC<{}> = () => {
+  const arr = [
+    "한식",
+    "중국식",
+    "일식",
+    "뷔페식",
+    "경양식",
+    "찜탕",
+    "족발보쌈",
+    "회",
+    "고기구이",
+    "국수",
+    "치킨",
+    "분식",
+  ];
+  const arr1 = [
+    "한식",
+    "중국식",
+    "일식",
+    "뷔페식",
+    "경양식",
+    "찜탕",
+    "족발보쌈",
+    "회",
+    "고기구이",
+    "국수",
+    "치킨",
+    "분식",
+  ];
   return (
     <>
-      <div style={{margin:"40px auto", width:"fit-content"}}><img src={category_font} alt="" ></img> </div>
-      <div
-        style={{
-          display: "flex",
-          margin: "40px 0 45px 0",
-          justifyContent: "center",
-        }}
-      >
-        {arr.map((item, idx) => {
-          return (
-            <div style={{ textAlign: "center" }} key={idx}>
-              <div
-                style={{
-                  width: "82px",
-                  height: "82px",
-                  background: "gray",
-                  margin: "0 12px",
-                }}
-              ></div>
-              <p style={{margin:"3px 0"}}>중식</p>
-            </div>
-          );
-        })}
-      </div>
-      <div
-        style={{
-          display: "flex",
-          margin: "0 0 50px 0",
-          justifyContent: "center",
-        }}
-      >
-        {arr.map((item, idx) => {
-          return (
-            <div style={{ textAlign: "center" }} key={idx}>
-              <div
-                style={{
-                  width: "82px",
-                  height: "82px",
-                  background: "gray",
-                  margin: "0 12px",
-                }}
-              ></div>
-              <p>중식</p>
-            </div>
-          );
-        })}
-      </div>
+      <Font>
+        <FontImg src={category_font} alt=""></FontImg>{" "}
+      </Font>
+      <FlexWrap>
+        <SmallWrap>
+          {arr.map((item, idx) => {
+            return (
+              <div key={idx}>
+                <Box></Box>
+                <P>{item}</P>
+              </div>
+            );
+          })}
+        </SmallWrap>
+      </FlexWrap>
     </>
   );
 };
+
+const FlexWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+`;
+const SmallWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  @media (max-width: 576px) {
+    width: 440px;
+  }
+`;
+
+const Font = styled.div`
+  margin: 40px auto;
+  width: fit-content;
+  @media (max-width: 576px) {
+    margin: 20px auto;
+  }
+`;
+const FontImg = styled.img`
+  @media (max-width: 576px) {
+    width: 177px;
+  }
+`;
+
+const Box = styled.div`
+  width: 82px;
+  height: 82px;
+  background: gray;
+  margin: 0 12px;
+  @media (max-width: 576px) {
+    width: calc(82px * 0.8);
+    height: calc(82px * 0.8);
+  }
+`;
+const P = styled.p`
+  margin: 3px 0 15px;
+  @media (max-width: 576px) {
+    font-size: 15px;
+  }
+`;
 
 export default CategoryList;
