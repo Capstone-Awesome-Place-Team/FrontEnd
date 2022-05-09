@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import theme_font from "../../static/image/theme_font.svg";
 import { actionCreators as mainActions } from "../../redux/modules/main";
 import LoadMore from "./LoadMore";
+import spicy from "../../static/image/spicy.jpg";
 const ThemeList: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,8 +44,7 @@ const ThemeList: React.FC<{}> = () => {
             style={{
               width: "460px",
               height: "130px",
-              backgroundImage: `url(${item.theme_img})`,
-              backgroundSize: "460px 130px",
+              backgroundImage: `url(${spicy})`,
               margin: "19px auto",
             }}
             onClick={() => navigate(`/theme_list/${item.theme_title}`)}
