@@ -28,8 +28,6 @@ const Modal: React.FC<{ setOpenModal: Function; games: boolean }> = ({
           borderRadius: "55px",
           backgroundColor: "#EAEAEA",
           boxShadow: "rgba(0,0,0, 0.35) 0 5px 15px",
-          // display: "flex",
-          // flexDirection:"column",
           padding: "18px", // 모달창안의 여백
         }}
       >
