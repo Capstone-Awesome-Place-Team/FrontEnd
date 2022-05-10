@@ -197,7 +197,11 @@ const RandomGame: React.FC = () => {
           음식을 클릭하면 관련 음식점들을 확인할 수 있어요!
         </p>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <StartBtn src={start_btn} alt="" onClick={() => RandomGame()}></StartBtn>
+          <StartBtn
+            src={start_btn}
+            alt=""
+            onClick={() => RandomGame()}
+          ></StartBtn>
         </div>
       </div>
     </>
@@ -262,7 +266,7 @@ const ImgInside = styled.div`
 `;
 const PickedFood = styled.div`
   font-family: IBM Plex Sans KR;
-  cursor:pointer;
+  cursor: pointer;
 `;
 const SlotAnimationList = styled.div`
   height: 100px;
@@ -270,7 +274,7 @@ const SlotAnimationList = styled.div`
 `;
 
 const StartBtn = styled.img`
-   cursor:pointer;
+  cursor: pointer;
 `;
 
 export default RandomGame;

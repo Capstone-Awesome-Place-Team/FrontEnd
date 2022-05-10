@@ -180,6 +180,8 @@ const ChooseFood: React.FC = () => {
           <p
             style={{
               marginTop: "8px",
+              color:"#7C7C7C",
+              fontFamily:"IBM Plex Sans KR"
             }}
           >
             끌리는게 있다면 클릭하세요!
@@ -189,7 +191,7 @@ const ChooseFood: React.FC = () => {
               display: "flex",
               width: "218px",
               flexWrap: "wrap",
-              margin: "29px auto",
+              margin: "40px auto 20px",
             }}
           >
             {pick_list.map((item: any, idx: any) => {
