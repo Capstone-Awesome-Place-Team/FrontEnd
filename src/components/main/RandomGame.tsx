@@ -12,10 +12,13 @@ const RandomGame: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [ThreeFood, setThreeFood] = useState<Array<string>>([]);
-  // const [isAnmiation, setIsAnimation] =useState<boolean>(false);
+  const [isAnmiation, setIsAnimation] = useState<Array<boolean>>([
+    false,
+    false,
+  ]);
   const [arrayAnimation, setArrayAnimation] = useState([false, false, false]);
   const [trigger, setTrigger] = useState<boolean>(false);
-  const testRandom = [
+  const random_food_list = [
     "삼계탕",
     "닭갈비",
     "훈제오리",
@@ -31,6 +34,7 @@ const RandomGame: React.FC = () => {
   ];
   const arr = [0, 0, 0];
   const RandomGame = () => {
+    setIsAnimation([true, false]); //시작하기를 다시눌렀을때 두구두구 문구부터 시작
     setArrayAnimation([true, true, true]);
     setTrigger(!trigger);
     const List = [];
@@ -45,6 +49,7 @@ const RandomGame: React.FC = () => {
       }
     }
   };
+
   useEffect(() => {
     let slot1: SettimeoutType,
       slot2: SettimeoutType,
@@ -59,6 +64,7 @@ const RandomGame: React.FC = () => {
       }, 1600);
       slot3 = setTimeout(() => {
         setArrayAnimation((old) => [old[0], old[1], false]);
+        setIsAnimation((prev) => [prev[0], true]);
       }, 2400);
       closetrigger = setTimeout(() => {
         setTrigger(false);
@@ -80,8 +86,50 @@ const RandomGame: React.FC = () => {
           // marginTop: "5px",
         }}
       >
-        <p style={{ fontSize:"30px", fontFamily:"IBM Plex Sans KR", color:"#E22F2F", marginBottom:"10px"}}>푸드 슬롯머신</p>
-        <p style={{color:"#7C7C7C", fontSize:"15px", fontFamily:"IBM Plex Sans KR",}}>오늘은 여기서 골라보자!</p>
+        <p
+          style={{
+            fontSize: "30px",
+            fontFamily: "IBM Plex Sans KR",
+            color: "#E22F2F",
+            marginBottom: "10px",
+          }}
+        >
+          푸드 슬롯머신
+        </p>
+        {isAnmiation[0] ? (
+          isAnmiation[1] ? (
+            <p
+              style={{
+                color: "#7C7C7C",
+                fontSize: "15px",
+                fontFamily: "IBM Plex Sans KR",
+              }}
+            >
+              오늘은 여기서 골라보자!
+            </p>
+          ) : (
+            <p
+              style={{
+                color: "#7C7C7C",
+                fontSize: "15px",
+                fontFamily: "IBM Plex Sans KR",
+              }}
+            >
+              두구~두구~두구~두구
+            </p>
+          )
+        ) : (
+          <p
+            style={{
+              color: "#7C7C7C",
+              fontSize: "15px",
+              fontFamily: "IBM Plex Sans KR",
+            }}
+          >
+            오늘은 어떤 음식이 잭팟일까?
+          </p>
+        )}
+
         <div className="body">
           {ThreeFood.length > 2 ? (
             <div
@@ -103,9 +151,11 @@ const RandomGame: React.FC = () => {
                     >
                       {arrayAnimation[idx] ? (
                         <SlideBox>
-                          {testRandom.map((food, idx) => {
+                          {random_food_list.map((food, idx) => {
                             return (
-                              <SlotAnimationList key={idx}>{food}</SlotAnimationList>
+                              <SlotAnimationList key={idx}>
+                                {food}
+                              </SlotAnimationList>
                             );
                           })}
                         </SlideBox>
@@ -147,7 +197,7 @@ const RandomGame: React.FC = () => {
           음식을 클릭하면 관련 음식점들을 확인할 수 있어요!
         </p>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <img src={start_btn} alt="" onClick={() => RandomGame()}></img>
+          <StartBtn src={start_btn} alt="" onClick={() => RandomGame()}></StartBtn>
         </div>
       </div>
     </>
@@ -212,9 +262,15 @@ const ImgInside = styled.div`
 `;
 const PickedFood = styled.div`
   font-family: IBM Plex Sans KR;
+  cursor:pointer;
 `;
 const SlotAnimationList = styled.div`
   height: 100px;
   font-family: IBM Plex Sans KR;
 `;
+
+const StartBtn = styled.img`
+   cursor:pointer;
+`;
+
 export default RandomGame;

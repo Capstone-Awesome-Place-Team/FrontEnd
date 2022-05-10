@@ -43,6 +43,7 @@ const Modal: React.FC<{ setOpenModal: Function; games: boolean }> = ({
             style={{
               border: "none",
               backgroundColor: "transparent",
+              cursor: "pointer"
             }}
           >
             <img src={close_line} alt=""></img>
