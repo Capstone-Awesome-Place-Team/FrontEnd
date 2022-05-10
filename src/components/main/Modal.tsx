@@ -35,6 +35,7 @@ const Modal: React.FC<{ setOpenModal: Function; games: boolean }> = ({
           style={{
             display: "flex",
             justifyContent: "end",
+            height:"25px"
           }}
         >
           <button

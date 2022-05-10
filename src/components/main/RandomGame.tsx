@@ -77,16 +77,16 @@ const RandomGame: React.FC = () => {
         className="title"
         style={{
           textAlign: "center",
-          marginTop: "5px",
+          // marginTop: "5px",
         }}
       >
-        <h1>랜덤 추천 이름</h1>
-        <p>랜덤 추천 문구</p>
+        <p style={{ fontSize:"30px", fontFamily:"IBM Plex Sans KR", color:"#E22F2F", marginBottom:"10px"}}>푸드 슬롯머신</p>
+        <p style={{color:"#7C7C7C", fontSize:"15px", fontFamily:"IBM Plex Sans KR",}}>오늘은 여기서 골라보자!</p>
         <div className="body">
           {ThreeFood.length > 2 ? (
             <div
               className="wrap"
-              style={{ display: "flex", margin: "43px 0 80px" }}
+              style={{ display: "flex", margin: "40px 0 15px" }}
             >
               {ThreeFood.map((item, idx) => {
                 return (
@@ -103,16 +103,14 @@ const RandomGame: React.FC = () => {
                     >
                       {arrayAnimation[idx] ? (
                         <SlideBox>
-                          {testRandom.map((item, idx) => {
+                          {testRandom.map((food, idx) => {
                             return (
-                              <div style={{ height: "100px" }} key={idx}>
-                                {item}
-                              </div>
+                              <SlotAnimationList key={idx}>{food}</SlotAnimationList>
                             );
                           })}
                         </SlideBox>
                       ) : (
-                        <div>{item}</div>
+                        <PickedFood>{item}</PickedFood>
                       )}
                     </ImgInside>
                   </ImgOutside>
@@ -122,7 +120,7 @@ const RandomGame: React.FC = () => {
           ) : (
             <div
               className="wrap"
-              style={{ display: "flex", margin: "43px 0 80px" }}
+              style={{ display: "flex", margin: "40px 0 15px" }}
             >
               {arr.map((item, idx) => {
                 return (
@@ -138,6 +136,16 @@ const RandomGame: React.FC = () => {
             </div>
           )}
         </div>
+        <p
+          style={{
+            fontFamily: "IBM Plex Sans KR",
+            fontSize: "14px",
+            color: "#FF7979",
+            marginBottom: "45px",
+          }}
+        >
+          음식을 클릭하면 관련 음식점들을 확인할 수 있어요!
+        </p>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <img src={start_btn} alt="" onClick={() => RandomGame()}></img>
         </div>
@@ -190,17 +198,23 @@ const ImgOutside = styled.div`
   overflow: hidden;
 `;
 const ImgInside = styled.div`
-   position: absolute;
-                        top: 0px;
-                        left: ;0px;
-                        width: 96px;
-                        height: 157px;
-                        background-color: rgba(0,0,0, 0.4);
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        font-size: 28px;
-                        color: white;
-                        font-family: IBM Plex Sans KR;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 96px;
+  height: 157px;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: white;
+`;
+const PickedFood = styled.div`
+  font-family: IBM Plex Sans KR;
+`;
+const SlotAnimationList = styled.div`
+  height: 100px;
+  font-family: IBM Plex Sans KR;
 `;
 export default RandomGame;
