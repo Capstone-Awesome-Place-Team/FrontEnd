@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 
 const BodyGlobal: React.FC = (props)=>{
     const location = useLocation().pathname;
-    console.log(location)
     return(<Div location={location}>
         {props.children}
     </Div>)
