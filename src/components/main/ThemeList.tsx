@@ -17,7 +17,6 @@ const ThemeList: React.FC<{}> = () => {
   const [list, setList] = useState([]); //새로운 테마리스트 추가하기위한 변수
   const [Idx, setIdx] = useState(LIMIT);
   const [showMore, setShowMore] = useState(true);
-
   useEffect(() => {
     if (isLoading) {
       dispatch(mainActions.getThemeListDB());
@@ -45,8 +44,7 @@ const ThemeList: React.FC<{}> = () => {
           <ThemeImg
             style={{
               backgroundSize:"contain",
-              backgroundImage: `url(${spicy})`,
-      
+              backgroundImage: `url(${item.theme_img})`,
               backgroundRepeat:"no-repeat"
             }}
             onClick={() => navigate(`/theme_list/${item.theme_title}`)}

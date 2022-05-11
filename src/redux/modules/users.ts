@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 import { createAction } from "redux-actions";
 // import { useNavigate } from "react-router-dom";
 import { SetUser, Signup } from "../../types/interfaces";
+import { actionCreators as favorite } from "./favorite";
 
 //actions
 
@@ -46,8 +47,12 @@ const LoginDB = (user: SetUser, navigate: Function) => {
 };
 
 const Logout =(navigate:Function)=>{
-  localStorage.removeItem("token");
-  navigate("/");
+  return async function (dispatch : Dispatch){
+    localStorage.removeItem("token");
+    dispatch(favorite.RemoveInfo());
+    navigate("/");
+  }
+
 }
 //Reducer
 
