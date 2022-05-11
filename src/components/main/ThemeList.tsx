@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import theme_font from "../../static/image/theme_font.svg";
 import { actionCreators as mainActions } from "../../redux/modules/main";
 import LoadMore from "./LoadMore";
-import spicy from "../../static/image/spicy.jpg";
+
 import styled from "styled-components";
 const ThemeList: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -38,20 +38,28 @@ const ThemeList: React.FC<{}> = () => {
       <Font>
         <FontImg src={theme_font} alt=""></FontImg>
       </Font>
-      <div style={{ display:"flex" ,textAlign:"center", justifyContent:"center",alignItems:"center", flexDirection:"column",  }}>
-      {list.map((item: { theme_title: string; theme_img: string }, idx) => {
-        return (
-          <ThemeImg
-            style={{
-              backgroundSize:"contain",
-              backgroundImage: `url(${item.theme_img})`,
-              backgroundRepeat:"no-repeat"
-            }}
-            onClick={() => navigate(`/theme_list/${item.theme_title}`)}
-            key={idx}
-          ></ThemeImg>
-        );
-      })}
+      <div
+        style={{
+          display: "flex",
+          textAlign: "center",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        {list.map((item: { theme_title: string; theme_img: string }, idx) => {
+          return (
+            <ThemeImg
+              style={{
+                backgroundSize: "contain",
+                backgroundImage: `url(${item.theme_img})`,
+                backgroundRepeat: "no-repeat",
+              }}
+              onClick={() => navigate(`/theme_list/${item.theme_title}`)}
+              key={idx}
+            ></ThemeImg>
+          );
+        })}
       </div>
       {showMore && <LoadMore loadMore={loadMore}></LoadMore>}
     </>
@@ -59,16 +67,15 @@ const ThemeList: React.FC<{}> = () => {
 };
 
 const ThemeImg = styled.div`
- width: 460px;
-              height: 130px;
-              margin: 10px auto;
-  @media(max-width:576px){
+  width: 460px;
+  height: 130px;
+  margin: 10px auto;
+  @media (max-width: 576px) {
     width: 330px;
     height: 95px;
     margin: 10px auto;
   }
-`
-
+`;
 
 const Font = styled.div`
   margin: 40px auto;
