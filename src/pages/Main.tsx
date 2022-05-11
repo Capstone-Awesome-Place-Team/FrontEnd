@@ -7,9 +7,9 @@ import ThemeList from "../components/main/ThemeList";
 import { RootState } from "../redux/configStore";
 import { actionCreators as mainActions } from "../redux/modules/main";
 const Main: React.FC<{chooseGame:Function}> = (props) => {
+  const info = useSelector((state:RootState )=>state.favorite.list)
   const {chooseGame} = props
   const dispatch = useDispatch();
-
   return (
     <div>
       <SearchArea></SearchArea>

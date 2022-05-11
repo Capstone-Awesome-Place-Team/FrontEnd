@@ -25,7 +25,7 @@ const Mypage: React.FC = () => {
   }, []);
   return (
     <div>
-      <MypageCategory setCategory={setCategory} category={category}/>
+      <MypageCategory setCategory={setCategory} category={category} />
       {category === "edit_profile" && <Editprofile nickname={info.nickname } is_login={is_login}/>}
       {category === "favorite_list" && <FavoriteList {...info} is_login={is_login}/>}
       {category === "favorite_list_map" && <FavoriteListMap {...info} is_login={is_login}/>}

@@ -10,6 +10,7 @@ import { Edit_info } from "../../types/interfaces";
 const GET_FAVORITELIST = "GETFAVORITELIST";
 const CANCEL_FAVORITE = "CANCELFAVORITE";
 const EDIT_INFO = "EDITINFO";
+const REMOVE_INFO= "REMOVEINFO"
 //action creators
 const getFavoriteList = createAction(
   GET_FAVORITELIST,
@@ -20,6 +21,7 @@ const cancelFavorite = createAction(CANCEL_FAVORITE, (r_code: number) => ({
 }));
 
 const editInfo = createAction(EDIT_INFO, (nickanme: string) => ({ nickanme }));
+const removeInfo = createAction(REMOVE_INFO, ()=>({}))
 // const getFavoriteList = (list: any) => ({
 //   type: GET_FAVORITELIST,
 //   list,
@@ -57,7 +59,7 @@ const getFavoriteListDB = () => {
     try {
       const res:any = await apis.getFavorite(); //나중에 서버 생기면 넣을것
       // dispatch(getFavoriteList(dummyfiles));
-      console.log(res)
+      console.log(res);
       dispatch(getFavoriteList(res));
     } catch (error: any) {
       console.log(error.message);
@@ -93,6 +95,12 @@ const editInfoDB = (info: {
   };
 };
 
+const RemoveInfo:any =()=>{
+  return async function (dispatch:Dispatch){
+    dispatch(removeInfo())
+  }
+}
+
 //Reducer
 
 export default function reducer(state = initialState, action: any) {
@@ -111,6 +119,24 @@ export default function reducer(state = initialState, action: any) {
       console.log(action.payload.nickanme);
       return { list: { ...state.list, nickname: action.payload.nickanme } };
     }
+    case REMOVE_INFO:{
+      return { list:{nickname: "",
+      like_list: [
+        {
+          r_code: 0,
+          restaurant_name: "",
+          img: "",
+          address: "",
+          star: 0,
+          options: {
+            takeout: true,
+            parking: false,
+            pet: false,
+            nokids: false,
+          },
+        },
+      ],}}
+    }
     default:
       return state;
   }
@@ -120,6 +146,7 @@ const actionCreators = {
   getFavoriteListDB,
   cancelFavoriteDB,
   editInfoDB,
+  RemoveInfo
 };
 
 export { actionCreators };
