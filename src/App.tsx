@@ -26,15 +26,7 @@ const App: React.FC = () => {
   return (
     <div>
       <Header />
-      <Overflow
-        style={{
-          height: "100vh",
-          overflowY: "auto",
-          overflowX: "hidden",
-          scrollbarColor: "red",
-        }}
-        id="scrollbar"
-      >
+      <Overflow id="scrollbar">
         {openModal && <Modal setOpenModal={setOpenModal} games={games} />}
         <Routes>
           <Route path="/" element={<Main chooseGame={chooseGame} />} />
@@ -52,5 +44,8 @@ const Overflow = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 export default App;
