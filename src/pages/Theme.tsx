@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { RootState } from "../redux/configStore";
-
 import { actionCreators as mainActions } from "../redux/modules/main";
+
 
 const Theme = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const Theme = () => {
       </p>
       {theme_detail_list.restaurant_info.map((item: any, idx: number) => {
         return (
-          <div style={{ margin: "20px auto", width: "690px" }} key={idx}>
+          <div style={{ margin: "20px auto", width: "97%" }} key={idx}>
             <RestaurantImg img={item.img} onClick={()=>navigate(`/restaurant/${item.r_code}`)}>
               {item.options.takeout && <KeyWord>포장</KeyWord>}
               {item.options.parking && <KeyWord>주차</KeyWord>}
@@ -101,16 +101,24 @@ const Theme = () => {
 
 const RestaurantImg = styled.div`
   background-image: ${(props: { img: string }) => `url(${props.img})`};
-  width: 690px;
+  width: 100%;
   height: 295px;
-  background-size: 690px 295px;
+  background-position:  center ;
+  background-size: cover;
+  background-repeat:no-repeat;
   display: flex;
+  justify-content:end;
+  align-items:end;
+
+  
 `;
 
 const KeyWord = styled.div`
   display: flex;
-  position: relative;
-  top: 250px;
+  /* position: relative; */
+  /* margin-bottom: 10px; */
+  /* margin-left:250px; */
+  flex-direction: end;
   left: 530px;
   width: 62px;
   height: 22px;
@@ -121,7 +129,13 @@ const KeyWord = styled.div`
   font-weight: bold;
   border-radius: 11px;
   color: white;
-  margin: 0 7.5px;
+  /* margin: 0 7.5px 10px; */
+  &:nth-child(1){
+    margin: 0 7.5px 10px;
+  }
+  &:nth-child(2){
+    margin: 0 20px 10px 7.5px;
+  }
 `;
 
 export default Theme;
