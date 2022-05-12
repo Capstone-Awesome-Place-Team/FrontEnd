@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import header_profile from "../static/image/header_profile.svg";
+import header_profile from "../static/image/header_profile.png";
 import awesome from "../static/image/awesome_place_font.svg"
 
 const Header: React.FC = (props) => {
