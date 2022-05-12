@@ -30,7 +30,6 @@ jobs:
       - name: Setting .env
         run: |
           echo "REACT_APP_BASE_URL=${{ secrets.REACT_APP_BASE_URL}}" >> .env
-          echo "REACT_APP_KAKAOMAP_API_KEY=${{ secrets.REACT_APP_KAKAOMAP_API_KEY}}" >> .env
           cat .env
         
       - name: Build
