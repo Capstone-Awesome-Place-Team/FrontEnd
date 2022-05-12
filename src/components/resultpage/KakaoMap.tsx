@@ -34,7 +34,10 @@ const KakaoMap: React.FC = () => {
 
   return (
     <>
-      <div id="map" style={{ width: "500px", height: "400px" }}></div>
+    {/* <div style={{ border:"1px solid black"}}> */}
+      <div id="map" style={{ width: "400px", height: "300px", margin:"50px auto", border:"1px solid black" }}></div>
+      <hr />
+      {/* </div> */}
     </>
   );
 };
