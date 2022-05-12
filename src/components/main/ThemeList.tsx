@@ -16,11 +16,13 @@ const ThemeList: React.FC<{}> = () => {
   const LIMIT = 5;
   const [list, setList] = useState([]); //새로운 테마리스트 추가하기위한 변수
   const [Idx, setIdx] = useState(LIMIT);
-  const [showMore, setShowMore] = useState(true);
+  const [showMore, setShowMore] = useState(false);
   useEffect(() => {
     if (isLoading) {
       dispatch(mainActions.getThemeListDB());
     } else {
+      const newShowMore = LIMIT <= theme_list.length - 1;
+      setShowMore(newShowMore);
       setList(theme_list.slice(0, LIMIT));
     }
   }, [isLoading]);
@@ -32,7 +34,6 @@ const ThemeList: React.FC<{}> = () => {
     setList(newList);
     setShowMore(newShowMore);
   };
-
   return (
     <>
       <Font>
