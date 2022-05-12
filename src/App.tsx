@@ -10,6 +10,7 @@ import Theme from "./pages/Theme";
 import Modal from "./components/main/Modal";
 import RestaurantDetail from "./pages/RestaurantDetail";
 import styled from "styled-components";
+import ResultPage from "./pages/ResultPage";
 const App: React.FC = () => {
   const [openModal, setOpenModal] = useState(false); //나중에 contextAPI 활용해볼것
   const [games, setGames] = useState(true);
@@ -35,6 +36,7 @@ const App: React.FC = () => {
           <Route path="mypage" element={<Mypage />} />
           <Route path="theme_list/:theme_title" element={<Theme />} />
           <Route path="restaurant/:r_code" element={<RestaurantDetail />} />
+          <Route path="list/:currentInput" element={<ResultPage />} />
         </Routes>
       </Overflow>
     </div>
