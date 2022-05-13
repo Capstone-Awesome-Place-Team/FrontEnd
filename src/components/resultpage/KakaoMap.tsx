@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import default_img from "../../static/image/header_profile.png"
+import {useSelector} from "react-redux";
+import {RootState} from "../../redux/configStore";
 declare global {
   interface Window {
     kakao: any;
@@ -8,6 +9,7 @@ declare global {
 }
 const { kakao } = window;
 const KakaoMap: React.FC = () => {
+  const result = useSelector((state: RootState)=>(state.main.search_list))
   const [test, setTest] = useState(true);
   const test_list = [
     { title: "동원참치", address: "서울특별시 종로구 인사동7길 37" },
@@ -83,18 +85,19 @@ const KakaoMap: React.FC = () => {
 
   return (
     <>
-      {/* <div style={{ border:"1px solid black"}}> */}
+    <h2 style={{ width:"fit-content", margin:"20px auto"}}>검색결과 음식점 리스트를 지도로 한눈에</h2>
+      <div style={{ }}>
       <div
         id="map"
         style={{
           width: "400px",
           height: "300px",
-          margin: "50px auto",
+          margin: "20px auto",
           border: "1px solid black",
         }}
       ></div>
       <hr />
-      {/* </div> */}
+      </div>
     </>
   );
 };

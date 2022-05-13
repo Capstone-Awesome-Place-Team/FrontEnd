@@ -5,6 +5,9 @@ import { createAction } from "redux-actions";
 //actions
 const GET_THEME = "GETTHEME";
 const GET_THEME_DETAIL = "GETTHEMEDETAIL";
+const GET_SEARCH_RESULT= "SEARCHRESULT";
+
+
 const getThemeList = createAction(
   GET_THEME,
   (list: { theme_title: string; theme_img: string }[]) => ({ list })
@@ -12,11 +15,11 @@ const getThemeList = createAction(
 const getThemeDetailList = createAction(
   GET_THEME_DETAIL,
   (list: {
-    theme_title: string;
-    theme_content: string;
-    restaurant_info: [];
+   
   }) => ({ list })
 );
+
+const getSearchResult= createAction(GET_SEARCH_RESULT, (search_list:[])=>({search_list}));
 
 const initialState = {
   // 회원이 가진 찜목록 및 닉네임
@@ -43,6 +46,8 @@ const initialState = {
       },
     ],
   },
+  search_list:[]
+  ,
   isLoading:true,
 };
 
@@ -75,6 +80,8 @@ const getSearchDB = (search:string, navigate:Function)=>{
   return async function (dispatch:Dispatch){
     try{
       const res:any = await apis.getSearchInfo(search);
+      console.log(res);
+      dispatch(getSearchResult(res));
       navigate(`/list/${search}`)
     } catch (error:any){
       console.log(error.message);
@@ -89,6 +96,10 @@ export default function reducer(state = initialState, action: any) {
     }
     case GET_THEME_DETAIL: {
       return {...state, theme_detail: action.payload.list, };
+    }
+
+    case GET_SEARCH_RESULT:{
+      return {...state, search_list: action.payload.search_list}
     }
     default:
       return state;
