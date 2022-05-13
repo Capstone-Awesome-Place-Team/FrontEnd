@@ -8,7 +8,20 @@ declare global {
 }
 const { kakao } = window;
 const KakaoMap: React.FC = () => {
+  const [test, setTest] = useState(true);
+  const test_list = [
+    { title: "동원참치", address: "서울특별시 종로구 인사동7길 37" },
+    { title: "에코밥상", address: "서울특별시 종로구 사직로 127-14" },
+    { title: "정선곤드레쌈밥", address: "서울특별시 종로구 평창문화로 152" },
+    {
+      title: "맹순이꽃게 아구전문점",
+      address: "서울특별시 강서구 공항대로 272",
+    },
+  ];
+
+  console.log(test);
   useEffect(() => {
+    let test_done_list: any[] = [];
     let container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
     let options = {
       center: new kakao.maps.LatLng(37.566826004661, 126.978652258309), //지도의 중심좌표.
@@ -17,25 +30,88 @@ const KakaoMap: React.FC = () => {
 
     let map = new kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
 
-    // if(test){
-    //     var geocoder = new kakao.maps.services.Geocoder();
-    //     var callback = function(result:any, status:string) {
-    //         if (status === kakao.maps.services.Status.OK) {
+    if (test) {
+      var geocoder = new kakao.maps.services.Geocoder();
 
-    //             console.log(result[0])
+      test_list.forEach((item, idx) => {
+        geocoder.addressSearch(item.address, (result: any, status: string) => {
+          if (status === kakao.maps.services.Status.OK) {
+            // console.log(result[0].y, result[0].x);
+            test_done_list = [
+              ...test_done_list,
+              {
+                title: item.title,
+                latlng: new kakao.maps.LatLng(result[0].y / 1, result[0].x / 1),
+              },
+            ];
+            setTest(!test); //이것도 명확히 어떻게 동작되는지 다시볼것
+          }
+          // console.log(test_done_list);
+        });
+      });
 
-    //             setTest(!test)
-    //         }
-    //     };
+      setTimeout(() => {
+        //비동기처리때문에 setTimeout 일단 임시적으로 넣어서 확인, 나중에 완료되면 바로실행할수있게 바꿀것
+        // console.log(test_done_list);
+        for (let i = 0; i < test_done_list.length; i++) {
+          // 마커 이미지의 이미지 크기 입니다
+          let imageSize = new kakao.maps.Size(24, 35);
 
-    //     geocoder.addressSearch('서울특별시', callback);
-    // }
+          // 마커 이미지를 생성합니다
+          let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+          // 마커를 생성합니다
+          console.log("언제");
+          let marker = new kakao.maps.Marker({
+            map: map, // 마커를 표시할 지도
+            position: test_done_list[i].latlng, // 마커를 표시할 위치
+            title: test_done_list[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+            image: markerImage, // 마커 이미지
+          });
+        }
+      }, 300);
+
+      let imageSrc =
+        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+      console.log(test_done_list);
+
+      // console.log(i)
+    }
+
+    var positions = [
+      {
+        title: "에코밥상",
+        latlng: new kakao.maps.LatLng(37.5762076645137, 126.973148168228),
+      },
+      {
+        title: "정선곤드레쌈밥",
+        latlng: new kakao.maps.LatLng(37.6100262574236, 126.976297216089),
+      },
+      {
+        title: "동원참치",
+        latlng: new kakao.maps.LatLng(37.5726406166543, 126.984701444611),
+      },
+      {
+        title: "근린공원",
+        latlng: new kakao.maps.LatLng(33.451393, 126.570738),
+      },
+    ];
+    // console.log(positions)
+    // 마커 이미지의 이미지 주소입니다
   }, []);
 
   return (
     <>
-    {/* <div style={{ border:"1px solid black"}}> */}
-      <div id="map" style={{ width: "400px", height: "300px", margin:"50px auto", border:"1px solid black" }}></div>
+      {/* <div style={{ border:"1px solid black"}}> */}
+      <div
+        id="map"
+        style={{
+          width: "400px",
+          height: "300px",
+          margin: "50px auto",
+          border: "1px solid black",
+        }}
+      ></div>
       <hr />
       {/* </div> */}
     </>
