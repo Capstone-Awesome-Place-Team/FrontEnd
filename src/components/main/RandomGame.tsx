@@ -146,7 +146,7 @@ const RandomGame: React.FC = () => {
                     ></img>
                     <ImgInside
                       onClick={() =>
-                        dispatch(searchActions.getSearchDB(item, navigate))
+                        dispatch(searchActions.postSearchDB(item, navigate))
                       }
                     >
                       {arrayAnimation[idx] ? (
