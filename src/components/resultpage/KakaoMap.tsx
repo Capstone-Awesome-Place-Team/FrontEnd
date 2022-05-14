@@ -69,7 +69,7 @@ const KakaoMap: React.FC = () => {
               let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
               // 마커를 생성합니다
-              console.log("언제");
+            
               let marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
                 position: array[i].latlng, // 마커를 표시할 위치
@@ -117,7 +117,7 @@ const KakaoMap: React.FC = () => {
           overflow: "auto",
           height: bigger ? "490px" : "200px",
           border: "2px solid black",
-          margin: "10px"
+          margin: "10px 100px"
         }}
       >
         <div
