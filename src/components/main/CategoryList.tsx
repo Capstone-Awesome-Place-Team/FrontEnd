@@ -1,7 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { actionCreators as mainActions } from "../../redux/modules/main";
 import styled from "styled-components";
+
 import category_font from "../../static/image/category_font.svg";
+import { useNavigate } from "react-router-dom";
+
+
 const CategoryList: React.FC<{}> = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const arr = [
     "한식",
     "중국식",
@@ -16,20 +24,7 @@ const CategoryList: React.FC<{}> = () => {
     "치킨",
     "분식",
   ];
-  const arr1 = [
-    "한식",
-    "중국식",
-    "일식",
-    "뷔페식",
-    "경양식",
-    "찜탕",
-    "족발보쌈",
-    "회",
-    "고기구이",
-    "국수",
-    "치킨",
-    "분식",
-  ];
+
   return (
     <>
       <Font>
@@ -39,7 +34,7 @@ const CategoryList: React.FC<{}> = () => {
         <SmallWrap>
           {arr.map((item, idx) => {
             return (
-              <div key={idx}>
+              <div key={idx} onClick={()=>dispatch(mainActions.postSearchDB(item, navigate))}>
                 <Box></Box>
                 <P>{item}</P>
               </div>

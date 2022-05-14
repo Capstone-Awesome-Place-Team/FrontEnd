@@ -16,8 +16,7 @@ import {
   bunsik,
   noodle,
   chinese_food,
-  soup,
-  jokbal,
+  etc
 } from "../../shared/lists";
 import arrow_line from "../../static/image/arrow-line .svg";
 const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
@@ -58,27 +57,27 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
         if (second_list.indexOf(japanes_food[rPick]) === -1) {
           second_list.push(japanes_food[rPick]);
         }
-      } else if (food === "중국식") {
+      } else if (food === "중식") {
         const rPick = Math.floor(Math.random() * chinese_food.length);
         if (second_list.indexOf(chinese_food[rPick]) === -1) {
           second_list.push(chinese_food[rPick]);
         }
-      } else if (food === "경양식") {
+      } else if (food === "양식") {
         const rPick = Math.floor(Math.random() * american_food.length);
         if (second_list.indexOf(american_food[rPick]) === -1) {
           second_list.push(american_food[rPick]);
         }
-      } else if (food === "찜탕") {
-        const rPick = Math.floor(Math.random() * soup.length);
-        if (second_list.indexOf(soup[rPick]) === -1) {
-          second_list.push(soup[rPick]);
+      } else if (food === "기타") {
+        const rPick = Math.floor(Math.random() * etc.length);
+        if (second_list.indexOf(etc[rPick]) === -1) {
+          second_list.push(etc[rPick]);
         }
-      } else if (food === "국수") {
+      } else if (food === "면류") {
         const rPick = Math.floor(Math.random() * noodle.length);
         if (second_list.indexOf(noodle[rPick]) === -1) {
           second_list.push(noodle[rPick]);
         }
-      } else if (food === "치킨" || food === "고기구이") {
+      } else if (food === "고기") {
         const rPick = Math.floor(Math.random() * meat.length);
         if (second_list.indexOf(meat[rPick]) === -1) {
           second_list.push(meat[rPick]);
@@ -88,17 +87,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
         if (second_list.indexOf(bunsik[rPick]) === -1) {
           second_list.push(bunsik[rPick]);
         }
-      } else if (food === "족발보쌈") {
-        const rPick = Math.floor(Math.random() * jokbal.length);
-        if (second_list.indexOf(jokbal[rPick]) === -1) {
-          second_list.push(jokbal[rPick]);
-        }
-      } else if (food === "뷔페식") {
-        const rPick = Math.floor(Math.random() * jokbal.length);
-        if (second_list.indexOf(jokbal[rPick]) === -1) {
-          second_list.push(jokbal[rPick]);
-        }
-      }
+      } 
     }
     if (saveList.length === 0) {
       //선택한적이없어 saveList값이 없다면 리스트 업데이트, saveList값 업데이트
