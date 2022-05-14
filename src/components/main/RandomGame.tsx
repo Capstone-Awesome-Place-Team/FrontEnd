@@ -8,7 +8,7 @@ import unchose_sample from "../../static/image/unchose_sample.jpg";
 import { all_food } from "../../shared/lists";
 import styled from "styled-components";
 type SettimeoutType = ReturnType<typeof setTimeout>;
-const RandomGame: React.FC = () => {
+const RandomGame: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [ThreeFood, setThreeFood] = useState<Array<string>>([]);
@@ -32,6 +32,7 @@ const RandomGame: React.FC = () => {
     "돼지불백",
     "삼겹주물럭",
   ];
+
   const arr = [0, 0, 0];
   const RandomGame = () => {
     setIsAnimation([true, false]); //시작하기를 다시눌렀을때 두구두구 문구부터 시작
@@ -48,6 +49,11 @@ const RandomGame: React.FC = () => {
         }
       }
     }
+  };
+
+  const searching = (chosenOne: string) => {
+    dispatch(searchActions.postSearchDB(chosenOne, navigate));
+    setOpenModal(false);
   };
 
   useEffect(() => {
@@ -144,11 +150,7 @@ const RandomGame: React.FC = () => {
                       alt=""
                       style={{ marginRight: "5px" }}
                     ></img>
-                    <ImgInside
-                      onClick={() =>
-                        dispatch(searchActions.postSearchDB(item, navigate))
-                      }
-                    >
+                    <ImgInside onClick={() => searching(item)}>
                       {arrayAnimation[idx] ? (
                         <SlideBox>
                           {random_food_list.map((food, idx) => {
