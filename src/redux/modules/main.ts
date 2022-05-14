@@ -91,6 +91,18 @@ const postSearchDB = (search:string, navigate:Function)=>{
   }
 }
 
+const getSearchDB = (search:string)=>{
+  return async function (dispatch:Dispatch){
+    try{
+      const res = await apis.getSearchInfo(search);
+      console.log(res);
+    } catch (error:any){
+      console.log(error.message)
+    }
+
+  }
+}
+
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_THEME: {

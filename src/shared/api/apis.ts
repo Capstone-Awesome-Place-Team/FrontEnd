@@ -18,5 +18,7 @@ export const apis = {
   //theme Detail
   getThemeDetail: (theme_title:string)=> instance.get(`/theme_list/${theme_title}`),
   //search result
-  postSearchInfo: (search:string)=>instance.post(`/search`,{ search })
+  postSearchInfo: (search:string)=>instance.post(`/search`,{ search }),
+  //reset search page and get same search result
+  getSearchInfo:(search:string)=>instance.get(`/list/${search}`)
 };
