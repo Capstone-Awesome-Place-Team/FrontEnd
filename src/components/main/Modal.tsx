@@ -49,8 +49,8 @@ const Modal: React.FC<{ setOpenModal: Function; games: boolean }> = ({
             <img src={close_line} alt=""></img>
           </button>
         </div>
-        {games === true && <ChooseFood />}
-        {games === false && <RandomGame />}
+        {games === true && <ChooseFood setOpenModal={setOpenModal} />}
+        {games === false && <RandomGame setOpenModal={setOpenModal} />}
       </div>
     </div>
   );

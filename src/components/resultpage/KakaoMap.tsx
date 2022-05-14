@@ -105,7 +105,7 @@ const KakaoMap: React.FC = () => {
       //   }
       // }, 300);
     }
-  }, [result]);
+  }, [result]); //result 리스트가 바뀔때 맵초기화하여 다시 마크업, 없으면 업데이트가 안됨
 
   return (
     <>
@@ -147,9 +147,9 @@ const MapBtn = styled.div`
 `;
 
 const MapWrap = styled.div`
-    overflow: auto;
-    height: ${(props: { bigger: boolean }) => props.bigger ? "490px" : "200px"};
-    border: 2px solid black;
-    margin: 10px 100px;
+  overflow: auto;
+  height: ${(props: { bigger: boolean }) => (props.bigger ? "490px" : "200px")};
+  border: 2px solid black;
+  margin: 10px 100px;
 `;
 export default KakaoMap;

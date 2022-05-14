@@ -6,7 +6,7 @@ import { actionCreators as searchActions } from "../../redux/modules/main";
 import sushi from "../../static/image/sushi.svg";
 import chosen_guide from "../../static/image/chosen_guide.svg";
 import restart_bttn from "../../static/image/restart.svg";
-import cantchoose_font from "../../static/image/cantchoose_font.svg" 
+import cantchoose_font from "../../static/image/cantchoose_font.svg";
 import {
   first_category,
   meat,
@@ -20,7 +20,7 @@ import {
   jokbal,
 } from "../../shared/lists";
 import arrow_line from "../../static/image/arrow-line .svg";
-const ChooseFood: React.FC = () => {
+const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [chosenOne, setChosenOne] = useState("시작!");
@@ -117,6 +117,11 @@ const ChooseFood: React.FC = () => {
     setSaveList([]);
     setPreStep(false);
   };
+
+  const searching = () => {
+    dispatch(searchActions.postSearchDB(chosenOne, navigate));
+    setOpenModal(false);
+  };
   return (
     <>
       {final_food ? (
@@ -151,9 +156,7 @@ const ChooseFood: React.FC = () => {
                 color: "white",
                 fontFamily: "IBM Plex Sans KR",
               }}
-              onClick={() =>
-                dispatch(searchActions.postSearchDB(chosenOne, navigate))
-              }
+              onClick={() => searching()}
             >
               {chosenOne}
             </div>
@@ -180,8 +183,8 @@ const ChooseFood: React.FC = () => {
           <p
             style={{
               marginTop: "8px",
-              color:"#7C7C7C",
-              fontFamily:"IBM Plex Sans KR"
+              color: "#7C7C7C",
+              fontFamily: "IBM Plex Sans KR",
             }}
           >
             끌리는게 있다면 클릭하세요!
