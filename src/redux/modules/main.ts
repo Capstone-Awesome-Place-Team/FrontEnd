@@ -15,7 +15,9 @@ const getThemeList = createAction(
 const getThemeDetailList = createAction(
   GET_THEME_DETAIL,
   (list: {
-   
+    theme_title: string;
+    theme_content: string;
+    restaurant_info: [];
   }) => ({ list })
 );
 
@@ -56,7 +58,7 @@ const getThemeListDB = () => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getMain(); //나중에 서버 생기면 넣을것
-      console.log(res);
+      // console.log(res);
       dispatch(getThemeList(res));
     } catch (error: any) {
       console.log(error.message);
@@ -76,10 +78,10 @@ const getThemeDetail = (theme_title: string) => {
   };
 };
 
-const getSearchDB = (search:string, navigate:Function)=>{
+const postSearchDB = (search:string, navigate:Function)=>{
   return async function (dispatch:Dispatch){
     try{
-      const res:any = await apis.getSearchInfo(search);
+      const res:any = await apis.postSearchInfo(search);
       console.log(res);
       dispatch(getSearchResult(res));
       navigate(`/list/${search}`)
@@ -109,7 +111,7 @@ export default function reducer(state = initialState, action: any) {
 const actionCreators = {
   getThemeListDB,
   getThemeDetail,
-  getSearchDB
+  postSearchDB
 };
 
 export { actionCreators };

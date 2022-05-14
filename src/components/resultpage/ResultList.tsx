@@ -15,7 +15,7 @@ type Restaurant = {
 };
 const ResultList: React.FC = () => {
   const result = useSelector((state: RootState) => state.main.search_list);
-  console.log(result);
+  //   console.log(result);
   return (
     <Div>
       <Sorting>
@@ -29,7 +29,7 @@ const ResultList: React.FC = () => {
       <ListBody>
         {result.map((item: Restaurant, idx: string) => {
           return (
-            <div className="post">
+            <div key={idx}>
               <PostImg img={item.img}></PostImg>
               <AddressStarWrap>
                 <div style={{ fontWeight: "bold" }}>{item.restaurant_name}</div>

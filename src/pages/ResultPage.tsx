@@ -8,7 +8,7 @@ import { RootState } from "../redux/configStore";
 
 const ResultPage: React.FC = () => {
   const result = useSelector((state: RootState)=>(state.main.search_list))
-  console.log(result)
+  // console.log(result)
   const Url = useParams().currentInput;
   console.log(Url);
 

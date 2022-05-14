@@ -152,7 +152,7 @@ const ChooseFood: React.FC = () => {
                 fontFamily: "IBM Plex Sans KR",
               }}
               onClick={() =>
-                dispatch(searchActions.getSearchDB(chosenOne, navigate))
+                dispatch(searchActions.postSearchDB(chosenOne, navigate))
               }
             >
               {chosenOne}
