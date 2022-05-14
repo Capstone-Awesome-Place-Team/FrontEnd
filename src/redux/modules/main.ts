@@ -51,6 +51,7 @@ const initialState = {
   search_list:[]
   ,
   isLoading:true,
+  isSearched:false
 };
 
 const getThemeListDB = () => {
@@ -95,6 +96,7 @@ const getSearchDB = (search:string)=>{
   return async function (dispatch:Dispatch){
     try{
       const res = await apis.getSearchInfo(search);
+      dispatch(getSearchResult(res)) // 아직 연결 안됨 404 에러 
       console.log(res);
     } catch (error:any){
       console.log(error.message)
@@ -113,7 +115,7 @@ export default function reducer(state = initialState, action: any) {
     }
 
     case GET_SEARCH_RESULT:{
-      return {...state, search_list: action.payload.search_list}
+      return {...state, search_list: action.payload.search_list, isSearched:true}
     }
     default:
       return state;
@@ -123,7 +125,8 @@ export default function reducer(state = initialState, action: any) {
 const actionCreators = {
   getThemeListDB,
   getThemeDetail,
-  postSearchDB
+  postSearchDB,
+  getSearchDB
 };
 
 export { actionCreators };
