@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/configStore";
+import styled from "styled-components";
 declare global {
   interface Window {
     kakao: any;
@@ -69,7 +70,7 @@ const KakaoMap: React.FC = () => {
               let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
               // 마커를 생성합니다
-            
+
               let marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
                 position: array[i].latlng, // 마커를 표시할 위치
@@ -112,32 +113,10 @@ const KakaoMap: React.FC = () => {
         검색결과 음식점 리스트를 지도로 한눈에
       </h2>
 
-      <div
-        style={{
-          overflow: "auto",
-          height: bigger ? "490px" : "200px",
-          border: "2px solid black",
-          margin: "10px 100px"
-        }}
-      >
-        <div
-          onClick={() => setBigger(!bigger)}
-          style={{
-            width: "120px",
-            margin: "10px auto",
-            textAlign: "center",
-            fontSize: "22px",
-            color: "white",
-            fontWeight: "bold",
-            cursor: "pointer",
-            border: "3px solid #FFAD7C",
-            backgroundColor: "#FFA54E",
-            borderRadius: "5px",
-            boxShadow: "3px 3px 5px #af470a",
-          }}
-        >
+      <MapWrap bigger={bigger}>
+        <MapBtn onClick={() => setBigger(!bigger)}>
           {bigger ? `맵 줄이기` : `맵 크게보기`}
-        </div>
+        </MapBtn>
         <div
           id="map"
           style={{
@@ -148,9 +127,29 @@ const KakaoMap: React.FC = () => {
           }}
         ></div>
         {/* <hr /> */}
-      </div>
+      </MapWrap>
     </>
   );
 };
 
+const MapBtn = styled.div`
+  width: 120px;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 22px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  /* border: 3px solid none; */
+  background-color: #ffa54e;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px #af470a;
+`;
+
+const MapWrap = styled.div`
+    overflow: auto;
+    height: ${(props: { bigger: boolean }) => props.bigger ? "490px" : "200px"};
+    border: 2px solid black;
+    margin: 10px 100px;
+`;
 export default KakaoMap;
