@@ -16,7 +16,7 @@ const KakaoMap: React.FC = () => {
   const Url = useParams().currentInput!;
   const result = useSelector((state: RootState) => state.main.search_list);
   const isSearched = useSelector((state: RootState) => state.main.isSearched);
-  console.log(result);
+  // console.log(result);
   // let test_done_list: any[] = [];
   let [bigger, setBigger] = useState<boolean>(false);
   const [test, setTest] = useState(true);
@@ -36,12 +36,13 @@ const KakaoMap: React.FC = () => {
     return { title: item.restaurant_name, address: item.address };
   });
   useEffect(() => {
-    console.log(isSearched);
+    // console.log(isSearched);
     if (!isSearched) {
       // 새로고침시 리덕스초기화로 isSearched는 false가 되어 그때 다시 DB요청
       dispatch(MainActions.postSearchDB(Url, navigate));
     } else {
       let array: any = [];
+      let count =0;
       let container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
       let options = {
         center: new kakao.maps.LatLng(37.566826004661, 126.978652258309), //지도의 중심좌표.
@@ -55,8 +56,12 @@ const KakaoMap: React.FC = () => {
       var geocoder = new kakao.maps.services.Geocoder();
       // console.log(res_list);
       res_list.forEach((item: any) => {
+        
         geocoder.addressSearch(item.address, (result: any, status: string) => {
+
           //Geocoder함수의 해당 주소로 정보찾는것
+          
+          // console.log(count)
           if (status === kakao.maps.services.Status.OK) {
             array = [
               ...array,
@@ -66,8 +71,13 @@ const KakaoMap: React.FC = () => {
               },
             ];
             // setTest(!test); //이것도 명확히 어떻게 동작되는지 다시볼것
+          
+          } else{
+            console.log(item.address, item.title)
           }
-          if (array.length === res_list.length) {
+          count++;
+          if (count === res_list.length) {
+            console.log(array)
             // setTest(!test);
             for (let i = 0; i < array.length; i++) {
               // 마커 이미지의 이미지 크기 입니다
