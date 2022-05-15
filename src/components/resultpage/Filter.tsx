@@ -1,17 +1,122 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import close_line from "../../static/image/close-line2.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/configStore";
+import { actionCreators as ResultActions } from "../../redux/modules/main";
 
 const Filter: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
-  const [priceClicked, setPriceClicked] = useState([
-    false,
-    false,
-    false,
-    false,
-  ]);
-  const [takeOutClick, setTakeOutClick] = useState([false, false]);
-  const [parkClick, setParkClick] = useState([false, false]);
-  console.log(priceClicked[0]);
+  const dispatch = useDispatch();
+  const result = useSelector((state: RootState) => state.main.search_list);
+  const isSaved = useSelector((state: RootState) => state.main.IsSaved);
+
+  const saved = useSelector((state: RootState) => state.main.save_result);
+  console.log(saved, isSaved);
+  const [priceClicked, setPriceClicked] = useState([true, false, false, false]);
+  const [takeOutClick, setTakeOutClick] = useState(true);
+  const [parkClick, setParkClick] = useState(true);
+
+  useEffect(() => {
+    if (!isSaved) {
+      dispatch(ResultActions.resultSave(result)); // 딱한번 검색된 리스트를 저장함
+    }
+  }, []);
+
+  const Filtering = () => {
+    //모든 조건 일일이 넣음
+    let filtered_result;
+    if (priceClicked[0]) {
+      if (takeOutClick && parkClick) {
+        filtered_result = saved.filter(
+          (item: any) =>
+            item.price < 10000 && item.options.takeout && item.options.parking
+        );
+      } else if (takeOutClick && !parkClick) {
+        filtered_result = saved.filter(
+          (item: any) => item.price < 10000 && item.options.takeout
+        );
+        console.log(filtered_result);
+      } else if (!takeOutClick && parkClick) {
+        filtered_result = saved.filter(
+          (item: any) => item.price < 10000 && item.options.parking
+        );
+      } else {
+        filtered_result = saved.filter((item: any) => item.price < 10000);
+      }
+    }
+    if (priceClicked[1]) {
+      if (takeOutClick && parkClick) {
+        filtered_result = saved.filter(
+          (item: any) =>
+            item.price >= 10000 &&
+            item.price < 20000 &&
+            item.options.takeout &&
+            item.options.parking
+        );
+      } else if (takeOutClick && !parkClick) {
+        filtered_result = saved.filter(
+          (item: any) =>
+            item.price >= 10000 && item.price < 20000 && item.options.takeout
+        );
+      } else if (!takeOutClick && parkClick) {
+        filtered_result = saved.filter(
+          (item: any) =>
+            item.price >= 10000 && item.price < 20000 && item.options.parking
+        );
+      } else {
+        filtered_result = saved.filter(
+          (item: any) => item.price >= 10000 && item.price < 20000
+        );
+      }
+    }
+    if (priceClicked[2]) {
+      if (takeOutClick && parkClick) {
+        filtered_result = saved.filter(
+          (item: any) =>
+            item.price >= 20000 &&
+            item.price < 30000 &&
+            item.options.takeout &&
+            item.options.parking
+        );
+      } else if (takeOutClick && !parkClick) {
+        filtered_result = saved.filter(
+          (item: any) =>
+            item.price >= 20000 && item.price < 30000 && item.options.takeout
+        );
+      } else if (!takeOutClick && parkClick) {
+        filtered_result = saved.filter(
+          (item: any) =>
+            item.price >= 20000 && item.price < 30000 && item.options.parking
+        );
+      } else {
+        filtered_result = saved.filter(
+          (item: any) => item.price >= 20000 && item.price < 30000
+        );
+      }
+    }
+    if (priceClicked[3]) {
+      if (takeOutClick && parkClick) {
+        filtered_result = saved.filter(
+          (item: any) =>
+            item.price > 40000 && item.options.takeout && item.options.parking
+        );
+      } else if (takeOutClick && !parkClick) {
+        filtered_result = saved.filter(
+          (item: any) => item.price > 40000 && item.options.takeout
+        );
+      } else if (!takeOutClick && parkClick) {
+        filtered_result = saved.filter(
+          (item: any) => item.price > 40000 && item.options.parking
+        );
+      } else {
+        filtered_result = saved.filter((item: any) => item.price > 40000);
+      }
+    }
+    console.log(filtered_result);
+    dispatch(ResultActions.getSearchResult(filtered_result));
+    setOpenModal(false);
+  };
+
   return (
     <>
       <div
@@ -111,44 +216,48 @@ const Filter: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
             <BtnWrap>
               <Btn
                 className="takeYes"
-                isClicked={takeOutClick[0]}
-                onClick={() => setTakeOutClick([true, false])}
+                isClicked={takeOutClick}
+                onClick={() => setTakeOutClick(true)}
               >
                 yes
               </Btn>
               <Btn
                 className="takeNo"
-                isClicked={takeOutClick[1]}
-                onClick={() => setTakeOutClick([false, true])}
+                isClicked={takeOutClick}
+                onClick={() => setTakeOutClick(false)}
+                priceWidth
               >
-                no
+                상관없음
               </Btn>
             </BtnWrap>
             <P>주차</P>
             <BtnWrap>
               <Btn
                 className="parkYes"
-                isClicked={parkClick[0]}
-                onClick={() => setParkClick([true, false])}
+                isClicked={parkClick}
+                onClick={() => setParkClick(true)}
               >
                 yes
               </Btn>
               <Btn
                 className="parkNo"
-                isClicked={parkClick[1]}
-                onClick={() => setParkClick([true, false])}
+                isClicked={parkClick}
+                onClick={() => setParkClick(false)}
+                priceWidth
               >
-                no
+                상관없음
               </Btn>
             </BtnWrap>
             <div>
-              <Btn priceWidth style={{ margin: "0 auto" }}>
+              <Btn
+                priceWidth
+                style={{ margin: "0 auto" }}
+                onClick={() => Filtering()}
+              >
                 확인
               </Btn>
             </div>
           </div>
-          {/* {games === true && <ChooseFood setOpenModal={setOpenModal} />} 
-       {games === false && <RandomGame setOpenModal={setOpenModal} />} */}
         </div>
       </div>
     </>
@@ -203,20 +312,20 @@ const Btn = styled.div`
       props.isClicked && "red"};
   }
   :nth-child(1).takeYes {
-    background-color: ${(props: { isClicked: boolean[] }) =>
+    background-color: ${(props: { isClicked: boolean }) =>
       props.isClicked && "red"};
   }
   :nth-child(2).takeNo {
-    background-color: ${(props: { isClicked: boolean[] }) =>
-      props.isClicked && "red"};
+    background-color: ${(props: { isClicked: boolean }) =>
+      props.isClicked === false && "red"};
   }
   :nth-child(1).parkYes {
-    background-color: ${(props: { isClicked: boolean[] }) =>
+    background-color: ${(props: { isClicked: boolean }) =>
       props.isClicked && "red"};
   }
   :nth-child(2).parkNo {
-    background-color: ${(props: { isClicked: boolean[] }) =>
-      props.isClicked && "red"};
+    background-color: ${(props: { isClicked: boolean }) =>
+      props.isClicked === false && "red"};
   }
 `;
 export default Filter;

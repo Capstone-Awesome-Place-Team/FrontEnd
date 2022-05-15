@@ -6,7 +6,7 @@ import { createAction } from "redux-actions";
 const GET_THEME = "GETTHEME";
 const GET_THEME_DETAIL = "GETTHEMEDETAIL";
 const GET_SEARCH_RESULT= "SEARCHRESULT";
-
+const RESULT_SAVED ="RESULTSAVED"
 
 const getThemeList = createAction(
   GET_THEME,
@@ -22,7 +22,7 @@ const getThemeDetailList = createAction(
 );
 
 const getSearchResult= createAction(GET_SEARCH_RESULT, (search_list:[])=>({search_list}));
-
+const resultSave = createAction(RESULT_SAVED, (save_result:[])=>({save_result}));
 const initialState = {
   // 회원이 가진 찜목록 및 닉네임
   list: [
@@ -50,8 +50,10 @@ const initialState = {
   },
   search_list:[]
   ,
+  save_result:[],
   isLoading:true,
-  isSearched:false
+  isSearched:false,
+  IsSaved: false,
 };
 
 const getThemeListDB = () => {
@@ -117,6 +119,10 @@ export default function reducer(state = initialState, action: any) {
     case GET_SEARCH_RESULT:{
       return {...state, search_list: action.payload.search_list, isSearched:true}
     }
+
+    case RESULT_SAVED:{
+      return {...state, IsSaved:true,save_result: action.payload.save_result}
+    }
     default:
       return state;
   }
@@ -126,7 +132,9 @@ const actionCreators = {
   getThemeListDB,
   getThemeDetail,
   postSearchDB,
-  getSearchDB
+  getSearchDB,
+  getSearchResult,
+  resultSave
 };
 
 export { actionCreators };
