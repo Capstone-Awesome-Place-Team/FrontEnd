@@ -42,7 +42,7 @@ const KakaoMap: React.FC = () => {
       dispatch(MainActions.postSearchDB(Url, navigate));
     } else {
       let array: any = [];
-      let count =0;
+
       let container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
       let options = {
         center: new kakao.maps.LatLng(37.566826004661, 126.978652258309), //지도의 중심좌표.
@@ -55,8 +55,8 @@ const KakaoMap: React.FC = () => {
 
       var geocoder = new kakao.maps.services.Geocoder();
       // console.log(res_list);
-      res_list.forEach((item: any) => {
-        
+      res_list.forEach((item: any, idx:number) => {
+        console.log(idx)
         geocoder.addressSearch(item.address, (result: any, status: string) => {
 
           //Geocoder함수의 해당 주소로 정보찾는것
@@ -75,9 +75,9 @@ const KakaoMap: React.FC = () => {
           } else{
             console.log(item.address, item.title)
           }
-          count++;
-          if (count === res_list.length) {
-            console.log(array)
+    
+          if (idx === res_list.length-1) {
+            // console.log(array)
             // setTest(!test);
             for (let i = 0; i < array.length; i++) {
               // 마커 이미지의 이미지 크기 입니다
