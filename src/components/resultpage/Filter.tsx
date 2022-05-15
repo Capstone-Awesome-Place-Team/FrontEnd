@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import close_line from "../../static/image/close-line2.svg";
+
 const Filter: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
+  const [priceClicked, setPriceClicked] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const [takeOutClick, setTakeOutClick] = useState([false, false]);
+  const [parkClick, setParkClick] = useState([false, false]);
+  console.log(priceClicked[0]);
   return (
     <>
       <div
@@ -47,27 +57,95 @@ const Filter: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
               <img src={close_line} alt=""></img>
             </button>
           </div>
-          <div className="body" style={{textAlign:"center"}}>
+          <div
+            className="body"
+            style={{ textAlign: "center", marginTop: "50px" }}
+          >
             <P>가격</P>
             <div
               className="prices"
-              style={{ display: "flex", marginBottom:"10px"}}
+              style={{ display: "flex", marginBottom: "10px" }}
             >
-              <Btn priceWidth Margin Font>~1만원</Btn>
-              <Btn priceWidth Margin Font>1~2만원</Btn>
-              <Btn priceWidth Margin Font>2~3만원</Btn>
-              <Btn priceWidth Margin Font>4만원~</Btn>
+              <Btn
+                priceWidth
+                Margin
+                Font
+                isClicked={priceClicked[0]}
+                onClick={() => setPriceClicked([true, false, false, false])}
+                className="price1"
+              >
+                ~1만원
+              </Btn>
+              <Btn
+                priceWidth
+                Margin
+                Font
+                isClicked={priceClicked[1]}
+                onClick={() => setPriceClicked([false, true, false, false])}
+                className="price2"
+              >
+                1~2만원
+              </Btn>
+              <Btn
+                priceWidth
+                Margin
+                Font
+                isClicked={priceClicked[2]}
+                onClick={() => setPriceClicked([false, false, true, false])}
+                className="price3"
+              >
+                2~3만원
+              </Btn>
+              <Btn
+                priceWidth
+                Margin
+                Font
+                isClicked={priceClicked[3]}
+                onClick={() => setPriceClicked([false, false, false, true])}
+                className="price4"
+              >
+                4만원~
+              </Btn>
             </div>
             <P>테이크아웃</P>
             <BtnWrap>
-              <Btn>yes</Btn>
-              <Btn>no</Btn>
+              <Btn
+                className="takeYes"
+                isClicked={takeOutClick[0]}
+                onClick={() => setTakeOutClick([true, false])}
+              >
+                yes
+              </Btn>
+              <Btn
+                className="takeNo"
+                isClicked={takeOutClick[1]}
+                onClick={() => setTakeOutClick([false, true])}
+              >
+                no
+              </Btn>
             </BtnWrap>
             <P>주차</P>
             <BtnWrap>
-              <Btn>yes</Btn>
-              <Btn>no</Btn>
+              <Btn
+                className="parkYes"
+                isClicked={parkClick[0]}
+                onClick={() => setParkClick([true, false])}
+              >
+                yes
+              </Btn>
+              <Btn
+                className="parkNo"
+                isClicked={parkClick[1]}
+                onClick={() => setParkClick([true, false])}
+              >
+                no
+              </Btn>
             </BtnWrap>
+            <div>
+              <Btn priceWidth style={{ margin: "0 auto" }}>
+                확인
+              </Btn>
+            </div>
           </div>
           {/* {games === true && <ChooseFood setOpenModal={setOpenModal} />} 
        {games === false && <RandomGame setOpenModal={setOpenModal} />} */}
@@ -87,18 +165,58 @@ const BtnWrap = styled.div`
   border: 1px solid black;
   justify-content: space-around;
   padding: 10px;
-  margin:10px 0;
+  margin: 10px 0;
 `;
 
 const Btn = styled.div`
-  width: ${(props:{priceWidth:boolean})=>props.priceWidth?"100px":"40px"};
-  font-size: ${(props:{Font:boolean})=>props.Font?"15px":"20px"};
+  width: ${(props: { priceWidth: boolean }) =>
+    props.priceWidth ? "100px" : "40px"};
+  font-size: ${(props: { Font: boolean }) => (props.Font ? "15px" : "20px")};
   font-weight: bold;
   background-color: #ea6e6e;
   color: white;
   border-radius: 5px;
   text-align: center;
-  margin: ${(props:{Margin:boolean})=>props.Margin?"5px":"0px"};
-  padding:5px;
+  margin: ${(props: { Margin: boolean }) => (props.Margin ? "5px" : "0px")};
+  padding: 5px;
+  cursor: pointer;
+  :hover {
+    background-color: red;
+  }
+  :active {
+    box-shadow: 0px 0px 5px #b20505;
+  }
+  :nth-child(1).price1 {
+    background-color: ${(props: { isClicked: boolean[] }) =>
+      props.isClicked && "red"};
+  }
+  :nth-child(2).price2 {
+    background-color: ${(props: { isClicked: boolean[] }) =>
+      props.isClicked && "red"};
+  }
+  :nth-child(3).price3 {
+    background-color: ${(props: { isClicked: boolean[] }) =>
+      props.isClicked && "red"};
+  }
+  :nth-child(4).price4 {
+    background-color: ${(props: { isClicked: boolean[] }) =>
+      props.isClicked && "red"};
+  }
+  :nth-child(1).takeYes {
+    background-color: ${(props: { isClicked: boolean[] }) =>
+      props.isClicked && "red"};
+  }
+  :nth-child(2).takeNo {
+    background-color: ${(props: { isClicked: boolean[] }) =>
+      props.isClicked && "red"};
+  }
+  :nth-child(1).parkYes {
+    background-color: ${(props: { isClicked: boolean[] }) =>
+      props.isClicked && "red"};
+  }
+  :nth-child(2).parkNo {
+    background-color: ${(props: { isClicked: boolean[] }) =>
+      props.isClicked && "red"};
+  }
 `;
 export default Filter;
