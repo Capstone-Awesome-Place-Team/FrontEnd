@@ -56,7 +56,7 @@ const KakaoMap: React.FC = () => {
       var geocoder = new kakao.maps.services.Geocoder();
       // console.log(res_list);
       res_list.forEach((item: any, idx:number) => {
-        console.log(idx)
+        // console.log(idx)
         geocoder.addressSearch(item.address, (result: any, status: string) => {
 
           //Geocoder함수의 해당 주소로 정보찾는것
@@ -77,7 +77,7 @@ const KakaoMap: React.FC = () => {
           }
     
           if (idx === res_list.length-1) {
-            // console.log(array)
+            console.log(array)
             // setTest(!test);
             for (let i = 0; i < array.length; i++) {
               // 마커 이미지의 이미지 크기 입니다
