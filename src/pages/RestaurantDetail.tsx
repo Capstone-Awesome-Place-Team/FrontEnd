@@ -1,52 +1,94 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Review from "../components/restaurant_detail_page/Review";
 import { RootState } from "../redux/configStore";
 import { actionCreators as Actions } from "../redux/modules/main";
-import heart from "../static/image/get_favorite_heart.svg"
+import heart from "../static/image/get_favorite_heart.svg";
 const RestaurantDetail: React.FC<{}> = () => {
   const dispatch = useDispatch();
   let r_code: string = useParams().r_code!;
   const detail = useSelector(
     (state: RootState) => state.main.restaurant_detail
   );
-  console.log(detail);
+  //   if(detail.keys())
+  const [choose, setChoose] = useState(0); //이미지 선택
   // console.log(r_code)
   useEffect(() => {
-    dispatch(Actions.getResInfoDB(r_code));
+    if (Object.keys(detail).length === 0) {
+      dispatch(Actions.getResInfoDB(r_code));
+    }
   }, []);
+
   return (
     <>
-      <PostImg img={detail.img_list[0]}>
-        <Arrow></Arrow>
-      </PostImg>
+      {Object.keys(detail).length === 0 ? (
+        <div>로딩중</div>
+      ) : (
+        <div>
+          <PostImg img={detail.img_list[choose]}>
+            <Arrow></Arrow>
+          </PostImg>
 
-      <div
-        className="pic_list_wrap"
-        style={{ display: "flex", justifyContent: "center" }}
-      >
-        <PostImg className="first" small img={detail.img_list[0]}></PostImg>
-        <PostImg className="second" small img={detail.img_list[1]}></PostImg>
-      </div>
-      <div className="detail_info">
-        <div style={{ display: "flex" }} className="content_and_heart">
-            <div className="content">
-             <div className="res_name_and_star" style={{ display: "flex" }}>
-                 <div className="res_name">{detail.restaurant_name}</div>
-                 <div className="star">{detail.star}</div>
-             </div>
-            <div className="main_dish">이 가게에서 많이 시켰어요! ({detail.price}원)</div>
-            <div className="price"></div>
+          <div
+            className="pic_list_wrap"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            {detail.img_list.map((item: string, idx: number) => {
+              return (
+                <div
+                  style={{
+                    position: "relative",
+                  }}
+                  onClick={() => setChoose(idx)}
+                  key={idx}
+                >
+                  <PostImg className="first" small img={item}></PostImg>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "15px",
+                      left: "5px",
+                      width: "100px",
+                      height: "100px",
+                      backgroundColor: choose === idx ? "" : "rgba(0,0,0, 0.4)",
+                      border: choose === idx ? "3px solid #01AEF6" : "",
+                    }}
+                  >
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="detail_info">
+            <div style={{ display: "flex" }} className="content_and_heart">
+              <div className="content">
+                <div className="res_name_and_star" style={{ display: "flex" }}>
+                  <div className="res_name">{detail.restaurant_name}</div>
+                  <div className="star">{detail.star}</div>
+                </div>
+                <div className="main_dish">
+                  이 가게에서 많이 시켰어요! ({detail.price}원)
+                </div>
+                <div className="price"></div>
+              </div>
+              <div
+                className="heart"
+                style={{
+                  backgroundImage: `url(${heart})`,
+                  width: "40px",
+                  height: "37px",
+                }}
+              ></div>
             </div>
-          <div className="heart" style={{ backgroundImage:`url(${heart})`, width:"40px", height:"37px" }}></div>
+            <hr />
+            <div className="address">주소: {detail.address}</div>
+            <hr />
+          </div>
+          <Review />
         </div>
-        <hr />
-        <div className="address">주소: {detail.address}</div>
-        <hr />
-      </div>
-      <Review />
+      )}
     </>
   );
 };
