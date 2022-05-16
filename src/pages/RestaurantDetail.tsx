@@ -17,9 +17,9 @@ const RestaurantDetail: React.FC<{}> = () => {
   const [choose, setChoose] = useState(0); //이미지 선택
   // console.log(r_code)
   useEffect(() => {
-    if (Object.keys(detail).length === 0) {
+ 
       dispatch(Actions.getResInfoDB(r_code));
-    }
+    
   }, []);
 
   return (
