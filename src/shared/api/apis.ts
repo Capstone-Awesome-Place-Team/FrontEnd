@@ -20,5 +20,7 @@ export const apis = {
   //search result
   postSearchInfo: (search:string)=>instance.post(`/search`,{ search }),
   //reset search page and get same search result
-  getSearchInfo:(search:string)=>instance.get(`/list/${search}`)
+  getSearchInfo:(search:string)=>instance.get(`/list/${search}`),
+  //get resto's detail info
+  getResInfo: (r_code:string)=> instance.get(`/restaurant/${r_code}`),
 };

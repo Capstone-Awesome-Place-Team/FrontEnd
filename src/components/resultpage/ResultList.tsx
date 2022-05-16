@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RootState } from "../../redux/configStore";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import filter from "../../static/image/filter.png";
+import { useNavigate } from "react-router-dom";
+import { actionCreators as Actions } from "../../redux/modules/main";
 type Restaurant = {
   address: string;
   comment_count: number;
@@ -13,9 +15,20 @@ type Restaurant = {
   restaurant_name: string;
   star: number;
 };
-const ResultList: React.FC<{setOpenModal:Function}> = ({setOpenModal}) => {
-  const result = useSelector((state: RootState) => state.main.search_list);
-  console.log(result);
+const ResultList: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
+  const result = useSelector((state: RootState) => state.main).search_list; // 리랜더링을위해 seaerch_list는 뒤로 뺌
+//  const aa = useSelector((state: RootState)=>state.main) // main 전체로하면 search_list가 바뀌면 인지한다
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const sortedComment = ()=>{
+    const sorted= result.sort((a:{comment_count:number}, b:{comment_count:number})=> b.comment_count- a.comment_count);
+    dispatch(Actions.getSearchResult(sorted));
+  }
+  const sortedStar = ()=>{
+    const sorted= result.sort((a:{star:number}, b:{star:number})=> b.star- a.star);
+    dispatch(Actions.getSearchResult(sorted));
+  }
   return (
     <Div>
       <div
@@ -26,24 +39,42 @@ const ResultList: React.FC<{setOpenModal:Function}> = ({setOpenModal}) => {
         }}
       >
         <Sorting>
-          <String>댓글순</String>
+          <String 
+          onClick={()=>sortedComment()}
+          >
+            댓글순</String>
           <span>|</span>
-          <String>평점순</String>
-          <span>|</span>
-          <String>거리순</String>
+          <String onClick={()=>sortedStar()}>평점순</String>
+          {/* <span>|</span> */}
+          {/* <String>거리순</String> */}
         </Sorting>
-        <img src={filter} alt="" style={{ marginRight: "40px" }} onClick={()=>setOpenModal(true)}></img>
+        <img
+          src={filter}
+          alt=""
+          style={{ marginRight: "40px" }}
+          onClick={() => setOpenModal(true)}
+        ></img>
       </div>
       <ListBody>
         {result.map((item: Restaurant, idx: string) => {
           return (
             <div key={idx}>
-              <PostImg img={item.img}></PostImg>
+              <PostImg
+                img={item.img}
+                onClick={() => navigate(`/restaurant/${item.r_code}`)}
+              ></PostImg>
               <AddressStarWrap>
                 <div style={{ fontWeight: "bold" }}>{item.restaurant_name}</div>
                 <div style={{ color: "#FFA069" }}>평점 {item.star}</div>
               </AddressStarWrap>
-              <div style={{ margin: "0 0 20px 20px", fontSize: "15px",flexWrap: "wrap",width:"320px" }}>
+              <div
+                style={{
+                  margin: "0 0 20px 20px",
+                  fontSize: "15px",
+                  flexWrap: "wrap",
+                  width: "320px",
+                }}
+              >
                 {item.address}
               </div>
               {/* <hr /> */}
@@ -104,5 +135,12 @@ const Sorting = styled.div`
 
 const String = styled.div`
   margin: 0px 5px;
+  cursor:pointer;
+  :hover{
+    text-shadow:1px 1px 3px #4c4c4c;
+  }
+  :active{
+    text-shadow:0 0 3px #000000;
+  }
 `;
 export default ResultList;
