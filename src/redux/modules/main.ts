@@ -7,7 +7,7 @@ const GET_THEME = "GETTHEME";
 const GET_THEME_DETAIL = "GETTHEMEDETAIL";
 const GET_SEARCH_RESULT = "SEARCHRESULT";
 const RESULT_SAVED = "RESULTSAVED";
-const SORT_RESULT = "SORTRESULT";
+const RESTAURANT_DETAIL = "RESTAURANTDETAIL";
 
 const getThemeList = createAction(
   GET_THEME,
@@ -28,6 +28,11 @@ const getSearchResult = createAction(GET_SEARCH_RESULT, (search_list: []) => ({
 const resultSave = createAction(RESULT_SAVED, (save_result: []) => ({
   save_result,
 }));
+
+const restaurantDetail = createAction(RESTAURANT_DETAIL, (detail: {}) => ({
+  detail,
+}));
+
 const initialState = {
   // 회원이 가진 찜목록 및 닉네임
   list: [
@@ -55,6 +60,7 @@ const initialState = {
   },
   search_list: [],
   save_result: [],
+  restaurant_detail: {},
   isLoading: true,
   isSearched: false,
   IsSaved: false,
@@ -77,6 +83,7 @@ const getResInfoDB = (r_code: string) => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getResInfo(r_code); //나중에 서버 생기면 넣을것
+      dispatch(restaurantDetail(res));
       console.log(res);
     } catch (error: any) {
       console.log(error.message);
@@ -145,6 +152,13 @@ export default function reducer(state = initialState, action: any) {
         save_result: action.payload.save_result,
       };
     }
+
+    case RESTAURANT_DETAIL: {
+      return {
+        ...state,
+        restaurant_detail: action.payload.detail,
+      };
+    }
     default:
       return state;
   }
@@ -156,7 +170,6 @@ const actionCreators = {
   postSearchDB,
   getSearchDB,
   getResInfoDB,
-
   getSearchResult,
   resultSave,
 };
