@@ -6,6 +6,7 @@ import Review from "../components/restaurant_detail_page/Review";
 import { RootState } from "../redux/configStore";
 import { actionCreators as Actions } from "../redux/modules/main";
 import heart from "../static/image/get_favorite_heart.svg";
+import all_img from "../static/image/set_of_imgs.png"
 const RestaurantDetail: React.FC<{}> = () => {
   const dispatch = useDispatch();
   let r_code: string = useParams().r_code!;
@@ -116,7 +117,7 @@ const Arrow = styled.div`
   top: 40%;
   left: 90%;
   position: relative;
-  background-position: -50px -190px;
-  background-image: url("https://t1.daumcdn.net/localimg/localimages/07/2018/pc/ico_detail_211026.png");
+  background-position: -50px -190px; //이미지위치
+  background-image: url(${all_img});
 `;
 export default RestaurantDetail;
