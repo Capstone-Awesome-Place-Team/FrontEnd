@@ -4,9 +4,11 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Review from "../components/restaurant_detail_page/Review";
 import { RootState } from "../redux/configStore";
-import { actionCreators as Actions } from "../redux/modules/main";
+import { actionCreators as Actions } from "../redux/modules/restaurant";
 import heart from "../static/image/get_favorite_heart.svg";
+import red_heart from "../static/image/red_heart.svg"
 import all_img from "../static/image/set_of_imgs.png";
+
 const RestaurantDetail: React.FC<{}> = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -14,8 +16,9 @@ const RestaurantDetail: React.FC<{}> = () => {
   const isLogin= localStorage.getItem("token");
 //   console.log(test)
   const detail = useSelector(
-    (state: RootState) => state.main.restaurant_detail
+    (state: RootState) => state.restaurant
   );
+  console.log(detail)
   const [choose, setChoose] = useState(0); //이미지 선택
   // console.log(r_code)
   //   useEffect(() => {
@@ -28,13 +31,14 @@ const RestaurantDetail: React.FC<{}> = () => {
     if (isLoading) {
       dispatch(Actions.getResInfoDB(r_code, setIsLoading));
     }
+  
   }, []);
   return (
     <>
       {isLoading ? (
         <div>로딩중</div>
       ) : (
-        <div>
+        <div style={{marginBottom:"150px"}}>
           <PostImg img={detail.img_list[choose]}>
             <Arrow></Arrow>
           </PostImg>
@@ -69,7 +73,7 @@ const RestaurantDetail: React.FC<{}> = () => {
             })}
           </div>
           <div className="detail_info">
-            <div style={{ display: "flex" }} className="content_and_heart">
+            <div style={{ display: "flex",  margin:"30px"  }} className="content_and_heart">
               <div className="content">
                 <div className="res_name_and_star" style={{ display: "flex" }}>
                   <div className="res_name">{detail.restaurant_name}</div>
@@ -80,14 +84,27 @@ const RestaurantDetail: React.FC<{}> = () => {
                 </div>
                 <div className="price"></div>
               </div>
-              {isLogin===null?null:<div
+              {isLogin===null?null:detail.like?<div style={{position:"relative", left:"100px"}}><div
+                className="heart"
+                style={{
+                  backgroundImage: `url(${red_heart})`,
+                  width: "40px",
+                  height: "37px",
+                  margin: "5px auto"
+                }}
+                onClick={()=> dispatch(Actions.cancelFavoriteDB(detail.r_code)) }
+              ></div>
+              <div style={{color:"#E22F2F"}}>찜목록 추가됨</div>
+              </div>:<div><div
                 className="heart"
                 style={{
                   backgroundImage: `url(${heart})`,
                   width: "40px",
                   height: "37px",
+                  margin: "5px auto"
                 }}
-              ></div>}
+                onClick={()=> dispatch(Actions.likeFavoriteDB(detail.r_code)) }
+              ></div><div>찜목록에 추가하기</div></div>}
             </div>
             <hr />
             <div className="address">주소: {detail.address}</div>

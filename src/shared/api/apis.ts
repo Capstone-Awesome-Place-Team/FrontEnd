@@ -6,6 +6,8 @@ export const apis = {
   // Cancel Favorite
   cancelFavorite: (r_code: number) =>
     instance.delete(`/like`, { data: { r_code } }), // delete는 보통 body가 비어있고 params로 넘겨주는데 헤더에 많은 정보를 담을수 없을때 이런식으로 사용
+  //like Favorite
+  likeFavorite: (r_code:number)=> instance.post(`like`, {r_code}),
   //EditInfo
   editInfo: (info: { pw: string | undefined; nickname: string | undefined }) =>
     instance.put(`/user_edit`, { ...info }),
@@ -23,4 +25,5 @@ export const apis = {
   getSearchInfo:(search:string)=>instance.get(`/list/${search}`),
   //get resto's detail info
   getResInfo: (r_code:string)=> instance.get(`/restaurant/${r_code}`),
+
 };

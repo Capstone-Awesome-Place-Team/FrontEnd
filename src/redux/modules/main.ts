@@ -9,6 +9,7 @@ const GET_SEARCH_RESULT = "SEARCHRESULT";
 const RESULT_SAVED = "RESULTSAVED";
 const RESTAURANT_DETAIL = "RESTAURANTDETAIL";
 
+
 const getThemeList = createAction(
   GET_THEME,
   (list: { theme_title: string; theme_img: string }[]) => ({ list })
@@ -32,6 +33,8 @@ const resultSave = createAction(RESULT_SAVED, (save_result: []) => ({
 const restaurantDetail = createAction(RESTAURANT_DETAIL, (detail: {}) => ({
   detail,
 }));
+
+
 
 const initialState = {
   // 회원이 가진 찜목록 및 닉네임
@@ -77,6 +80,8 @@ const getResInfoDB = (r_code: string, setIsLoading:Function) => {
     }
   };
 };
+
+
 
 const getThemeDetail = (theme_title: string, setIsLoading: Function) => {
   return async function (dispatch: Dispatch) {
@@ -147,6 +152,7 @@ export default function reducer(state = initialState, action: any) {
         restaurant_detail: action.payload.detail,
       };
     }
+   
     default:
       return state;
   }
