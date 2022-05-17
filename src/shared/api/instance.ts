@@ -11,7 +11,6 @@ instance.interceptors.request.use(
 
     USER_TOKEN !== "Bearer null" &&
       (config.headers!["Authorization"] = USER_TOKEN);
-
     config.headers!["Content-Type"] = "application/json; charset=utf-8";
     config.headers!["X-Requested-With"] = "XMLHttpRequest";
     config.headers!["Accept"] = "application/json";

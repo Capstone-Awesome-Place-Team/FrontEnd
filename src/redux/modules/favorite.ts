@@ -10,7 +10,8 @@ import { Edit_info } from "../../types/interfaces";
 const GET_FAVORITELIST = "GETFAVORITELIST";
 const CANCEL_FAVORITE = "CANCELFAVORITE";
 const EDIT_INFO = "EDITINFO";
-const REMOVE_INFO= "REMOVEINFO"
+const REMOVE_INFO= "REMOVEINFO";
+// const LIKE_FAVORITE = "LIKEFAVORITE";
 //action creators
 const getFavoriteList = createAction(
   GET_FAVORITELIST,
@@ -19,7 +20,7 @@ const getFavoriteList = createAction(
 const cancelFavorite = createAction(CANCEL_FAVORITE, (r_code: number) => ({
   r_code,
 }));
-
+// const likeFavorite = createAction(LIKE_FAVORITE, (r_code:number)=>({r_code}))
 const editInfo = createAction(EDIT_INFO, (nickanme: string) => ({ nickanme }));
 const removeInfo = createAction(REMOVE_INFO, ()=>({}))
 // const getFavoriteList = (list: any) => ({
@@ -48,6 +49,7 @@ const initialState = {
       },
     ],
   },
+
 };
 
 //MiddleWare
@@ -79,6 +81,8 @@ const cancelFavoriteDB = (r_code: number) => {
     }
   };
 };
+
+
 
 const editInfoDB = (info: {
   pw: string | undefined;
@@ -137,6 +141,7 @@ export default function reducer(state = initialState, action: any) {
         },
       ],}}
     }
+   
     default:
       return state;
   }
