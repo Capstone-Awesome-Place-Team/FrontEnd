@@ -85,12 +85,12 @@ const Review: React.FC<{}> = () => {
                         );
                       })}
 
-                  <div className="nick_and_time" style={{ display: "flex" }}>
+                  <div className="nick_and_time" style={{ display: "flex", fontWeight:"bold", margin:"3px 0" }}>
                     <div>{item.nickname},</div>
                     <div style={{margin:"0 5px"}}>{item.time}</div>
                   </div>
-                  <div style={{fontSize:"15px", fontWeight:"bold"}}>{item.title}</div>
-                  <div style={{fontSize:"15px"}}>{item.content}</div>
+                  <div style={{fontSize:"15px", fontWeight:"bold", color:"#4B4B4B"}}>{item.title}</div>
+                  <div style={{fontSize:"15px", color:"#747474"}}>{item.content}</div>
                 </div>
               );
             })}
