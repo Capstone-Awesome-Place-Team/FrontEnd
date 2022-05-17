@@ -39,9 +39,10 @@ const Review: React.FC<{}> = () => {
           <div
             className="comment_list_wrap"
             style={{
-              border: "1px solid black",
+              border: "1px solid #999999",
               width: "340px",
               height: "283px",
+              margin:"0 20px 30px 0"
             }}
           >
             {comments.map((item: any, idx: number) => {
