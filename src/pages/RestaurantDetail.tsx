@@ -6,25 +6,32 @@ import Review from "../components/restaurant_detail_page/Review";
 import { RootState } from "../redux/configStore";
 import { actionCreators as Actions } from "../redux/modules/main";
 import heart from "../static/image/get_favorite_heart.svg";
-import all_img from "../static/image/set_of_imgs.png"
+import all_img from "../static/image/set_of_imgs.png";
 const RestaurantDetail: React.FC<{}> = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   let r_code: string = useParams().r_code!;
+  const isLogin= localStorage.getItem("token");
+//   console.log(test)
   const detail = useSelector(
     (state: RootState) => state.main.restaurant_detail
   );
-  //   if(detail.keys())
   const [choose, setChoose] = useState(0); //이미지 선택
   // console.log(r_code)
-  useEffect(() => {
- 
-      dispatch(Actions.getResInfoDB(r_code));
-    
-  }, []);
+  //   useEffect(() => {
+  //     if (Object.keys(detail).length === 0) {
+  //       dispatch(Actions.getResInfoDB(r_code));
+  //     }
+  //   }, []);
 
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(Actions.getResInfoDB(r_code, setIsLoading));
+    }
+  }, []);
   return (
     <>
-      {Object.keys(detail).length === 0 ? (
+      {isLoading ? (
         <div>로딩중</div>
       ) : (
         <div>
@@ -56,8 +63,7 @@ const RestaurantDetail: React.FC<{}> = () => {
                       backgroundColor: choose === idx ? "" : "rgba(0,0,0, 0.4)",
                       border: choose === idx ? "3px solid #01AEF6" : "",
                     }}
-                  >
-                  </div>
+                  ></div>
                 </div>
               );
             })}
@@ -74,14 +80,14 @@ const RestaurantDetail: React.FC<{}> = () => {
                 </div>
                 <div className="price"></div>
               </div>
-              <div
+              {isLogin===null?null:<div
                 className="heart"
                 style={{
                   backgroundImage: `url(${heart})`,
                   width: "40px",
                   height: "37px",
                 }}
-              ></div>
+              ></div>}
             </div>
             <hr />
             <div className="address">주소: {detail.address}</div>
