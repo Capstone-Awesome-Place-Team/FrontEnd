@@ -2,7 +2,7 @@ import React from "react";
 const Review: React.FC<{}> = () => {
   return (
     <>
-      <div className="Wrap" style={{ display: "flex" }}>
+      <div className="Wrap" style={{ display: "flex", justifyContent:"center"}}>
         <div>
           <div
             className="comment_list"
