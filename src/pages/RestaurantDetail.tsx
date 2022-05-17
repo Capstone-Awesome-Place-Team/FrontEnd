@@ -125,7 +125,7 @@ const RestaurantDetail: React.FC<{}> = () => {
                   className="main_dish"
                   style={{ fontSize: "15px", fontWeight: "bold", margin:"10px 0" }}
                 >
-                  이 가게에서 많이 시켰어요! ({detail.price}원)
+                  이 가게에서 많이 시켰어요! ({detail.price.toLocaleString('ko-KR')}원)
                 </div>
                 <div className="address" style={{width:"240px", fontSize: "15px",  }}>주소: {detail.address}</div>
                 <div className="price"></div>
