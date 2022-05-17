@@ -16,14 +16,9 @@ const ResultPage: React.FC = () => {
   // console.log(result)
   const Url = useParams().currentInput;
   console.log(Url);
-  useEffect(()=>{
+  // useEffect(()=>{
   
-      // dispatch()
-      // // console.log("Dd")
-    
-
-  
-  },[])
+  // },[])
   return (
     <>
     {openModal&&<Filter setOpenModal={setOpenModal} ></Filter>}

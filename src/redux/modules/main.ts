@@ -42,21 +42,7 @@ const initialState = {
     },
   ],
   theme_detail: {
-    theme_title: "",
-    theme_content: "",
-    restaurant_info: [
-      {
-        r_code: null,
-        restaurant_name: "",
-        img: "",
-        intro: "",
-        options: {
-          takeout: null,
-          parking: null,
-        },
-        star: null,
-      },
-    ],
+    
   },
   search_list: [],
   save_result: [],
@@ -70,7 +56,7 @@ const getThemeListDB = () => {
   // 메인 테마리스트 가져오기
   return async function (dispatch: Dispatch) {
     try {
-      const res: any = await apis.getMain(); //나중에 서버 생기면 넣을것
+      const res: any = await apis.getMain(); 
       // console.log(res);
       dispatch(getThemeList(res));
     } catch (error: any) {
@@ -79,11 +65,12 @@ const getThemeListDB = () => {
   };
 };
 
-const getResInfoDB = (r_code: string) => {
+const getResInfoDB = (r_code: string, setIsLoading:Function) => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getResInfo(r_code); //나중에 서버 생기면 넣을것
       dispatch(restaurantDetail(res));
+      setIsLoading(false);
       console.log(res);
     } catch (error: any) {
       console.log(error.message);
@@ -91,12 +78,13 @@ const getResInfoDB = (r_code: string) => {
   };
 };
 
-const getThemeDetail = (theme_title: string) => {
+const getThemeDetail = (theme_title: string, setIsLoading: Function) => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getThemeDetail(theme_title); //나중에 서버 생기면 넣을것
       console.log(res);
       dispatch(getThemeDetailList(res));
+      setIsLoading(false)
     } catch (error: any) {
       console.log(error.message);
     }
