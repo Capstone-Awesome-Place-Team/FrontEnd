@@ -26,7 +26,15 @@ const Review: React.FC<{}> = () => {
     <>
       <div style={{ display: "flex", margin: "10px 40px" }}>
         <img src={review_pen} alt="" width="36px"></img>
-        <div style={{ fontSize: "20px", fontWeight: "bold", color: "#747474", display:"flex", alignItems:"center" }}>
+        <div
+          style={{
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#747474",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           리뷰({comments.length})
         </div>
       </div>
@@ -42,7 +50,8 @@ const Review: React.FC<{}> = () => {
               border: "1px solid #999999",
               width: "340px",
               height: "283px",
-              margin:"0 20px 30px 0"
+              margin: "0 20px 30px 0",
+              overflowY: "auto"
             }}
           >
             {comments.map((item: any, idx: number) => {
@@ -86,12 +95,29 @@ const Review: React.FC<{}> = () => {
                         );
                       })}
 
-                  <div className="nick_and_time" style={{ display: "flex", fontWeight:"bold", margin:"3px 0" }}>
+                  <div
+                    className="nick_and_time"
+                    style={{
+                      display: "flex",
+                      fontWeight: "bold",
+                      margin: "3px 0",
+                    }}
+                  >
                     <div>{item.nickname},</div>
-                    <div style={{margin:"0 5px"}}>{item.time}</div>
+                    <div style={{ margin: "0 5px" }}>{item.time}</div>
                   </div>
-                  <div style={{fontSize:"15px", fontWeight:"bold", color:"#4B4B4B"}}>{item.title}</div>
-                  <div style={{fontSize:"15px", color:"#747474"}}>{item.content}</div>
+                  <div
+                    style={{
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                      color: "#4B4B4B",
+                    }}
+                  >
+                    {item.title}
+                  </div>
+                  <div style={{ fontSize: "15px", color: "#747474" }}>
+                    {item.content}
+                  </div>
                 </div>
               );
             })}
