@@ -25,8 +25,8 @@ const Review: React.FC<{}> = () => {
   return (
     <>
       <div style={{ display: "flex", margin: "10px 40px" }}>
-        <img src={review_pen} alt=""></img>
-        <div style={{ fontSize: "17px", fontWeight: "bold", color: "#747474" }}>
+        <img src={review_pen} alt="" width="36px"></img>
+        <div style={{ fontSize: "20px", fontWeight: "bold", color: "#747474", display:"flex", alignItems:"center" }}>
           리뷰({comments.length})
         </div>
       </div>
