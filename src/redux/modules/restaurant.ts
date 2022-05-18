@@ -17,7 +17,9 @@ const initialState = {
   comments: [],
   img_list: [],
   like: false,
-  mycomment: {star: 0, title: '', content: '', time: ''},
+  mycomment: {
+    star: 0, title: '', content: '', time: ''
+  },
   options: {takeout: false, parking: true},
   price: null,
   r_code: null,

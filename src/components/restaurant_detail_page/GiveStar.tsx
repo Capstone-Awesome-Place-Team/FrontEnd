@@ -1,6 +1,8 @@
 import { url } from "inspector";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../../redux/configStore";
 import {
   review_arrow,
   star_0,
@@ -15,6 +17,10 @@ import {
   star_5,
 } from "../../static/imgIndex";
 const GiveStar: React.FC = () => {
+  const mycomment = useSelector(
+    (state: RootState) => state.restaurant
+  ).mycomment;
+  console.log(mycomment);
   const [isClicked, setIsClicked] = useState(false);
   const [star, setStar] = useState(0);
   const [isChoose, setIsChoose] = useState(false);
@@ -39,69 +45,61 @@ const GiveStar: React.FC = () => {
   };
   return (
     <div className="give_star" style={{ display: "flex" }}>
-      <div
-        style={{
-          fontSize: "17px",
-          fontWeight: "bold",
-          color: "#747474",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        나의 리뷰
-      </div>
-      <div style={{ position: "relative", margin: "5px" }}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <StarBox item={star_list[star]} isChoose={isChoose}></StarBox>
-          <div
-            style={{
-              width: "40px",
-              height: "35px",
-              border: "1px solid black",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                backgroundImage: `url(${review_arrow})`,
-                width: "30px",
-                height: "18px",
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                //   borderBottom: "1px solid black"
-              }}
-              onClick={() => setIsClicked(!isClicked)}
-            ></div>
+      <MyreviewFont>나의 리뷰</MyreviewFont>
+      {mycomment.title === "" ? (
+        <OutWrap>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <StarBox item={star_list[star]} isChoose={isChoose}></StarBox>
+            <ArrowWrap>
+              <ReviewArrow
+                onClick={() => setIsClicked(!isClicked)}
+              ></ReviewArrow>
+            </ArrowWrap>
           </div>
-        </div>
-        {isClicked && (
-          <div
-            style={{
-              position: "absolute",
-              width: "200px",
-              height: "310px",
-              overflowY: "auto",
-              border: "1px solid black",
-              backgroundColor: "white",
-            }}
-          >
-            {star_list.map((item, idx) => {
-              return (
-                <Star
-                  item={item}
-                  onClick={() => choose_one(idx)}
-                  key={idx}
-                ></Star>
-              );
-            })}
+          {isClicked && (
+            <StarListInWrap>
+              {star_list.map((item, idx) => {
+                return (
+                  <Star
+                    item={item}
+                    onClick={() => choose_one(idx)}
+                    key={idx}
+                  ></Star>
+                );
+              })}
+            </StarListInWrap>
+          )}
+        </OutWrap>
+      ) : (
+        <OutWrap>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <StarBox
+              item={star_list[mycomment.star * 2 - 2]}
+              reviewed
+            ></StarBox>
+            <ArrowWrap>
+              <ReviewArrow></ReviewArrow>
+            </ArrowWrap>
           </div>
-        )}
-      </div>
+        </OutWrap>
+      )}
     </div>
   );
 };
+
+const OutWrap = styled.div`
+  position: relative;
+  margin: 5px;
+`;
+
+const StarListInWrap = styled.div`
+  position: absolute;
+  width: 200px;
+  height: 310px;
+  overflow-y: auto;
+  border: 1px solid black;
+  background-color: white;
+`;
 
 const Star = styled.div`
   background-image: ${(props: { item: string }) => `url(${props.item})`};
@@ -115,14 +113,46 @@ const Star = styled.div`
 `;
 
 const StarBox = styled.div`
-  background-image: ${(props: { item: string; isChoose: boolean }) =>
-    props.isChoose ? `url(${props.item})` : `url(${star_0})`};
-
+  background-image: ${(props: {
+    item: string;
+    isChoose: boolean;
+    reviewed: boolean;
+  }) =>
+    props.isChoose
+      ? `url(${props.item})`
+      : props.reviewed
+      ? `url(${props.item})`
+      : `url(${star_0})`};
   width: 160px;
   height: 35px;
   background-size: contain;
   background-repeat: no-repeat;
   border: 1px solid black;
   /* background-position:center; */
+`;
+
+const MyreviewFont = styled.div`
+  font-size: 17px;
+  font-weight: bold;
+  color: #747474;
+  display: flex;
+  align-items: center;
+`;
+
+const ArrowWrap = styled.div`
+  width: 40px;
+  height: 35px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ReviewArrow = styled.div`
+  background-image: url(${review_arrow});
+  width: 30px;
+  height: 18px;
+  background-size: contain;
+  background-repeat: no-repeat;
 `;
 export default GiveStar;
