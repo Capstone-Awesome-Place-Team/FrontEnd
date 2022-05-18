@@ -33,7 +33,7 @@ const Theme = () => {
       {isLoading ? (
         <div style={{margin:"100px"}}>로딩중</div>
       ) : (
-        <div>
+        <div style={{margin:"100px 0"}}>
           <p
             style={{
               width: "fit-content",
