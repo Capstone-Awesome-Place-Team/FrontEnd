@@ -168,6 +168,14 @@ const RestaurantDetail: React.FC<{}> = () => {
             <hr />
           </div>
           <Review />
+          <div className="map" style={{
+            width:"660px",
+            height:"413px",
+            border: "1px solid black",
+            margin: "50px auto"
+          }}>
+지도
+          </div>
         </div>
       )}
     </>
