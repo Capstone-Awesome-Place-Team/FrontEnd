@@ -30,23 +30,33 @@ const GiveStar: React.FC = () => {
     star_4_5,
     star_5,
   ];
-  console.log(value)
+  console.log(value);
   const choose_one = (idx: number) => {
     setStar(idx);
     setIsChoose(true);
     setIsClicked(!isClicked);
-    isValue((idx+2)/2)
+    isValue((idx + 2) / 2);
   };
   return (
     <div className="give_star" style={{ display: "flex" }}>
-      <div>나의 리뷰</div>
-      <div style={{ position: "relative" }}>
-        <div style={{ display: "flex" }}>
+      <div
+        style={{
+          fontSize: "17px",
+          fontWeight: "bold",
+          color: "#747474",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        나의 리뷰
+      </div>
+      <div style={{ position: "relative", margin: "5px" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <StarBox item={star_list[star]} isChoose={isChoose}></StarBox>
           <div
             style={{
               width: "40px",
-              height: "44px",
+              height: "35px",
               border: "1px solid black",
               display: "flex",
               justifyContent: "center",
@@ -109,9 +119,10 @@ const StarBox = styled.div`
     props.isChoose ? `url(${props.item})` : `url(${star_0})`};
 
   width: 160px;
-  height: 44px;
+  height: 35px;
   background-size: contain;
   background-repeat: no-repeat;
   border: 1px solid black;
+  /* background-position:center; */
 `;
 export default GiveStar;

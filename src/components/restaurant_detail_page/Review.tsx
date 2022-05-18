@@ -69,6 +69,7 @@ const Review: React.FC<{}> = () => {
                     borderRadius: "9px",
                     margin: "10px 7px",
                   }}
+                  key={idx}
                 >
                   {item.star % 1 === 0
                     ? star_list1.map((star, idx) => {
@@ -80,6 +81,7 @@ const Review: React.FC<{}> = () => {
                                 width: "98px",
                                 height: "18px",
                               }}
+                              key={idx}
                             ></div>
                           )
                         );
@@ -93,6 +95,7 @@ const Review: React.FC<{}> = () => {
                                 width: "98px",
                                 height: "18px",
                               }}
+                              key={idx}
                             ></div>
                           )
                         );
