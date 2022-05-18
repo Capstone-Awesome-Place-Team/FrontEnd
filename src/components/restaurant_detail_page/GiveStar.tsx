@@ -21,10 +21,11 @@ const GiveStar: React.FC = () => {
     (state: RootState) => state.restaurant
   ).mycomment;
   console.log(mycomment);
+  const isLogin = localStorage.getItem("token");
   const [isClicked, setIsClicked] = useState(false);
   const [star, setStar] = useState(0);
   const [isChoose, setIsChoose] = useState(false);
-  const [value, isValue] = useState(0);
+
   const star_list = [
     star_1,
     star_1_5,
@@ -36,52 +37,54 @@ const GiveStar: React.FC = () => {
     star_4_5,
     star_5,
   ];
-  console.log(value);
   const choose_one = (idx: number) => {
     setStar(idx);
     setIsChoose(true);
     setIsClicked(!isClicked);
-    isValue((idx + 2) / 2);
   };
   return (
     <div className="give_star" style={{ display: "flex" }}>
       <MyreviewFont>나의 리뷰</MyreviewFont>
-      {mycomment.title === "" ? (
-        <OutWrap>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <StarBox item={star_list[star]} isChoose={isChoose}></StarBox>
-            <ArrowWrap>
-              <ReviewArrow
-                onClick={() => setIsClicked(!isClicked)}
-              ></ReviewArrow>
-            </ArrowWrap>
-          </div>
-          {isClicked && (
-            <StarListInWrap>
-              {star_list.map((item, idx) => {
-                return (
-                  <Star
-                    item={item}
-                    onClick={() => choose_one(idx)}
-                    key={idx}
-                  ></Star>
-                );
-              })}
-            </StarListInWrap>
-          )}
-        </OutWrap>
+      {isLogin !== null ? (
+        mycomment.title === "" ? (
+          <OutWrap>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <StarBox item={star_list[star]} isChoose={isChoose}></StarBox>
+              <ArrowWrap>
+                <ReviewArrow
+                  onClick={() => setIsClicked(!isClicked)}
+                ></ReviewArrow>
+              </ArrowWrap>
+            </div>
+            {isClicked && (
+              <StarListInWrap>
+                {star_list.map((item, idx) => {
+                  return (
+                    <Star
+                      item={item}
+                      onClick={() => choose_one(idx)}
+                      key={idx}
+                    ></Star>
+                  );
+                })}
+              </StarListInWrap>
+            )}
+          </OutWrap>
+        ) : (
+          <OutWrap>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <StarBox
+                item={star_list[mycomment.star * 2 - 2]}
+                reviewed
+              ></StarBox>
+              <ArrowWrap>
+                <ReviewArrow></ReviewArrow>
+              </ArrowWrap>
+            </div>
+          </OutWrap>
+        )
       ) : (
-        <OutWrap>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <StarBox
-              item={star_list[mycomment.star * 2 - 2]}
-              reviewed
-            ></StarBox>
-            <ArrowWrap>
-              <ReviewArrow></ReviewArrow>
-            </ArrowWrap>
-          </div>
-        </OutWrap>
+        <></>
       )}
     </div>
   );
