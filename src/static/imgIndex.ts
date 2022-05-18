@@ -21,8 +21,5 @@ export {
     star_4,
     star_4_5,
     star_5,
-   
     review_arrow
-
-
 }

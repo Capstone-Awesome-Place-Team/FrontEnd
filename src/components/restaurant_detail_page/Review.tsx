@@ -14,17 +14,26 @@ import {
   star_5,
 } from "../../static/imgIndex";
 
-import GiveStar from "../restaurant_detail_page/GiveStar"
-import WriteComment from "../restaurant_detail_page/WriteComment"
+import GiveStar from "../restaurant_detail_page/GiveStar";
+import WriteComment from "../restaurant_detail_page/WriteComment";
 import review_pen from "../../static/image/review_pen.svg";
 
 const Review: React.FC<{}> = () => {
   const detail = useSelector((state: RootState) => state.restaurant);
   const comments = useSelector((state: RootState) => state.restaurant).comments;
   console.log(comments);
-  const star_list1 = [star_1, star_2, star_3, star_4, star_5];
-  const star_list2 = [star_1_5, star_2_5, star_3_5, star_4_5];
-  console.log(star_list1);
+  const star_list = [
+    star_1,
+    star_1_5,
+    star_2,
+    star_2_5,
+    star_3,
+    star_3_5,
+    star_4,
+    star_4_5,
+    star_5,
+  ];
+// item.star * 2 - 2 => 평점으로 위 index 찾는 공식
   return (
     <>
       <div style={{ display: "flex", margin: "10px 40px" }}>
@@ -54,7 +63,7 @@ const Review: React.FC<{}> = () => {
               width: "340px",
               height: "283px",
               margin: "0 20px 30px 0",
-              overflowY: "auto"
+              overflowY: "auto",
             }}
           >
             {comments.map((item: any, idx: number) => {
@@ -71,35 +80,20 @@ const Review: React.FC<{}> = () => {
                   }}
                   key={idx}
                 >
-                  {item.star % 1 === 0
-                    ? star_list1.map((star, idx) => {
-                        return (
-                          item.star - 1 === idx && (
-                            <div
-                              style={{
-                                backgroundImage: `url(${star_list1[idx]})`,
-                                width: "98px",
-                                height: "18px",
-                              }}
-                              key={idx}
-                            ></div>
-                          )
-                        );
-                      })
-                    : star_list2.map((star, idx) => {
-                        return (
-                          Math.floor(item.star) - 1 === idx && (
-                            <div
-                              style={{
-                                backgroundImage: `url(${star_list2[idx]})`,
-                                width: "98px",
-                                height: "18px",
-                              }}
-                              key={idx}
-                            ></div>
-                          )
-                        );
-                      })}
+                  {star_list.map((star, idx) => {
+                    return (
+                      item.star * 2 - 2 === idx && (
+                        <div
+                          style={{
+                            backgroundImage: `url(${star_list[idx]})`,
+                            width: "98px",
+                            height: "18px",
+                          }}
+                          key={idx}
+                        ></div>
+                      )
+                    );
+                  })}
 
                   <div
                     className="nick_and_time"
