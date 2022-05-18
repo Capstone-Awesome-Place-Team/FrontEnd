@@ -13,6 +13,9 @@ import {
   star_4_5,
   star_5,
 } from "../../static/imgIndex";
+
+import GiveStar from "../restaurant_detail_page/GiveStar"
+import WriteComment from "../restaurant_detail_page/WriteComment"
 import review_pen from "../../static/image/review_pen.svg";
 
 const Review: React.FC<{}> = () => {
@@ -122,15 +125,8 @@ const Review: React.FC<{}> = () => {
               );
             })}
           </div>
-          <div
-            style={{
-              border: "1px solid black",
-              width: "340px",
-              height: "72px",
-            }}
-          >
-            리뷰남기기
-          </div>
+          <GiveStar />
+          <WriteComment />
         </div>
         <div style={{ border: "1px solid black", width: "294px" }}>이미지</div>
       </div>

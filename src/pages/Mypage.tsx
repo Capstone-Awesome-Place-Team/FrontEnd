@@ -24,7 +24,7 @@ const Mypage: React.FC = () => {
     }
   }, []);
   return (
-    <div>
+    <div style={{margin:"13vh 0 0 0"}}>
       <MypageCategory setCategory={setCategory} category={category} />
       {category === "edit_profile" && <Editprofile nickname={info.nickname } is_login={is_login}/>}
       {category === "favorite_list" && <FavoriteList {...info} is_login={is_login}/>}

@@ -52,7 +52,7 @@ const RestaurantDetail: React.FC<{}> = () => {
       {isLoading ? (
         <div>로딩중</div>
       ) : (
-        <div style={{ marginBottom: "150px" }}>
+        <div style={{ marginTop:"80px" }}>
           <PostImg img={detail.img_list[choose]}>
             <ArrowNext
               className="arrow"
