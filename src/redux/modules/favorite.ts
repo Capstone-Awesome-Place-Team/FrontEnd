@@ -99,7 +99,7 @@ const editInfoDB = (info: {
   };
 };
 
-const RemoveInfo:any =()=>{
+const RemoveInfo:any =()=>{ //로그아웃시
   return async function (dispatch:Dispatch){
     dispatch(removeInfo())
   }

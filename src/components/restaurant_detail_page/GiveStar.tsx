@@ -16,7 +16,8 @@ import {
   star_4_5,
   star_5,
 } from "../../static/imgIndex";
-const GiveStar: React.FC = () => {
+const GiveStar: React.FC<{value:number, isValue:Function}> = (props) => {
+  const {value, isValue}= props
   const mycomment = useSelector(
     (state: RootState) => state.restaurant
   ).mycomment;
@@ -25,7 +26,7 @@ const GiveStar: React.FC = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [star, setStar] = useState(0);
   const [isChoose, setIsChoose] = useState(false);
-
+  // const [value, isValue] = useState(0);
   const star_list = [
     star_1,
     star_1_5,
@@ -37,10 +38,12 @@ const GiveStar: React.FC = () => {
     star_4_5,
     star_5,
   ];
+  console.log(value);
   const choose_one = (idx: number) => {
     setStar(idx);
     setIsChoose(true);
     setIsClicked(!isClicked);
+    isValue((idx + 2) / 2);
   };
   return (
     <div className="give_star" style={{ display: "flex" }}>
