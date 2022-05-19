@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import RestaurantMap from "../components/restaurant_detail_page/RestaurantMap";
 import Review from "../components/restaurant_detail_page/Review";
 import { RootState } from "../redux/configStore";
 import { actionCreators as Actions } from "../redux/modules/restaurant";
@@ -16,7 +17,7 @@ const RestaurantDetail: React.FC<{}> = () => {
   const isLogin = localStorage.getItem("token");
   //   console.log(test)
   const detail = useSelector((state: RootState) => state.restaurant);
-  console.log(detail);
+  // console.log(detail);
   const [choose, setChoose] = useState(0); //이미지 선택
   // console.log(r_code)
   //   useEffect(() => {
@@ -178,17 +179,7 @@ const RestaurantDetail: React.FC<{}> = () => {
             <hr />
           </div>
           <Review />
-          <div
-            className="map"
-            style={{
-              width: "660px",
-              height: "413px",
-              border: "1px solid black",
-              margin: "50px auto",
-            }}
-          >
-            지도
-          </div>
+         <RestaurantMap />
         </div>
       )}
     </>
