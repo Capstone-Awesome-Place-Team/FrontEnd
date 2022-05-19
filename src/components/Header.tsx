@@ -31,18 +31,18 @@ const Header: React.FC = (props) => {
         >
           <img onClick={() => navigate("/")} src={awesome} alt=""></img>
           <div style={{ display: "flex", alignItems: "center" }}>
-          {isLogin?.length === undefined && (
+          {isLogin === null && (
               <Box onClick={() => navigate("/signin")}>로그인</Box>
             )}
-            {isLogin?.length===undefined&&<Stick>|</Stick>}
-            {isLogin?.length === undefined && (
+            {isLogin === null&&<Stick>|</Stick>}
+            {isLogin === null && (
               <Box onClick={() => navigate("/signup")}>회원가입</Box>
             )}
             
-            {isLogin?.length && (
+            {isLogin !== null && (
               <Box onClick={() => navigate("/mypage")}>마이페이지</Box>
             )}
-            <img src={header_profile} alt="profile"></img>
+            {isLogin  !== null && <img src={header_profile} alt="profile"></img>}
           </div>
         </div>
       )}
