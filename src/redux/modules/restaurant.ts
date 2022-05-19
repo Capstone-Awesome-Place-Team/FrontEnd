@@ -5,88 +5,132 @@ import { createAction } from "redux-actions";
 const LIKE_FAVORITE = "LIKEFAVORITE";
 const RESTAURANT_DETAIL = "RESTAURANTDETAIL";
 const CANCEL_FAVORITE = "CANCELFAVORITE";
-
-const likeFavorite = createAction(LIKE_FAVORITE, (r_code:number)=>({r_code}))
+const ADD_COMMENT = "ADDCOMMENT";
+const likeFavorite = createAction(LIKE_FAVORITE, (r_code: number) => ({
+  r_code,
+}));
+const addComment = createAction(
+  ADD_COMMENT,
+  (comments: { star: number; title: string; content: string }) => ({ comments })
+);
 const restaurantDetail = createAction(RESTAURANT_DETAIL, (detail: {}) => ({
-    detail,
-  }));
-  const cancelFavorite = createAction(CANCEL_FAVORITE, ()=>({}))
+  detail,
+}));
+const cancelFavorite = createAction(CANCEL_FAVORITE, () => ({}));
 
-const initialState = {
+const initialState: {
+  address: string;
+  comments: [];
+  img_list: [];
+  like: boolean;
+  mycomment: {};
+  options: {};
+  price: number;
+  r_code: number;
+  restaurant_name: string;
+  star:number
+} = {
   address: "",
   comments: [],
   img_list: [],
   like: false,
   mycomment: {
-    star: 0, title: '', content: '', time: ''
+    star: 0,
+    title: "",
+    content: "",
+    time: "",
   },
-  options: {takeout: false, parking: true},
-  price: null,
-  r_code: null,
+  options: { takeout: false, parking: true },
+  price: 0,
+  r_code: 0,
   restaurant_name: "",
   star: 0,
-}
+};
 
-const getResInfoDB = (r_code: string, setIsLoading:Function) => {
-    return async function (dispatch: Dispatch) {
-      try {
-        const res: any = await apis.getResInfo(r_code); //나중에 서버 생기면 넣을것
-        dispatch(restaurantDetail(res));
-        setIsLoading(false);
-        console.log(res);
-      } catch (error: any) {
-        console.log(error.message);
-      }
-    };
-  };
-
-const likeFavoriteDB = (r_code:number)=>{
-    return async function (dispatch:Dispatch){
-      try{
-        const res = await apis.likeFavorite(r_code);
-        dispatch(likeFavorite(r_code));
-        console.log(res);
-      } catch(error){
-        console.log(error);
-      }
+const getResInfoDB = (r_code: string, setIsLoading: Function) => {
+  return async function (dispatch: Dispatch) {
+    try {
+      const res: any = await apis.getResInfo(r_code); //나중에 서버 생기면 넣을것
+      dispatch(restaurantDetail(res));
+      setIsLoading(false);
+      console.log(res);
+    } catch (error: any) {
+      console.log(error.message);
     }
-  }
-  const cancelFavoriteDB = (r_code:number) => {
-    console.log()
-    return async function (dispatch: Dispatch) {
-      try {
-        const res = await apis.cancelFavorite(r_code) 
-        dispatch(cancelFavorite());
-        // console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
   };
+};
+
+const likeFavoriteDB = (r_code: number) => {
+  return async function (dispatch: Dispatch) {
+    try {
+      const res = await apis.likeFavorite(r_code);
+      dispatch(likeFavorite(r_code));
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+const cancelFavoriteDB = (r_code: number) => {
+  // console.log()
+  return async function (dispatch: Dispatch) {
+    try {
+      const res = await apis.cancelFavorite(r_code);
+      dispatch(cancelFavorite());
+      // console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const addReviewDB = (
+  comments: { star: number; title: string; content: string },
+  r_code: number
+) => {
+  return async function (dispatch: Dispatch) {
+    try {
+      const res = await apis.addComment(r_code, comments);
+      console.log(res);
+      dispatch(addComment(comments));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export default function reducer(state = initialState, action: any) {
-    switch (action.type) {
-        case LIKE_FAVORITE:{
-            return {...state,like:true  }
-          }
-          case RESTAURANT_DETAIL: {
-            return {
-              ...action.payload.detail,
-            };
-          }
-          case CANCEL_FAVORITE:{
-            return {
-              ...state, like:false
-            }
-          }
-     
-      default:
-        return state;
+  switch (action.type) {
+    case LIKE_FAVORITE: {
+      return { ...state, like: true };
     }
-  }
+    case RESTAURANT_DETAIL: {
+      return {
+        ...action.payload.detail,
+      };
+    }
+    case CANCEL_FAVORITE: {
+      return {
+        ...state,
+        like: false,
+      };
+    }
+    case ADD_COMMENT: {
+      return {
+        ...state,
+        mycomment: { ...action.payload.comments },
+        comments: [...state.comments, action.payload.comments],
+      };
+    }
 
-  export const actionCreators ={
-    likeFavoriteDB,
-    getResInfoDB,
-    cancelFavoriteDB
+    default:
+      return state;
   }
+}
+
+export const actionCreators = {
+  likeFavoriteDB,
+  getResInfoDB,
+  cancelFavoriteDB,
+  addReviewDB,
+};

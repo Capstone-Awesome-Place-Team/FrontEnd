@@ -1,18 +1,43 @@
-import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../redux/configStore";
 import review_enter from "../../static/image/review_enter.svg";
-const WriteComment: React.FC = () => {
+import { actionCreators as commentActions } from "../../redux/modules/restaurant";
+const WriteComment: React.FC<{ value: number }> = (props) => {
+  const dispatch = useDispatch();
+  const { value } = props;
+
   const redux_comment = useSelector(
-    (state: RootState) => state.restaurant.mycomment
-  );
-  const [comment, setComment] = useState("");
-  const comments = useRef<HTMLTextAreaElement>(null);
+    (state: RootState) => state.restaurant
+  ).mycomment;
+  const r_code = useSelector((state: RootState) => state.restaurant.r_code);
+  const a = useSelector((state: RootState) => state.restaurant);
+  console.log(redux_comment);
+  //   console.log(r_code)
+  //   const [comment, setComment] = useState("");
+  const content = useRef<HTMLTextAreaElement>(null);
+  const title = useRef<HTMLTextAreaElement>(null);
   const isLogin = localStorage.getItem("token");
-  console.log(isLogin);
+
   const Comment_confirm = () => {
-    console.log(comments.current?.value);
+    console.log(content.current?.value, title.current?.value, value);
+    if (
+      content.current?.value.length === 0 ||
+      title.current?.value.length === 0 ||
+      value === 0
+    ) {
+      console.log("평점, 제목과 내용 입력해주세요");
+      alert("평점, 제목과 내용 입력해주세요"); // 나중에 다른걸로 바꿀것, 테스트하기위해 추가
+    } else {
+      console.log("dd");
+      const comments = {
+        star: value,
+        title: title.current!.value,
+        content: content.current!.value,
+      };
+      dispatch(commentActions.addReviewDB(comments, r_code));
+    }
   };
   return (
     <>
@@ -21,7 +46,7 @@ const WriteComment: React.FC = () => {
           <>
             <div style={{ display: "flex" }}>
               <div style={{ margin: "1px 5px" }}>제목: </div>
-              <Title defaultValue={comment}></Title>
+              <Title defaultValue={redux_comment.title} ref={title}></Title>
             </div>
             <div
               style={{
@@ -32,7 +57,10 @@ const WriteComment: React.FC = () => {
                 alignItems: "center",
               }}
             >
-              <TextArea defaultValue={comment} ref={comments}></TextArea>
+              <TextArea
+                defaultValue={redux_comment.title}
+                ref={content}
+              ></TextArea>
               <div
                 style={{
                   backgroundImage: `url(${review_enter})`,
@@ -40,7 +68,7 @@ const WriteComment: React.FC = () => {
                   height: "55px",
                   margin: "0 0 0 10px",
                 }}
-                onClick={() => Comment_confirm()}
+                onClick={Comment_confirm}
               ></div>
             </div>
           </>

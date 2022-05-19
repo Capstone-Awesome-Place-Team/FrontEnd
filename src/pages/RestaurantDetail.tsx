@@ -39,11 +39,11 @@ const RestaurantDetail: React.FC<{}> = () => {
         setChoose(choose + 1);
       }
     }
-    if(step==="prev"){
-        if(choose===0){
-            return;
-        }
-        setChoose(choose-1);
+    if (step === "prev") {
+      if (choose === 0) {
+        return;
+      }
+      setChoose(choose - 1);
     }
   };
 
@@ -52,7 +52,7 @@ const RestaurantDetail: React.FC<{}> = () => {
       {isLoading ? (
         <div>로딩중</div>
       ) : (
-        <div style={{ marginTop:"80px" }}>
+        <div style={{ marginTop: "80px" }}>
           <PostImg img={detail.img_list[choose]}>
             <ArrowNext
               className="arrow"
@@ -123,11 +123,21 @@ const RestaurantDetail: React.FC<{}> = () => {
                 </div>
                 <div
                   className="main_dish"
-                  style={{ fontSize: "15px", fontWeight: "bold", margin:"10px 0" }}
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px 0",
+                  }}
                 >
-                  이 가게에서 많이 시켰어요! ({detail.price.toLocaleString('ko-KR')}원)
+                  이 가게에서 많이 시켰어요! (
+                  {detail.price.toLocaleString("ko-KR")}원)
                 </div>
-                <div className="address" style={{width:"240px", fontSize: "15px",  }}>주소: {detail.address}</div>
+                <div
+                  className="address"
+                  style={{ width: "240px", fontSize: "15px" }}
+                >
+                  주소: {detail.address}
+                </div>
                 <div className="price"></div>
               </div>
               {isLogin === null ? null : detail.like ? (
@@ -164,17 +174,20 @@ const RestaurantDetail: React.FC<{}> = () => {
                 </div>
               )}
             </div>
-          
+
             <hr />
           </div>
           <Review />
-          <div className="map" style={{
-            width:"660px",
-            height:"413px",
-            border: "1px solid black",
-            margin: "50px auto"
-          }}>
-지도
+          <div
+            className="map"
+            style={{
+              width: "660px",
+              height: "413px",
+              border: "1px solid black",
+              margin: "50px auto",
+            }}
+          >
+            지도
           </div>
         </div>
       )}
