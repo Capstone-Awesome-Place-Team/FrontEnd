@@ -16,12 +16,12 @@ const KakaoMap: React.FC = () => {
   const Url = useParams().currentInput!;
   const result = useSelector((state: RootState) => state.main.search_list);
   const isSearched = useSelector((state: RootState) => state.main.isSearched);
-  // console.log(result);
+  console.log(result);
   // let test_done_list: any[] = [];
   let [bigger, setBigger] = useState<boolean>(false);
   const [test, setTest] = useState(true);
   // const [resetPage, setResetPage]= useState(true)
-  let array: any = [];
+
   // const test_list = [
   //   { title: "동원참치", address: "서울특별시 종로구 인사동7길 37" },
   //   { title: "에코밥상", address: "서울특별시 종로구 사직로 127-14" },
