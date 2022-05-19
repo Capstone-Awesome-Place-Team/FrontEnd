@@ -1,7 +1,7 @@
 import { apis } from "../../shared/api/apis";
 import { Dispatch } from "redux";
 import { createAction } from "redux-actions";
-
+import { RestaurantType } from "../../types/interfaces";
 const LIKE_FAVORITE = "LIKEFAVORITE";
 const RESTAURANT_DETAIL = "RESTAURANTDETAIL";
 const CANCEL_FAVORITE = "CANCELFAVORITE";
@@ -18,18 +18,7 @@ const restaurantDetail = createAction(RESTAURANT_DETAIL, (detail: {}) => ({
 }));
 const cancelFavorite = createAction(CANCEL_FAVORITE, () => ({}));
 
-const initialState: {
-  address: string;
-  comments: [];
-  img_list: [];
-  like: boolean;
-  mycomment: {};
-  options: {};
-  price: number;
-  r_code: number;
-  restaurant_name: string;
-  star:number
-} = {
+const initialState: RestaurantType = {
   address: "",
   comments: [],
   img_list: [],
@@ -91,8 +80,8 @@ const addReviewDB = (
   return async function (dispatch: Dispatch) {
     try {
       const res = await apis.addComment(r_code, comments);
-      console.log(res);
-      dispatch(addComment(comments));
+      document.location.reload();
+      // dispatch(addComment(comments)); //새로고침을 하기때문에 없앰
     } catch (error) {
       console.log(error);
     }

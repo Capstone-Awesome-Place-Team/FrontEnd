@@ -13,6 +13,18 @@ export interface PostPropsType {
   isMap:boolean;
   }
 
+  export interface RestaurantType {
+    address: string;
+    comments: [];
+    img_list: [];
+    like: boolean;
+    mycomment: {};
+    options: {};
+    price: number;
+    r_code: number;
+    restaurant_name: string;
+    star:number
+  }
   export interface MypageCategoryType {
     category : string,
     setCategory :Function,
