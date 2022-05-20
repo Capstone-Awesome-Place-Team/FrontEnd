@@ -105,7 +105,7 @@ const ListBox = styled.div`
   margin: auto;
   border-radius: 10px;
   @media(max-width:576px){
-    width: 330px;
+    width: 90%;
   height: 130px;
   }
 `;
@@ -115,6 +115,10 @@ const ScrollBarBox = styled.div`
   height: 180px;
   overflow-y: auto;
   overflow-x: hidden;
+  @media(max-width:576px){
+    width:99%;
+    height:120px;
+  }
   ::-webkit-scrollbar {
     width: 9px;
   }
