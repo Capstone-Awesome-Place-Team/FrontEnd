@@ -17,9 +17,9 @@ ReactDOM.render(
   <div style={{ backgroundColor:"#E5E5E5", width:"100vw",height:"100vh", }}>
   <Global>
     <GlobalStyle />
-    <BodyGlobal>
+    {/* <BodyGlobal> */}
     <App />
-    </BodyGlobal>
+    {/* </BodyGlobal> */}
     </Global>
     </div>
     </ScrollToTop>
