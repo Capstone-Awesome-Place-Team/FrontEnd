@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { actionCreators as searchActions } from "../../redux/modules/main";
-import sushi from "../../static/image/sushi.svg";
+import result_background from "../../static/image/result_background.png";
 import chosen_guide from "../../static/image/chosen_guide.svg";
 import restart_bttn from "../../static/image/restart.svg";
 import cantchoose_font from "../../static/image/cantchoose_font.svg";
@@ -129,7 +129,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
             오늘은 {chosenOne} 맛집가자!
           </p>
           <div style={{ position: "relative" }}>
-            <img src={sushi} alt=""></img>
+            <img src={result_background} alt=""></img>
             <div
               style={{
                 position: "absolute",

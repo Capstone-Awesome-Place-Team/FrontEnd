@@ -1,7 +1,7 @@
 import React, { ImgHTMLAttributes, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import game_choose from "../../static/image/game_choose.svg";
-import random_game from "../../static/image/random_game.jpg";
+import random_game from "../../static/image/random_game.svg";
 import random_game_font from "../../static/image/random_game_font.svg";
 import game_choose_font from "../../static/image/game_choose_font.svg";
 import styled from "styled-components";
@@ -28,7 +28,7 @@ const Entertains: React.FC<{ chooseGame: Function }> = (props) => {
           ></GameImages>
         </div>
         <div style={{ textAlign: "center" }}>
-          <img src={random_game_font} alt=""></img>
+          <img src={random_game_font} alt="" ></img>
           <GameImages
             Img={random_game}
             onClick={() => {
