@@ -12,7 +12,7 @@ const Main: React.FC<{chooseGame:Function}> = (props) => {
   const {chooseGame} = props
  
   return (
-    <div>
+    <div style={{marginBottom:"0px"}}>
       <SearchArea></SearchArea>
       <Entertains chooseGame={chooseGame}/> 
       <hr />
