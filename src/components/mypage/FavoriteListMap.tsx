@@ -98,7 +98,7 @@ const ListBox = styled.div`
     width: 90%;
     height: 130px;
   }
-  @media(max-height:700px){
+  @media (max-height: 700px) {
     height: 120px;
   }
 `;
@@ -112,7 +112,7 @@ const ScrollBarBox = styled.div`
     width: 99%;
     height: 120px;
   }
-  @media(max-height:700px){
+  @media (max-height: 700px) {
     height: 110px;
   }
   ::-webkit-scrollbar {
@@ -141,8 +141,8 @@ const NoList = styled.div`
   justify-content: center;
   height: 150px;
 
-  @media (max-width:576px){
-    height:100px;
+  @media (max-width: 576px) {
+    height: 100px;
   }
 `;
 

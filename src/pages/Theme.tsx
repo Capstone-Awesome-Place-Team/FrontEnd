@@ -16,24 +16,21 @@ const Theme = () => {
 
   console.log(theme_detail_list);
   useEffect(() => {
-    if(isLoading){
+    if (isLoading) {
       dispatch(mainActions.getThemeDetail(theme_title, setIsLoading));
-      console.log("완료")
+      console.log("완료");
       // setIsLoading(false)
+    } else {
     }
-    else{
-
-    }  
-  
   }, []);
 
   // console.log(theme_detail_list.restaurant_info[0].options.takeout)
   return (
     <div>
       {isLoading ? (
-        <div style={{margin:"100px"}}>로딩중</div>
+        <div style={{ margin: "100px" }}>로딩중</div>
       ) : (
-        <div style={{margin:"100px 0"}}>
+        <div style={{ margin: "100px 0" }}>
           <p
             style={{
               width: "fit-content",
@@ -96,15 +93,7 @@ const Theme = () => {
                 >
                   주소: <span style={{ color: "#4f4f4f" }}>{item.address}</span>
                 </p>
-                <p
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    fontFamily: "IBM Plex Sans KR",
-                  }}
-                >
-                  {item.intro}
-                </p>
+                <Intro>{item.intro}</Intro>
                 <br />
                 <hr />
               </div>
@@ -150,6 +139,15 @@ const KeyWord = styled.div`
   }
   &:nth-child(2) {
     margin: 0 20px 10px 7.5px;
+  }
+`;
+
+const Intro = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+  font-family: IBM Plex Sans KR;
+  @media(max-width:576px){
+    font-size:15px;
   }
 `;
 

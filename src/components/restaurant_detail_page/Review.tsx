@@ -17,6 +17,7 @@ import {
 import GiveStar from "../restaurant_detail_page/GiveStar";
 import WriteComment from "../restaurant_detail_page/WriteComment";
 import review_pen from "../../static/image/review_pen.svg";
+import review_background from "../../static/image/review_background.svg";
 
 const Review: React.FC<{}> = () => {
   const [value, isValue] = useState(0);
@@ -126,7 +127,7 @@ const Review: React.FC<{}> = () => {
           <GiveStar isValue={isValue} value={value} />
           <WriteComment value={value} />
         </div>
-        <div style={{ border: "1px solid black", width: "294px" }}>이미지</div>
+        <div style={{ width: "294px", backgroundImage: `url(${review_background})` }}></div>
       </div>
     </>
   );

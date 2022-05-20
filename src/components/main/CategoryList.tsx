@@ -2,9 +2,24 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { actionCreators as mainActions } from "../../redux/modules/main";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import category_font from "../../static/image/category_font.svg";
-import { useNavigate } from "react-router-dom";
+import { c_sushi,
+  soup,
+  noodle,
+  meat,
+  korean,
+  jokbal,
+  japanese,
+  chinese,
+  chicken,
+  buffet,
+  boonsik ,
+  american} from "../../static/imgIndex"
+
+
+
 
 
 const CategoryList: React.FC<{}> = () => {
@@ -25,6 +40,21 @@ const CategoryList: React.FC<{}> = () => {
     "분식",
   ];
 
+ const category = [
+  korean,
+  chinese,
+  japanese,
+  buffet,
+  american,
+  soup,
+  jokbal,
+  c_sushi,
+  meat,
+  noodle,
+  chicken ,
+  boonsik
+ ]
+
   return (
     <>
       <Font>
@@ -35,7 +65,7 @@ const CategoryList: React.FC<{}> = () => {
           {arr.map((item, idx) => {
             return (
               <div key={idx} onClick={()=>dispatch(mainActions.postSearchDB(item, navigate))}>
-                <Box></Box>
+                <Box Img = {category[idx]}></Box>
                 <P>{item}</P>
               </div>
             );
@@ -50,6 +80,7 @@ const FlexWrap = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
+  margin-bottom:40px;
 `;
 const SmallWrap = styled.div`
   display: flex;
@@ -76,15 +107,17 @@ const FontImg = styled.img`
 const Box = styled.div`
   width: 82px;
   height: 82px;
-  background: gray;
+  background-image: ${(props:{Img:string})=> `url(${props.Img})`};
   margin: 0 12px;
   @media (max-width: 576px) {
-    width: calc(82px * 0.8);
-    height: calc(82px * 0.8);
+    width: 65px;
+    height:65px;
+    background-size:contain;
   }
 `;
 const P = styled.p`
   margin: 3px 0 15px;
+  font-size:24px;
   @media (max-width: 576px) {
     font-size: 15px;
   }
