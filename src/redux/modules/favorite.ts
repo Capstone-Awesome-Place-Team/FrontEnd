@@ -60,9 +60,9 @@ const getFavoriteListDB = () => {
   return async function (dispatch: Dispatch) {
     try {
       const res:any = await apis.getFavorite(); //나중에 서버 생기면 넣을것
-      dispatch(getFavoriteList(dummyfiles));
+      // dispatch(getFavoriteList(dummyfiles));
       console.log(res);
-      // dispatch(getFavoriteList(res));
+      dispatch(getFavoriteList(res));
     } catch (error: any) {
       console.log(error.message);
     }
