@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import header_profile from "../static/image/header_profile.png";
-import awesome from "../static/image/awesome_place_font.svg"
+import awesome from "../static/image/awesome_place_font.svg";
 
 const Header: React.FC = (props) => {
   const navigate = useNavigate();
@@ -31,18 +31,18 @@ const Header: React.FC = (props) => {
         >
           <img onClick={() => navigate("/")} src={awesome} alt=""></img>
           <div style={{ display: "flex", alignItems: "center" }}>
-          {isLogin === null && (
+            {isLogin === null && (
               <Box onClick={() => navigate("/signin")}>로그인</Box>
             )}
-            {isLogin === null&&<Stick>|</Stick>}
+            {isLogin === null && <Stick>|</Stick>}
             {isLogin === null && (
               <Box onClick={() => navigate("/signup")}>회원가입</Box>
             )}
-            
+
             {isLogin !== null && (
               <Box onClick={() => navigate("/mypage")}>마이페이지</Box>
             )}
-            {isLogin  !== null && <img src={header_profile} alt="profile"></img>}
+            {isLogin !== null && <img src={header_profile} alt="profile"></img>}
           </div>
         </div>
       )}
@@ -52,19 +52,18 @@ const Header: React.FC = (props) => {
 
 const Box = styled.div`
   margin: 0px 5px;
-  background-image: url(${(props:any)=>props.imgUrl});
+  background-image: url(${(props: any) => props.imgUrl});
   &:hover {
     cursor: pointer;
   }
-  @media(max-width:576px){
-    font-size:18px;
-    
+  @media (max-width: 576px) {
+    font-size: 18px;
   }
 `;
 const Stick = styled.span`
-  @media(max-width:576px){
-    font-size:18px;
+  @media (max-width: 576px) {
+    font-size: 18px;
   }
-`
+`;
 
 export default Header;
