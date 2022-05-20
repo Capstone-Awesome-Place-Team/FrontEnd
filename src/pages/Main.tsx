@@ -26,7 +26,7 @@ const Main: React.FC<{ chooseGame: Function }> = (props) => {
 
 const Div = styled.div`
   @media (max-width: 576px) {
-    margin-bottom: 40px;
+    margin-bottom: 80px;
   }
 `;
 export default Main;
