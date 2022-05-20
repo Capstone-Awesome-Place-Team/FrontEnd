@@ -91,9 +91,10 @@ const Map = styled.div`
   height: 325px;
   margin: 0 auto;
   @media(max-width:576px){
-    background-size: 300px 243px;
-    width:300px;
-    height: 243px;
+    background-size: 330px 267px;
+    width:330px;
+    height: 267px;
+    margin: 17px auto;
   }
 `;
 

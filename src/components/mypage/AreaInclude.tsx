@@ -122,6 +122,11 @@ const Eunpyeong = styled.img.attrs(() => ({
   visibility: ${(props: { includeArea: boolean }) =>
     props.includeArea ? `visible;` : `hidden;`};
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 120px;
+  top: 55px;
+  width:15px;
+  }
 `;
 
 const Gangbuk = styled.img.attrs(() => ({
@@ -133,6 +138,11 @@ const Gangbuk = styled.img.attrs(() => ({
   visibility: ${(props: { includeArea: boolean }) =>
     props.includeArea ? `visible;` : `hidden;`};
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 160px;
+  top: 35px;
+  width:15px;
+  }
 `;
 
 const Dobong = styled.img.attrs(() => ({
@@ -144,6 +154,11 @@ const Dobong = styled.img.attrs(() => ({
   visibility: ${(props: { includeArea: boolean }) =>
     props.includeArea ? `visible;` : `hidden;`};
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 170px;
+  top: 10px;
+  width:15px;
+  }
 `;
 
 const Nowon = styled.img.attrs(() => ({
@@ -155,6 +170,11 @@ const Nowon = styled.img.attrs(() => ({
   visibility: ${(props: { includeArea: boolean }) =>
     props.includeArea ? `visible;` : `hidden;`};
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 190px;
+  top: 30px;
+  width:15px;
+  }
 `;
 
 const Gangseo = styled.img.attrs(() => ({
@@ -166,6 +186,11 @@ const Gangseo = styled.img.attrs(() => ({
   visibility: ${(props: { includeArea: boolean }) =>
     props.includeArea ? `visible;` : `hidden;`};
   cursor: pointer;
+  @media (max-width:576px) {
+    left: -30px;
+  top: 110px;
+  width:15px;
+  }
 `;
 const Seongbuk = styled.img.attrs(() => ({
   src: mark,
@@ -176,6 +201,11 @@ const Seongbuk = styled.img.attrs(() => ({
   visibility: ${(props: { includeArea: boolean }) =>
     props.includeArea ? `visible;` : `hidden;`};
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 120px;
+  top: 75px;
+  width:15px;
+  }
 `;
 
 const Seodeamon = styled.img.attrs(() => ({
@@ -187,6 +217,11 @@ const Seodeamon = styled.img.attrs(() => ({
   visibility: ${(props: { includeArea: boolean }) =>
     props.includeArea ? `visible;` : `hidden;`};
   cursor: pointer;
+  @media (max-width:576px) {
+    left:40px;
+  top: 95px;
+  width:15px;
+  }
 `;
 const Mapo = styled.img.attrs(() => ({
   src: mark,
@@ -197,6 +232,11 @@ const Mapo = styled.img.attrs(() => ({
   left: -30px;
   top: 150px;
   cursor: pointer;
+  @media (max-width:576px) {
+    left:0px;
+  top: 120px;
+  width:15px;
+  }
 `;
 const Youngsan = styled.img.attrs(() => ({
   src: mark,
@@ -207,6 +247,11 @@ const Youngsan = styled.img.attrs(() => ({
   left: 0px;
   top: 170px;
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 40px;
+  top: 140px;
+  width:15px;
+  }
 `;
 const Joonggu = styled.img.attrs(() => ({
   src: mark,
@@ -217,6 +262,11 @@ const Joonggu = styled.img.attrs(() => ({
   left: 0px;
   top: 140px;
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 45px;
+  top: 115px;
+  width:15px;
+  }
 `;
 const Dongdeamon = styled.img.attrs(() => ({
   src: mark,
@@ -227,6 +277,11 @@ const Dongdeamon = styled.img.attrs(() => ({
   left: 25px;
   top: 110px;
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 70px;
+  top: 90px;
+  width:15px;
+  }
 `;
 const Seongdong = styled.img.attrs(() => ({
   src: mark,
@@ -238,6 +293,11 @@ const Seongdong = styled.img.attrs(() => ({
   top: 150px;
   /* visibility: includedArea.includes("성동구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 50px;
+  top: 120px;
+  width:15px;
+  }
 `;
 const Joongrang = styled.img.attrs(() => ({
   src: mark,
@@ -249,6 +309,11 @@ const Joongrang = styled.img.attrs(() => ({
   top: 100px;
   /* visibility: includedArea.includes("중랑구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 70px;
+  top: 75px;
+  width:15px;
+  }
 `;
 const Gwangjin = styled.img.attrs(() => ({
   src: mark,
@@ -260,6 +325,11 @@ const Gwangjin = styled.img.attrs(() => ({
   top: 150px;
   /* visibility: includedArea.includes("광진구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left: 50px;
+  top: 120px;
+  width:15px;
+  }
 `;
 const Yangcheon = styled.img.attrs(() => ({
   src: mark,
@@ -268,9 +338,14 @@ const Yangcheon = styled.img.attrs(() => ({
     props.includeArea ? `visible;` : `hidden;`};
   position: relative;
   left: -270px;
-  top: 190px;
+  top: 180px;
   /* visibility: includedArea.includes("양천구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left: -140px;
+  top: 150px;
+  width:15px;
+  }
 `;
 const Yeongdeungpo = styled.img.attrs(() => ({
   src: mark,
@@ -282,6 +357,11 @@ const Yeongdeungpo = styled.img.attrs(() => ({
   top: 190px;
   /* visibility: includedArea.includes("영등포구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left: -120px;
+  top: 150px;
+  width:15px;
+  }
 `;
 const Dongjak = styled.img.attrs(() => ({
   src: mark,
@@ -293,6 +373,11 @@ const Dongjak = styled.img.attrs(() => ({
   top: 170px;
   /* visibility: includedArea.includes("동작구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:-100px;
+  top: 170px;
+  width:15px;
+  }
 `;
 const Geumcheon = styled.img.attrs(() => ({
   src: mark,
@@ -301,9 +386,14 @@ const Geumcheon = styled.img.attrs(() => ({
     props.includeArea ? `visible;` : `hidden;`};
   position: relative;
   left: 90px;
-  top: 220px;
+  top: 200px;
   /* visibility: includedArea.includes("금천구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:-160px;
+  top: 200px;
+  width:15px;
+  }
 `;
 const Gwanak = styled.img.attrs(() => ({
   src: mark,
@@ -312,9 +402,14 @@ const Gwanak = styled.img.attrs(() => ({
     props.includeArea ? `visible;` : `hidden;`};
   position: relative;
   left: 110px;
-  top: 220px;
+  top: 200px;
   /* visibility: includedArea.includes("관악구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:-140px;
+  top: 200px;
+  width:15px;
+  }
 `;
 const Seocho = styled.img.attrs(() => ({
   src: mark,
@@ -323,9 +418,14 @@ const Seocho = styled.img.attrs(() => ({
     props.includeArea ? `visible;` : `hidden;`};
   position: relative;
   left: 145px;
-  top: 190px;
+  top: 180px;
   /* visibility: includedArea.includes("서초구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:-100px;
+  top: 180px;
+  width:15px;
+  }
 `;
 const Gangnam = styled.img.attrs(() => ({
   src: mark,
@@ -334,9 +434,14 @@ const Gangnam = styled.img.attrs(() => ({
     props.includeArea ? `visible;` : `hidden;`};
   position: relative;
   left: 170px;
-  top: 180px;
+  top: 170px;
   /* visibility: includedArea.includes("강남구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:-80px;
+  top: 180px;
+  width:15px;
+  }
 `;
 const Songpa = styled.img.attrs(() => ({
   src: mark,
@@ -345,9 +450,14 @@ const Songpa = styled.img.attrs(() => ({
     props.includeArea ? `visible;` : `hidden;`};
   position: relative;
   left: 200px;
-  top: 170px;
+  top: 150px;
   /* visibility: includedArea.includes("송파구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:-50px;
+  top: 160px;
+  width:15px;
+  }
 `;
 const Gangdong = styled.img.attrs(() => ({
   src: mark,
@@ -356,9 +466,14 @@ const Gangdong = styled.img.attrs(() => ({
     props.includeArea ? `visible;` : `hidden;`};
   position: relative;
   left: 210px;
-  top: 120px;
+  top: 100px;
   /* visibility: includedArea.includes("강동구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:300px;
+  top: 90px;
+  width:15px;
+  }
 `;
 const Jongro = styled.img.attrs(() => ({
   src: mark,
@@ -370,6 +485,11 @@ const Jongro = styled.img.attrs(() => ({
   top: 70px;
   /* visibility: includedArea.includes("종로구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:140px;
+  top:50px;
+  width:15px;
+  }
 `;
 
 const Guro = styled.img.attrs(() => ({
@@ -382,6 +502,11 @@ const Guro = styled.img.attrs(() => ({
   top: 180px;
   /* visibility: includedArea.includes("구로구") ? "visible" : "hidden", */
   cursor: pointer;
+  @media (max-width:576px) {
+    left:20px;
+  top: 150px;
+  width:15px;
+  }
 `;
 
 export default AreaInclude;
