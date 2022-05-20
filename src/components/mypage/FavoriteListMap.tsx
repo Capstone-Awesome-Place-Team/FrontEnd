@@ -45,18 +45,8 @@ const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
                 })
               ) : (
                 <div style={{ textAlign: "center" }}>
-                  <p>지역을 클릭하여 저장한 맛집 정보를 확인할 수 있어요!</p>
-                  <div
-                    style={{
-                      display: "flex",
-                      fontSize: "20px",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      height: "150px",
-                    }}
-                  >
-                    리스트가 없습니다.
-                  </div>
+                  <P>지역을 클릭하여 저장한 맛집 정보를 확인할 수 있어요!</P>
+                  <NoList>리스트가 없습니다.</NoList>
                 </div>
               )}
             </ScrollBarBox>
@@ -77,10 +67,10 @@ const Container = styled.div`
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0 0 20px 20px;
   margin: 0 auto;
-  @media(max-width:576px){
-    width:100%;
-    border:none;
-    box-shadow:none;
+  @media (max-width: 576px) {
+    width: 100%;
+    border: none;
+    box-shadow: none;
   }
 `;
 
@@ -90,9 +80,9 @@ const Map = styled.div`
   width: 400px;
   height: 325px;
   margin: 0 auto;
-  @media(max-width:576px){
+  @media (max-width: 576px) {
     background-size: 330px 267px;
-    width:330px;
+    width: 330px;
     height: 267px;
     margin: 17px auto;
   }
@@ -104,9 +94,12 @@ const ListBox = styled.div`
   height: 190px;
   margin: auto;
   border-radius: 10px;
-  @media(max-width:576px){
+  @media (max-width: 576px) {
     width: 90%;
-  height: 130px;
+    height: 130px;
+  }
+  @media(max-height:700px){
+    height: 120px;
   }
 `;
 const ScrollBarBox = styled.div`
@@ -115,9 +108,12 @@ const ScrollBarBox = styled.div`
   height: 180px;
   overflow-y: auto;
   overflow-x: hidden;
-  @media(max-width:576px){
-    width:99%;
-    height:120px;
+  @media (max-width: 576px) {
+    width: 99%;
+    height: 120px;
+  }
+  @media(max-height:700px){
+    height: 110px;
   }
   ::-webkit-scrollbar {
     width: 9px;
@@ -136,5 +132,23 @@ const ScrollBarBox = styled.div`
 const ImgWrap = styled.div`
   padding: 20px;
   text-align: center;
+`;
+
+const NoList = styled.div`
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+
+  @media (max-width:576px){
+    height:100px;
+  }
+`;
+
+const P = styled.p`
+  @media (max-width: 576px) {
+    font-size: 13px;
+  }
 `;
 export default FavoriteListMap;
