@@ -52,7 +52,8 @@ const RandomGame: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
   };
 
   const searching = (chosenOne: string) => {
-    dispatch(searchActions.postSearchDB(chosenOne, navigate));
+    navigate(`/list/${chosenOne}`)
+    // dispatch(searchActions.postSearchDB(chosenOne, navigate));
     setOpenModal(false);
   };
 
