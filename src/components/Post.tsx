@@ -24,11 +24,7 @@ const Post: React.FC<PostPropsType> = (props) => {
         <RestaurantName className="restaurant_name" isMap={props.isMap}>
           {props.restaurant_name}
         </RestaurantName>
-        <Address
-          className="address"
-        >
-          {props.address}
-        </Address>
+        <Address className="address">{props.address}</Address>
       </div>
       {props.isMap ? null : (
         <div className="like" style={{ display: "flex", alignItems: "center" }}>
@@ -60,14 +56,14 @@ const Address = styled.div`
   color: #9c9c9c;
   font-size: 15px;
   font-weight: bold;
-  @media(max-width:576px){
+  @media (max-width: 576px) {
     width: 200px; //
   }
 `;
 const HeartImg = styled.img`
-  @media(max-width:576px){
-    width:27px;
-    height:25px;
+  @media (max-width: 576px) {
+    width: 27px;
+    height: 25px;
   }
 `;
 export default Post;

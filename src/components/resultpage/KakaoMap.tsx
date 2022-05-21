@@ -37,10 +37,11 @@ const KakaoMap: React.FC = () => {
   });
   useEffect(() => {
     // console.log(isSearched);
-    if (!isSearched) {
+    if (result.length===0) {
       // 새로고침시 리덕스초기화로 isSearched는 false가 되어 그때 다시 DB요청
-      dispatch(MainActions.postSearchDB(Url, navigate));
+      // dispatch(MainActions.postSearchDB(Url, navigate));
     } else {
+      console.log("dd")
       let array: any = [];
 
       let container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
@@ -204,7 +205,7 @@ const KakaoMap: React.FC = () => {
       //   }
       // }, 300);
     }
-  }, [result]); //result 리스트가 바뀔때 맵초기화하여 다시 마크업, 없으면 업데이트가 안됨
+  }, [result.length]); //result 리스트가 바뀔때 맵초기화하여 다시 마크업, 없으면 업데이트가 안됨
 
   return (
     <>

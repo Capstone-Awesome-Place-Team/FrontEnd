@@ -6,6 +6,7 @@ const LIKE_FAVORITE = "LIKEFAVORITE";
 const RESTAURANT_DETAIL = "RESTAURANTDETAIL";
 const CANCEL_FAVORITE = "CANCELFAVORITE";
 const ADD_COMMENT = "ADDCOMMENT";
+const DELETE_RESTAURANT = "DELETERESTAURANT"
 const likeFavorite = createAction(LIKE_FAVORITE, (r_code: number) => ({
   r_code,
 }));
@@ -17,6 +18,7 @@ const restaurantDetail = createAction(RESTAURANT_DETAIL, (detail: {}) => ({
   detail,
 }));
 const cancelFavorite = createAction(CANCEL_FAVORITE, () => ({}));
+const deleteRestaurantInfo = createAction(DELETE_RESTAURANT,()=>({}))
 
 const initialState: RestaurantType = {
   address: "",
@@ -36,12 +38,12 @@ const initialState: RestaurantType = {
   star: 0,
 };
 
-const getResInfoDB = (r_code: string, setIsLoading: Function) => {
+const getResInfoDB = (r_code: string) => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getResInfo(r_code); //나중에 서버 생기면 넣을것
       dispatch(restaurantDetail(res));
-      setIsLoading(false);
+     
       console.log(res);
     } catch (error: any) {
       console.log(error.message);
@@ -88,6 +90,9 @@ const addReviewDB = (
   };
 };
 
+
+
+
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
     case LIKE_FAVORITE: {
@@ -111,6 +116,25 @@ export default function reducer(state = initialState, action: any) {
         comments: [...state.comments, action.payload.comments],
       };
     }
+    case DELETE_RESTAURANT:{
+      return{
+        address: "",
+        comments: [],
+        img_list: [],
+        like: false,
+        mycomment: {
+          star: 0,
+          title: "",
+          content: "",
+          time: "",
+        },
+        options: { takeout: false, parking: true },
+        price: 0,
+        r_code: 0,
+        restaurant_name: "",
+        star: 0,
+      }
+    }
 
     default:
       return state;
@@ -122,4 +146,5 @@ export const actionCreators = {
   getResInfoDB,
   cancelFavoriteDB,
   addReviewDB,
+  deleteRestaurantInfo
 };

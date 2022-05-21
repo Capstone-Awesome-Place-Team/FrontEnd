@@ -6,13 +6,14 @@ import FavoriteFilter from "./FavoriteFilter";
 //image
 import prev from "../../static/image/arrow-prev.svg";
 import next from "../../static/image/arrow-next.svg";
-
+import { useNavigate } from "react-router-dom";
 
 const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   const list = props.like_list;
+  const navigate = useNavigate();
   const [selected, setSelected] = useState("전체");
   const [current_page_count, setPageCount] = useState(0); // 페이지를 넘길때마다 증가할수, 초기값 1 페이지로 시작
-  const [isActive, setActive] =useState(false);
+  const [isActive, setActive] = useState(false);
   //useSelector 로 내찜목록 정보 가져오기
   //스피너 처리 나중에할것
 
@@ -35,13 +36,11 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
     setPageCount((prev) => prev - 1);
   };
 
-
-  const closeDropDown= () =>{
-    if(isActive===true){
-      setActive(false)
-     
+  const closeDropDown = () => {
+    if (isActive === true) {
+      setActive(false);
     }
-  }
+  };
 
   const post = () => {
     const result = [];
@@ -52,10 +51,13 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
         }
 
         result.push(
-          <React.Fragment key={list[i].r_code}>
-            <Post {...list[i]} isMap={false}/>
+          <div
+            key={list[i].r_code}
+            onClick={() => navigate(`/restaurant/${list[i].r_code}`)}
+          >
+            <Post {...list[i]} isMap={false} />
             <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
-          </React.Fragment>
+          </div>
         );
       }
     } else {
@@ -71,10 +73,13 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
           break;
         }
         result.push(
-          <React.Fragment key={filteredlist[i].r_code}>
-            <Post {...filteredlist[i]} isMap={false}/>
+          <div
+            key={filteredlist[i].r_code}
+            onClick={() => navigate(`/restaurant/${filteredlist[i].r_code}`)}
+          >
+            <Post {...filteredlist[i]} isMap={false} />
             <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
-          </React.Fragment>
+          </div>
         );
       }
     }
@@ -83,7 +88,10 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
   };
 
   return (
-    <Container minHeight={props.is_login ? true : false} onClick={()=>closeDropDown()}>
+    <Container
+      minHeight={props.is_login ? true : false}
+      onClick={() => closeDropDown()}
+    >
       <div
         style={{
           display: "flex",
@@ -118,13 +126,12 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
           로그인후 이용가능합니다
         </div>
       )}
-  
+
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           height: "40px",
-       
         }}
       >
         <img
@@ -162,10 +169,10 @@ const Container = styled.div`
   border-radius: 0 0 20px 20px;
   // padding: "5px",
   margin: auto;
-  @media(max-width:576px){
-    border:none;
-    box-shadow:none;
-    width:100%;
+  @media (max-width: 576px) {
+    border: none;
+    box-shadow: none;
+    width: 100%;
   }
 `;
 

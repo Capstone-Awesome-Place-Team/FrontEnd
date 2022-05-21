@@ -2,6 +2,7 @@ import react, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Spinner from "../components/Spinner";
 import { RootState } from "../redux/configStore";
 import { actionCreators as mainActions } from "../redux/modules/main";
 
@@ -14,21 +15,20 @@ const Theme = () => {
   ).theme_detail;
   const theme_title = useParams().theme_title!;
 
-  console.log(theme_detail_list);
+  console.log();
   useEffect(() => {
-    if (isLoading) {
-      dispatch(mainActions.getThemeDetail(theme_title, setIsLoading));
-      console.log("완료");
+    if (Object.keys(theme_detail_list).length===0) {
+      dispatch(mainActions.getThemeDetail(theme_title));
       // setIsLoading(false)
-    } else {
-    }
+    } 
+    return (()=> dispatch(mainActions.deleteSearch()))
   }, []);
 
   // console.log(theme_detail_list.restaurant_info[0].options.takeout)
   return (
     <div>
-      {isLoading ? (
-        <div style={{ margin: "100px" }}>로딩중</div>
+      {Object.keys(theme_detail_list).length===0 ? (
+        <Spinner />
       ) : (
         <div style={{ margin: "100px 0" }}>
           <p
