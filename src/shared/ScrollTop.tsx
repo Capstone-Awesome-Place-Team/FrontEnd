@@ -5,7 +5,7 @@ const ScrollToTop: React.FC = (props) =>{
   const { pathname } = useLocation();
 
   useEffect(() => {
-    document.getElementById('scrollbar')!.scrollTo(0, 0);
+    // document.getElementById('scrollbar')!.scrollTo(0, 0);
   }, [pathname]);
 
   return <>{props.children}</>;
