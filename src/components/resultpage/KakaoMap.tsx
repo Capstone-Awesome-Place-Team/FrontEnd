@@ -208,9 +208,7 @@ const KakaoMap: React.FC = () => {
 
   return (
     <>
-      <H2 style={{  }}>
-        검색결과 음식점 리스트를 지도로 한눈에
-      </H2>
+      <H2 style={{}}>검색결과 음식점 리스트를 지도로 한눈에</H2>
 
       <MapWrap bigger={bigger}>
         <MapBtn onClick={() => setBigger(!bigger)}>
@@ -239,12 +237,13 @@ const MapBtn = styled.div`
 
 const MapWrap = styled.div`
   overflow: auto;
-  width:90%;
+  width: 90%;
   height: ${(props: { bigger: boolean }) => (props.bigger ? "490px" : "200px")};
   border: 2px solid black;
   margin: 10px auto;
-  @media(max-width:576px){
-    height: ${(props: { bigger: boolean }) => (props.bigger ? "400px" : "200px")};
+  @media (max-width: 576px) {
+    height: ${(props: { bigger: boolean }) =>
+      props.bigger ? "400px" : "200px"};
   }
 `;
 
@@ -253,16 +252,17 @@ const Map = styled.div`
   height: 400px;
   margin: 20px auto;
   border: 1px solid black;
-  @media(max-width:576px){
+  @media (max-width: 576px) {
     width: 90%;
-    height: ${(props: { bigger: boolean }) => (props.bigger ? "300px" : "200px")};
+    height: ${(props: { bigger: boolean }) =>
+      props.bigger ? "300px" : "200px"};
   }
 `;
 const H2 = styled.h2`
   width: fit-content;
-   margin: 20px auto 10px auto;
-   @media (max-width:576px){
-     font-size:20px;
-   }
-`
+  margin: 20px auto 10px auto;
+  @media (max-width: 576px) {
+    font-size: 20px;
+  }
+`;
 export default KakaoMap;

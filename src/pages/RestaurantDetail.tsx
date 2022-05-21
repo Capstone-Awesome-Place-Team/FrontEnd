@@ -179,7 +179,7 @@ const RestaurantDetail: React.FC<{}> = () => {
             <hr />
           </div>
           <Review />
-         <RestaurantMap />
+          <RestaurantMap />
         </div>
       )}
     </>
@@ -187,7 +187,7 @@ const RestaurantDetail: React.FC<{}> = () => {
 };
 
 const PostImg = styled.div`
-  width: ${(props: { small: boolean }) => (props.small ? "100px" : "660px")};
+  width: ${(props: { small: boolean }) => (props.small ? "100px" : "90%")};
   /* width: 660px; */
   height: ${(props: { small: boolean }) => (props.small ? "100px" : "379px")};
   background-image: ${(props: { img: string }) => `url(${props.img})`};
@@ -196,15 +196,19 @@ const PostImg = styled.div`
     props.small ? "cover" : "contain"};
   background-repeat: no-repeat;
   background-position: center;
+  margin: ${(props: { small: boolean }) =>
+    props.small ? "15px 5px" : "0 auto"};
+  background-color: ${(props: { small: boolean }) =>
+    props.small ? "" : "#000"};
   :hover {
     .arrow {
       visibility: visible;
     }
   }
-  margin: ${(props: { small: boolean }) =>
-    props.small ? "15px 5px" : "0 auto"};
-  background-color: ${(props: { small: boolean }) =>
-    props.small ? "" : "#000"};
+
+  @media(max-width:576px){
+    height: ${(props: { small: boolean }) => (props.small ? "100px" : "200px")};
+  }
 `;
 
 const ArrowNext = styled.div`
@@ -216,6 +220,10 @@ const ArrowNext = styled.div`
   background-position: -50px -190px; //이미지위치
   background-image: url(${all_img});
   visibility: hidden;
+  @media(max-width:576px){
+    top: 30%;
+  left: 90%;
+  }
 `;
 
 const ArrowPrev = styled.div`
@@ -227,5 +235,9 @@ const ArrowPrev = styled.div`
   background-position: -0px -190px; //이미지위치
   background-image: url(${all_img});
   visibility: hidden;
+  @media(max-width:576px){
+    top: -5%;
+  left: 0%;
+  }
 `;
 export default RestaurantDetail;
