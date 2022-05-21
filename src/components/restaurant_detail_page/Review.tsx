@@ -1,5 +1,4 @@
-
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/configStore";
 import {
@@ -18,6 +17,7 @@ import GiveStar from "../restaurant_detail_page/GiveStar";
 import WriteComment from "../restaurant_detail_page/WriteComment";
 import review_pen from "../../static/image/review_pen.svg";
 import review_background from "../../static/image/review_background.svg";
+import styled from "styled-components";
 
 const Review: React.FC<{}> = () => {
   const [value, isValue] = useState(0);
@@ -35,23 +35,13 @@ const Review: React.FC<{}> = () => {
     star_4_5,
     star_5,
   ];
-// item.star * 2 - 2 => 평점으로 위 index 찾는 공식
+  // item.star * 2 - 2 => 평점으로 위 index 찾는 공식
   return (
     <>
-      <div style={{ display: "flex", margin: "10px 40px" }}>
+      <ReviewFontWrap style={{}}>
         <img src={review_pen} alt="" width="36px"></img>
-        <div
-          style={{
-            fontSize: "20px",
-            fontWeight: "bold",
-            color: "#747474",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          리뷰({comments.length})
-        </div>
-      </div>
+        <ReviewFont style={{}}>리뷰({comments.length})</ReviewFont>
+      </ReviewFontWrap>
 
       <div
         className="Wrap"
@@ -127,10 +117,35 @@ const Review: React.FC<{}> = () => {
           <GiveStar isValue={isValue} value={value} />
           <WriteComment value={value} />
         </div>
-        <div style={{ width: "294px", backgroundImage: `url(${review_background})` }}></div>
+        <ReviewBackground></ReviewBackground>
       </div>
     </>
   );
 };
 
+const ReviewBackground = styled.div`
+  width: 294px;
+  background-image: url(${review_background});
+  @media (max-width: 576px) {
+    display: none;
+  }
+`;
+
+const ReviewFontWrap = styled.div`
+  display: flex;
+  margin: 10px 0;
+  justify-content: center;
+`;
+
+const ReviewFont = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  color: #747474;
+  display: flex;
+  align-items: center;
+  width: 630px;
+  @media (max-width: 576px) {
+    width: 340px;
+  }
+`;
 export default Review;

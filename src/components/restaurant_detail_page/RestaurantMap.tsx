@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 import { RootState } from "../../redux/configStore";
 
-import map_icon from "../../static/image/map_icon.svg"
+import map_icon from "../../static/image/map_icon.svg";
 const { kakao } = window;
 const RestaurantMap: React.FC<{}> = (props) => {
   const detail = useSelector((state: RootState) => state.restaurant);
@@ -45,7 +46,7 @@ const RestaurantMap: React.FC<{}> = (props) => {
           title: restaurant_loctaion.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           image: markerImage, // 마커 이미지
         });
- var iwContent = `<div style=" background-color: white; 
+        var iwContent = `<div style=" background-color: white; 
                   border: 1px solid black; 
                  margin: 0 0 95px 0;
                   width: fit-content; 
@@ -55,40 +56,57 @@ const RestaurantMap: React.FC<{}> = (props) => {
                   font-size:13px";
                   >${restaurant_loctaion.title}
                   </div>`,
-                  iwPosition = new kakao.maps.LatLng(
-                      restaurant_loctaion.latlng.Ma,
-                      restaurant_loctaion.latlng.La
-                  );
-                  var customOverlay = new kakao.maps.CustomOverlay({
-                    position: iwPosition,
-                    content: iwContent,
-                    map: map,
-                  });
-
+          iwPosition = new kakao.maps.LatLng(
+            restaurant_loctaion.latlng.Ma,
+            restaurant_loctaion.latlng.La
+          );
+        var customOverlay = new kakao.maps.CustomOverlay({
+          position: iwPosition,
+          content: iwContent,
+          map: map,
+        });
       }
-
     });
   }, []);
   return (
-    <div style={{ margin: "50px 0",}}>
-    <div style={{display:"flex", alignItems:"center", margin:"0 0 7px 30px"}}>
-        <img src={map_icon} alt="" ></img>
-    <span style={{margin:"0 5px", fontSize:"20px", fontWeight:"bold", color:"#747474"}}>지도</span>
-    </div>
+    <Wrap>
       <div
-        className="map"
-        id="map"
         style={{
-          width: "660px",
-          height: "413px",
-          border: "1px solid black",
-          margin: "0px auto",
-         
+          display: "flex",
+          alignItems: "center",
+          margin: "0 0 7px 30px",
         }}
       >
+        <img src={map_icon} alt=""></img>
+        <span
+          style={{
+            margin: "0 5px",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#747474",
+          }}
+        >
+          지도
+        </span>
       </div>
-    </div>
+      <Map className="map" id="map"></Map>
+    </Wrap>
   );
 };
+const Wrap =styled.div`
+  margin: 50px 0;
+  @media(max-width:576px){
+    margin: 20px 0 80px ;
+  }
+`
 
+const Map = styled.div`
+  width: 95%;
+  height: 413px;
+  border: 1px solid black;
+  margin: 0px auto;
+  @media(max-width:576px){
+    height:213px;
+  }
+`;
 export default RestaurantMap;
