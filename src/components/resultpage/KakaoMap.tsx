@@ -55,12 +55,11 @@ const KakaoMap: React.FC = () => {
 
       var geocoder = new kakao.maps.services.Geocoder();
       // console.log(res_list);
-      res_list.forEach((item: any, idx:number) => {
+      res_list.forEach((item: any, idx: number) => {
         // console.log(idx)
         geocoder.addressSearch(item.address, (result: any, status: string) => {
-
           //Geocoder함수의 해당 주소로 정보찾는것
-          
+
           // console.log(count)
           if (status === kakao.maps.services.Status.OK) {
             array = [
@@ -71,61 +70,114 @@ const KakaoMap: React.FC = () => {
               },
             ];
             // setTest(!test); //이것도 명확히 어떻게 동작되는지 다시볼것
-          
-          } else{
-            console.log(item.address, item.title)
-          }
-    
-          if (idx === res_list.length-1) {
-            console.log(array)
-            // setTest(!test);
-            for (let i = 0; i < array.length; i++) {
-              // 마커 이미지의 이미지 크기 입니다
-              let imageSize = new kakao.maps.Size(24, 35);
+            // console.log(array)
+            if (idx === res_list.length - 1) {
+              console.log(array);
+              // setTest(!test);
+              for (let i = 0; i < array.length; i++) {
+                // 마커 이미지의 이미지 크기 입니다
+                let imageSize = new kakao.maps.Size(24, 35);
 
-              // 마커 이미지를 생성합니다
-              let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+                // 마커 이미지를 생성합니다
+                let markerImage = new kakao.maps.MarkerImage(
+                  imageSrc,
+                  imageSize
+                );
 
-              // 마커를 생성합니다
-              let marker = new kakao.maps.Marker({
-                map: map, // 마커를 표시할 지도
-                position: array[i].latlng, // 마커를 표시할 위치
-                title: array[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                image: markerImage, // 마커 이미지
-              });
-              var iwContent = `<div style=" background-color: white; 
-                  border: 1px solid black; 
-                 margin: 0 0 95px 0;
-                  width: fit-content; 
-                  text-align: center; 
-                  font-weight:bold;
-                  padding:3px;
-                  font-size:13px";
-                  >${array[i].title}
-                  </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-                iwPosition = new kakao.maps.LatLng(
-                  array[i].latlng.Ma,
-                  array[i].latlng.La
-                ); //인포윈도우 표시 위치입니다
+                // 마커를 생성합니다
+                let marker = new kakao.maps.Marker({
+                  map: map, // 마커를 표시할 지도
+                  position: array[i].latlng, // 마커를 표시할 위치
+                  title: array[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                  image: markerImage, // 마커 이미지
+                });
+                var iwContent = `<div style=" background-color: white; 
+                    border: 1px solid black; 
+                   margin: 0 0 95px 0;
+                    width: fit-content; 
+                    text-align: center; 
+                    font-weight:bold;
+                    padding:3px;
+                    font-size:13px";
+                    >${array[i].title}
+                    </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                  iwPosition = new kakao.maps.LatLng(
+                    array[i].latlng.Ma,
+                    array[i].latlng.La
+                  ); //인포윈도우 표시 위치입니다
 
-              // 인포윈도우를 생성합니다
+                // 인포윈도우를 생성합니다
 
-              var customOverlay = new kakao.maps.CustomOverlay({
-                position: iwPosition,
-                content: iwContent,
-                map: map,
-              });
+                var customOverlay = new kakao.maps.CustomOverlay({
+                  position: iwPosition,
+                  content: iwContent,
+                  map: map,
+                });
 
-              // eslint-disable-next-line no-loop-func
-              kakao.maps.event.addListener(marker, "click", () => {
-                console.log("ddd");
-                customOverlay.setMap(map);
-              });
-              //   function closeOverlay() {
-              //     customOverlay.setMap(null);
-              // }
+                // eslint-disable-next-line no-loop-func
+                kakao.maps.event.addListener(marker, "click", () => {
+                  console.log("ddd");
+                  customOverlay.setMap(map);
+                });
+                //   function closeOverlay() {
+                //     customOverlay.setMap(null);
+                // }
+              }
             }
+          } else {
+            console.log(item.address, item.title);
           }
+
+          // if (idx === res_list.length-1) {
+          //   console.log(array)
+          //   // setTest(!test);
+          //   for (let i = 0; i < array.length; i++) {
+          //     // 마커 이미지의 이미지 크기 입니다
+          //     let imageSize = new kakao.maps.Size(24, 35);
+
+          //     // 마커 이미지를 생성합니다
+          //     let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+          //     // 마커를 생성합니다
+          //     let marker = new kakao.maps.Marker({
+          //       map: map, // 마커를 표시할 지도
+          //       position: array[i].latlng, // 마커를 표시할 위치
+          //       title: array[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          //       image: markerImage, // 마커 이미지
+          //     });
+          //     var iwContent = `<div style=" background-color: white;
+          //         border: 1px solid black;
+          //        margin: 0 0 95px 0;
+          //         width: fit-content;
+          //         text-align: center;
+          //         font-weight:bold;
+          //         padding:3px;
+          //         font-size:13px";
+          //         >${array[i].title}
+          //         </div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+          //       iwPosition = new kakao.maps.LatLng(
+          //         array[i].latlng.Ma,
+          //         array[i].latlng.La
+          //       ); //인포윈도우 표시 위치입니다
+
+          //     // 인포윈도우를 생성합니다
+
+          //     var customOverlay = new kakao.maps.CustomOverlay({
+          //       position: iwPosition,
+          //       content: iwContent,
+          //       map: map,
+          //     });
+
+          //     // eslint-disable-next-line no-loop-func
+          //     kakao.maps.event.addListener(marker, "click", () => {
+          //       console.log("ddd");
+          //       customOverlay.setMap(map);
+          //     });
+          //     //   function closeOverlay() {
+          //     //     customOverlay.setMap(null);
+          //     // }
+          //   }
+          // }
         });
       });
 
@@ -156,23 +208,15 @@ const KakaoMap: React.FC = () => {
 
   return (
     <>
-      <h2 style={{ width: "fit-content", margin: "20px auto 10px auto" }}>
+      <H2 style={{  }}>
         검색결과 음식점 리스트를 지도로 한눈에
-      </h2>
+      </H2>
 
       <MapWrap bigger={bigger}>
         <MapBtn onClick={() => setBigger(!bigger)}>
           {bigger ? `맵 줄이기` : `맵 크게보기`}
         </MapBtn>
-        <div
-          id="map"
-          style={{
-            width: "400px",
-            height: "400px",
-            margin: "20px auto",
-            border: "1px solid black",
-          }}
-        ></div>
+        <Map id="map" bigger={bigger}></Map>
         {/* <hr /> */}
       </MapWrap>
     </>
@@ -195,8 +239,30 @@ const MapBtn = styled.div`
 
 const MapWrap = styled.div`
   overflow: auto;
+  width:90%;
   height: ${(props: { bigger: boolean }) => (props.bigger ? "490px" : "200px")};
   border: 2px solid black;
-  margin: 10px 100px;
+  margin: 10px auto;
+  @media(max-width:576px){
+    height: ${(props: { bigger: boolean }) => (props.bigger ? "400px" : "200px")};
+  }
 `;
+
+const Map = styled.div`
+  width: 400px;
+  height: 400px;
+  margin: 20px auto;
+  border: 1px solid black;
+  @media(max-width:576px){
+    width: 90%;
+    height: ${(props: { bigger: boolean }) => (props.bigger ? "300px" : "200px")};
+  }
+`;
+const H2 = styled.h2`
+  width: fit-content;
+   margin: 20px auto 10px auto;
+   @media (max-width:576px){
+     font-size:20px;
+   }
+`
 export default KakaoMap;
