@@ -51,7 +51,7 @@ const ResultList: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
         <img
           src={filter}
           alt=""
-          style={{ marginRight: "40px" }}
+          style={{ marginRight: "40px", cursor:"pointer" }}
           onClick={() => setOpenModal(true)}
         ></img>
       </div>

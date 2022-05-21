@@ -145,6 +145,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
                 fontSize: "35px",
                 color: "white",
                 fontFamily: "IBM Plex Sans KR",
+                cursor: "pointer",
               }}
               onClick={() => searching()}
             >
@@ -155,7 +156,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
           <img
             src={restart_bttn}
             alt=""
-            style={{ marginTop: "23px" }}
+            style={{ marginTop: "23px", cursor:"pointer" }}
             onClick={() => {
               restart();
             }}
@@ -255,7 +256,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
             {prevStep && (
               <div>
                 <button
-                  style={{ border: "none", backgroundColor: "transparent" }}
+                  style={{ border: "none", backgroundColor: "transparent", cursor:"pointer" }}
                   onClick={() => restart()}
                 >
                   <img src={arrow_line} alt=""></img>
