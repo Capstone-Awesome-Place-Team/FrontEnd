@@ -16,7 +16,7 @@ import {
   bunsik,
   noodle,
   chinese_food,
-  etc
+  etc,
 } from "../../shared/lists";
 import arrow_line from "../../static/image/arrow-line .svg";
 const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
@@ -27,7 +27,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
   let [saveList, setSaveList] = useState<Array<string>>([]);
   const [final_food, setFinal_food] = useState<boolean>(false);
   const [prevStep, setPreStep] = useState<boolean>(false);
-
+  console.log(chinese_food.length);
   console.log(pick_list, saveList);
   while (pick_list.length < 8) {
     // 카테고리는 총 12개인데 8개만 나오기때문에 길이가 8이될때까지 while문 돌리고
@@ -43,7 +43,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
   const second_category = (food: string) => {
     setChosenOne(food);
     setPreStep(true);
-    const save_list = [...pick_list];
+    const save_list = [...pick_list]; //뒤로기가시 리스트필요하기때문
     const second_list: Array<any> = [];
 
     while (second_list.length < 8 && saveList.length === 0) {
@@ -87,7 +87,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
         if (second_list.indexOf(bunsik[rPick]) === -1) {
           second_list.push(bunsik[rPick]);
         }
-      } 
+      }
     }
     if (saveList.length === 0) {
       //선택한적이없어 saveList값이 없다면 리스트 업데이트, saveList값 업데이트
@@ -108,7 +108,8 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
   };
 
   const searching = () => {
-    dispatch(searchActions.postSearchDB(chosenOne, navigate));
+    navigate(`/list/${chosenOne}`);
+    // dispatch(searchActions.postSearchDB(chosenOne, navigate));
     setOpenModal(false);
   };
   return (
@@ -144,6 +145,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
                 fontSize: "35px",
                 color: "white",
                 fontFamily: "IBM Plex Sans KR",
+                cursor: "pointer",
               }}
               onClick={() => searching()}
             >
@@ -154,7 +156,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
           <img
             src={restart_bttn}
             alt=""
-            style={{ marginTop: "23px" }}
+            style={{ marginTop: "23px", cursor:"pointer" }}
             onClick={() => {
               restart();
             }}
@@ -187,7 +189,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
             }}
           >
             {pick_list.map((item: any, idx: any) => {
-              if (idx === 4) {
+              if (idx === 4) { //가운데 선택한음식 출력
                 return (
                   <React.Fragment key={idx}>
                     <div
@@ -254,7 +256,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
             {prevStep && (
               <div>
                 <button
-                  style={{ border: "none", backgroundColor: "transparent" }}
+                  style={{ border: "none", backgroundColor: "transparent", cursor:"pointer" }}
                   onClick={() => restart()}
                 >
                   <img src={arrow_line} alt=""></img>
