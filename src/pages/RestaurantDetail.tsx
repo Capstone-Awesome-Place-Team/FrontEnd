@@ -94,7 +94,7 @@ const RestaurantDetail: React.FC<{}> = () => {
               style={{ display: "flex", margin: "30px" }}
               className="content_and_heart"
             >
-              <div className="content">
+              <ContentWrap className="content">
                 <div className="res_name_and_star" style={{ display: "flex" }}>
                   <div
                     className="res_name"
@@ -135,9 +135,9 @@ const RestaurantDetail: React.FC<{}> = () => {
                   주소: {detail.address}
                 </div>
                 <div className="price"></div>
-              </div>
+              </ContentWrap>
               {isLogin === null ? null : detail.like ? (
-                <div style={{ position: "relative", left: "300px" }}>
+                <div style={{ position: "relative" }}>
                   <div
                     className="heart"
                     style={{
@@ -153,7 +153,7 @@ const RestaurantDetail: React.FC<{}> = () => {
                   <div style={{ color: "#E22F2F" }}>찜목록 취소</div>
                 </div>
               ) : (
-                <div style={{ position: "relative", left: "300px" }}>
+                <div style={{ position: "relative" }}>
                   <div
                     className="heart"
                     style={{
@@ -203,6 +203,13 @@ const PostImg = styled.div`
 
   @media (max-width: 576px) {
     height: ${(props: { small: boolean }) => (props.small ? "100px" : "200px")};
+  }
+`;
+
+const ContentWrap = styled.div`
+  width: 500px;
+  @media (max-width: 576px) {
+    width: 300px;
   }
 `;
 
