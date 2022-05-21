@@ -72,9 +72,11 @@ const Wrap = styled.div`
   max-width: 481px;
   height: 640px;
   border: 1px solid #9f9f9f;
-  margin: auto;
+  margin: 120px auto;
+  
   @media (max-width: 576px) {
     border: none;
+    margin: 0px auto;
   }
 `;
 
