@@ -4,32 +4,27 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import RestaurantMap from "../components/restaurant_detail_page/RestaurantMap";
 import Review from "../components/restaurant_detail_page/Review";
+import Spinner from "../components/Spinner";
 import { RootState } from "../redux/configStore";
 import { actionCreators as Actions } from "../redux/modules/restaurant";
 import heart from "../static/image/get_favorite_heart.svg";
 import red_heart from "../static/image/red_heart.svg";
 import all_img from "../static/image/set_of_imgs.png";
+import spinner from "../static/image/spinner.gif";
 
 const RestaurantDetail: React.FC<{}> = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   let r_code: string = useParams().r_code!;
   const isLogin = localStorage.getItem("token");
-  //   console.log(test)
   const detail = useSelector((state: RootState) => state.restaurant);
-  // console.log(detail);
   const [choose, setChoose] = useState(0); //이미지 선택
-  // console.log(r_code)
-  //   useEffect(() => {
-  //     if (Object.keys(detail).length === 0) {
-  //       dispatch(Actions.getResInfoDB(r_code));
-  //     }
-  //   }, []);
 
+  console.log(detail.address.length);
   useEffect(() => {
-    if (isLoading) {
-      dispatch(Actions.getResInfoDB(r_code, setIsLoading));
+    if (detail.address.length === 0) {
+      dispatch(Actions.getResInfoDB(r_code));
     }
+    return () => dispatch(Actions.deleteRestaurantInfo());
   }, []);
 
   const moveImage = (idx: number, step: string) => {
@@ -50,8 +45,8 @@ const RestaurantDetail: React.FC<{}> = () => {
 
   return (
     <>
-      {isLoading ? (
-        <div>로딩중</div>
+      {detail.address.length === 0 ? (
+        <Spinner />
       ) : (
         <div style={{ marginTop: "80px" }}>
           <PostImg img={detail.img_list[choose]}>
@@ -206,7 +201,7 @@ const PostImg = styled.div`
     }
   }
 
-  @media(max-width:576px){
+  @media (max-width: 576px) {
     height: ${(props: { small: boolean }) => (props.small ? "100px" : "200px")};
   }
 `;
@@ -220,9 +215,9 @@ const ArrowNext = styled.div`
   background-position: -50px -190px; //이미지위치
   background-image: url(${all_img});
   visibility: hidden;
-  @media(max-width:576px){
+  @media (max-width: 576px) {
     top: 30%;
-  left: 90%;
+    left: 90%;
   }
 `;
 
@@ -235,9 +230,9 @@ const ArrowPrev = styled.div`
   background-position: -0px -190px; //이미지위치
   background-image: url(${all_img});
   visibility: hidden;
-  @media(max-width:576px){
+  @media (max-width: 576px) {
     top: -5%;
-  left: 0%;
+    left: 0%;
   }
 `;
 export default RestaurantDetail;

@@ -4,8 +4,10 @@ import { FavoritePropsType } from "../../types/interfaces";
 import Post from "../Post";
 import AreaInclude from "./AreaInclude";
 import map from "../../static/image/map.svg";
+import { useNavigate } from "react-router-dom";
 
 const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
+  const navigate = useNavigate();
   const [selectedArea, setSelectedArea] = useState<any>([]);
   const includedArea: string[] = [];
 
@@ -38,9 +40,9 @@ const FavoriteListMap: React.FC<FavoritePropsType> = (props) => {
               {selectedArea.length > 0 ? (
                 selectedArea.map((item: any) => {
                   return (
-                    <React.Fragment key={item.r_code}>
+                    <div key={item.r_code} onClick={() => navigate(`/restaurant/${item.r_code}`)}>
                       <Post {...item} isMap />
-                    </React.Fragment>
+                    </div>
                   );
                 })
               ) : (

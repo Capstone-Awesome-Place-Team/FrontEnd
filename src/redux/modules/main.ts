@@ -8,6 +8,7 @@ const GET_THEME_DETAIL = "GETTHEMEDETAIL";
 const GET_SEARCH_RESULT = "SEARCHRESULT";
 const RESULT_SAVED = "RESULTSAVED";
 const RESTAURANT_DETAIL = "RESTAURANTDETAIL";
+const DELETE_SEARCH = "DELETESEARCH";
 
 
 const getThemeList = createAction(
@@ -34,15 +35,17 @@ const restaurantDetail = createAction(RESTAURANT_DETAIL, (detail: {}) => ({
   detail,
 }));
 
+const deleteSearch = createAction(DELETE_SEARCH, ()=>({}))
+
 
 
 const initialState = {
   // 회원이 가진 찜목록 및 닉네임
   list: [
-    {
-      theme_title: "",
-      theme_img: "",
-    },
+    // {
+    //   theme_title: "",
+    //   theme_img: "",
+    // },
   ],
   theme_detail: {
     
@@ -83,13 +86,13 @@ const getResInfoDB = (r_code: string, setIsLoading:Function) => {
 
 
 
-const getThemeDetail = (theme_title: string, setIsLoading: Function) => {
+const getThemeDetail = (theme_title: string) => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getThemeDetail(theme_title); //나중에 서버 생기면 넣을것
       console.log(res);
       dispatch(getThemeDetailList(res));
-      setIsLoading(false)
+   
     } catch (error: any) {
       console.log(error.message);
     }
@@ -120,6 +123,7 @@ const getSearchDB = (search: string) => {
     }
   };
 };
+
 
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
@@ -152,6 +156,25 @@ export default function reducer(state = initialState, action: any) {
         restaurant_detail: action.payload.detail,
       };
     }
+    case DELETE_SEARCH:{
+      return{
+        ...state,  list: [
+          // {
+          //   theme_title: "",
+          //   theme_img: "",
+          // },
+        ],
+        theme_detail: {
+          
+        },
+        search_list: [],
+        save_result: [],
+        restaurant_detail: {},
+        isLoading: true,
+        isSearched: false,
+        IsSaved: false,
+      }
+    }
    
     default:
       return state;
@@ -166,6 +189,7 @@ const actionCreators = {
   getResInfoDB,
   getSearchResult,
   resultSave,
+  deleteSearch
 };
 
 export { actionCreators };

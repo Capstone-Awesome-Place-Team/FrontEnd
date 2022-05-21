@@ -64,7 +64,7 @@ const CategoryList: React.FC<{}> = () => {
         <SmallWrap>
           {arr.map((item, idx) => {
             return (
-              <div key={idx} onClick={()=>dispatch(mainActions.postSearchDB(item, navigate))}>
+              <div key={idx} onClick={()=>navigate(`/list/${item}`)}>
                 <Box Img = {category[idx]}></Box>
                 <P>{item}</P>
               </div>
