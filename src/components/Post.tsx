@@ -4,9 +4,11 @@ import { actionCreators as favoriteActions } from "../redux/modules/favorite";
 import styled from "styled-components";
 import heart_fill from "../static/image/heart-fill.svg";
 import { PostPropsType } from "../types/interfaces";
+import { useNavigate } from "react-router-dom";
 
 const Post: React.FC<PostPropsType> = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cancelFavorite = () => {
     dispatch(favoriteActions.cancelFavoriteDB(props.r_code)); // 임시로 해당 레스토랑 이름(restaurant_name)을 사용하고 api 요청에서 받는 r_code로 나중에 수정
   };
@@ -18,13 +20,14 @@ const Post: React.FC<PostPropsType> = (props) => {
         width: "493px",
         margin: "10px 10px",
       }}
-    >
+    ><div style={{display: "flex",}} onClick={() => navigate(`/restaurant/${props.r_code}`)} >
       <PostImg src={props.img} alt="restaurant" isMap={props.isMap}></PostImg>
       <div className="content" style={{ margin: "0 14px" }}>
         <RestaurantName className="restaurant_name" isMap={props.isMap}>
           {props.restaurant_name}
         </RestaurantName>
         <Address className="address">{props.address}</Address>
+      </div>
       </div>
       {props.isMap ? null : (
         <div className="like" style={{ display: "flex", alignItems: "center" }}>

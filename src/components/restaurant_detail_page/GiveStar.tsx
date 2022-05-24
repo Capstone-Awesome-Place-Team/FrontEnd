@@ -105,6 +105,7 @@ const StarListInWrap = styled.div`
   overflow-y: auto;
   border: 1px solid black;
   background-color: white;
+  z-index:999;
 `;
 
 const Star = styled.div`
