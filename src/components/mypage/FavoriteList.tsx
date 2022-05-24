@@ -53,7 +53,7 @@ const FavoriteList: React.FC<FavoritePropsType> = (props) => {
         result.push(
           <div
             key={list[i].r_code}
-            onClick={() => navigate(`/restaurant/${list[i].r_code}`)}
+          
           >
             <Post {...list[i]} isMap={false} />
             <hr style={{ margin: "10px", border: "1px solid #DDD" }}></hr>
