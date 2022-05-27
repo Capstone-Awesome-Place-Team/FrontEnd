@@ -18,24 +18,16 @@ const ResultPage: React.FC = () => {
   const Url = useParams().currentInput!;
   console.log(result);
   useEffect(() => {
-    if (result.length === 0) {
-      console.log("여기")
-      dispatch(MainActions.postSearchDB(Url, navigate));
-    }
-    return (()=> dispatch(MainActions.deleteSearch()))
+    dispatch(MainActions.postSearchDB(Url, navigate));
+
+    return () => dispatch(MainActions.deleteSearch());
   }, []);
   return (
     <>
-      {result.length === 0 ? (
-        <Spinner />
-      ) : (
-        <>
-          {openModal && <Filter setOpenModal={setOpenModal}></Filter>}
-          <SearchArea></SearchArea>
-          <KakaoMap></KakaoMap>
-          <ResultList setOpenModal={setOpenModal}></ResultList>
-        </>
-      )}
+      {openModal && <Filter setOpenModal={setOpenModal}></Filter>}
+      <SearchArea></SearchArea>
+      <KakaoMap></KakaoMap>
+      <ResultList setOpenModal={setOpenModal}></ResultList>
     </>
   );
 };

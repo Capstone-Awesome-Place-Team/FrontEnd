@@ -15,8 +15,7 @@ const SearchArea: React.FC<{}> = () => {
   const searching = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const currentInput = search.current!.value;
-    navigate(`/list/${currentInput}`)
-    // dispatch(searchActions.postSearchDB(currentInput, navigate));
+    dispatch(searchActions.postSearchDB(currentInput, navigate));
   };
 
   return (
