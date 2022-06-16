@@ -10,13 +10,11 @@ import { actionCreators as userActions } from "../redux/modules/users";
 import back_arrow from "../static/image/back_arrow.svg";
 
 const Login: React.FC = (props) => {
-  
   const Id = useRef<HTMLInputElement>(null);
   const Pwd = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user_info = useSelector((state: RootState) => state.user.user);
-  console.log(user_info,"테스트");
 
   const checkLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,7 +35,6 @@ const Login: React.FC = (props) => {
     if (!checkId || !checkPw) {
       alert("아이디 또는 비밀번호 형식이 틀립니다.");
     } else {
-      console.log("API 통신 보내기");
       dispatch(userActions.LoginDB(user, navigate));
       // 로그인 API 보내기
     }
@@ -45,7 +42,7 @@ const Login: React.FC = (props) => {
   return (
     <Wrap>
       <ImgWrap>
-        <img src={example_logo} alt="로고" onClick={()=>navigate('/')}></img>
+        <img src={example_logo} alt="로고" onClick={() => navigate("/")}></img>
       </ImgWrap>
       <form onSubmit={checkLogin}>
         <InputWrap>
@@ -73,7 +70,7 @@ const Wrap = styled.div`
   height: 640px;
   border: 1px solid #9f9f9f;
   margin: 120px auto;
-  
+
   @media (max-width: 576px) {
     border: none;
     margin: 0px auto;

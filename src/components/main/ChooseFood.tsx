@@ -27,8 +27,6 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
   let [saveList, setSaveList] = useState<Array<string>>([]);
   const [final_food, setFinal_food] = useState<boolean>(false);
   const [prevStep, setPreStep] = useState<boolean>(false);
-  console.log(chinese_food.length);
-  console.log(pick_list, saveList);
   while (pick_list.length < 8) {
     // 카테고리는 총 12개인데 8개만 나오기때문에 길이가 8이될때까지 while문 돌리고
     const rPick = Math.floor(Math.random() * first_category.length);
@@ -156,7 +154,7 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
           <img
             src={restart_bttn}
             alt=""
-            style={{ marginTop: "23px", cursor:"pointer" }}
+            style={{ marginTop: "23px", cursor: "pointer" }}
             onClick={() => {
               restart();
             }}
@@ -189,7 +187,8 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
             }}
           >
             {pick_list.map((item: any, idx: any) => {
-              if (idx === 4) { //가운데 선택한음식 출력
+              if (idx === 4) {
+                //가운데 선택한음식 출력
                 return (
                   <React.Fragment key={idx}>
                     <div
@@ -256,7 +255,11 @@ const ChooseFood: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
             {prevStep && (
               <div>
                 <button
-                  style={{ border: "none", backgroundColor: "transparent", cursor:"pointer" }}
+                  style={{
+                    border: "none",
+                    backgroundColor: "transparent",
+                    cursor: "pointer",
+                  }}
                   onClick={() => restart()}
                 >
                   <img src={arrow_line} alt=""></img>

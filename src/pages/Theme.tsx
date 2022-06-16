@@ -15,19 +15,17 @@ const Theme = () => {
   ).theme_detail;
   const theme_title = useParams().theme_title!;
 
-  console.log();
   useEffect(() => {
-    if (Object.keys(theme_detail_list).length===0) {
+    if (Object.keys(theme_detail_list).length === 0) {
       dispatch(mainActions.getThemeDetail(theme_title));
       // setIsLoading(false)
-    } 
-    return (()=> dispatch(mainActions.deleteSearch()))
+    }
+    return () => dispatch(mainActions.deleteSearch());
   }, []);
 
-  // console.log(theme_detail_list.restaurant_info[0].options.takeout)
   return (
     <div>
-      {Object.keys(theme_detail_list).length===0 ? (
+      {Object.keys(theme_detail_list).length === 0 ? (
         <Spinner />
       ) : (
         <div style={{ margin: "100px 0" }}>
@@ -146,8 +144,8 @@ const Intro = styled.p`
   font-size: 20px;
   font-weight: bold;
   font-family: IBM Plex Sans KR;
-  @media(max-width:576px){
-    font-size:15px;
+  @media (max-width: 576px) {
+    font-size: 15px;
   }
 `;
 

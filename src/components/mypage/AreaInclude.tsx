@@ -4,7 +4,7 @@ const AreaInclude: React.FC<{ includedArea: string[]; selectOne: Function }> = (
   props
 ) => {
   const { includedArea, selectOne } = props;
-  console.log(includedArea.includes("은평구"));
+
   return (
     <>
       <Eunpyeong

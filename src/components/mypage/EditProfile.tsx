@@ -41,7 +41,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
     event.preventDefault();
 
     if (PwMessageColor && NickMessageColor && PwCheckMessageColor) {
-      console.log("요청모두 맞아서 api 호출");
+  
 
       // 이부분 리덕스로 사용할경우 비즈니스로직 바꿔야됨, useState로 사용안하고 useSelector로 store 값 쓰기때문에 이중으로 nickname, changingNickName으로 안써도됨
       // setNickName(changingNickName!); // 실질적으로 내정보에서 보는 닉네임으로 최종 변경
@@ -52,7 +52,7 @@ const Editprofile: React.FC<Edit_info> = (props) => {
       // API 호출
       dispatch(favoriteActions.editInfoDB(info)); // 닉네임, 비밀번호
       resetAll();
-      console.log(info, changingNickName);
+
     }
   };
 

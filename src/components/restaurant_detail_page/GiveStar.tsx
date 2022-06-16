@@ -21,7 +21,7 @@ const GiveStar: React.FC<{value:number, isValue:Function}> = (props) => {
   const mycomment = useSelector(
     (state: RootState) => state.restaurant
   ).mycomment;
-  console.log(mycomment);
+
   const isLogin = localStorage.getItem("token");
   const [isClicked, setIsClicked] = useState(false);
   const [star, setStar] = useState(0);

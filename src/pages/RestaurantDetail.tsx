@@ -19,7 +19,6 @@ const RestaurantDetail: React.FC<{}> = () => {
   const detail = useSelector((state: RootState) => state.restaurant);
   const [choose, setChoose] = useState(0); //이미지 선택
 
-  console.log(detail.address.length);
   useEffect(() => {
     if (detail.address.length === 0) {
       dispatch(Actions.getResInfoDB(r_code));
