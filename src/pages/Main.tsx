@@ -13,14 +13,13 @@ const Main: React.FC<{ chooseGame: Function }> = (props) => {
   const dispatch = useDispatch();
   const info = useSelector((state: RootState) => state.favorite.list);
   const isList = useSelector((state: RootState) => state.main).list;
-  console.log(isList);
   const { chooseGame } = props;
 
   useEffect(() => {
     if (isList.length === 0) {
       dispatch(MainActions.getThemeListDB());
     }
-    return (()=> dispatch(MainActions.deleteSearch()))
+    return () => dispatch(MainActions.deleteSearch());
   }, []);
   return (
     <>

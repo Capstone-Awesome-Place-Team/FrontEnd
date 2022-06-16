@@ -20,14 +20,18 @@ const Post: React.FC<PostPropsType> = (props) => {
         width: "493px",
         margin: "10px 10px",
       }}
-    ><div style={{display: "flex",}} onClick={() => navigate(`/restaurant/${props.r_code}`)} >
-      <PostImg src={props.img} alt="restaurant" isMap={props.isMap}></PostImg>
-      <div className="content" style={{ margin: "0 14px" }}>
-        <RestaurantName className="restaurant_name" isMap={props.isMap}>
-          {props.restaurant_name}
-        </RestaurantName>
-        <Address className="address">{props.address}</Address>
-      </div>
+    >
+      <div
+        style={{ display: "flex" }}
+        onClick={() => navigate(`/restaurant/${props.r_code}`)}
+      >
+        <PostImg src={props.img} alt="restaurant" isMap={props.isMap}></PostImg>
+        <div className="content" style={{ margin: "0 14px" }}>
+          <RestaurantName className="restaurant_name" isMap={props.isMap}>
+            {props.restaurant_name}
+          </RestaurantName>
+          <Address className="address">{props.address}</Address>
+        </div>
       </div>
       {props.isMap ? null : (
         <div className="like" style={{ display: "flex", alignItems: "center" }}>

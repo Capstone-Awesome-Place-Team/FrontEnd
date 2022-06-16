@@ -16,7 +16,7 @@ const ResultPage: React.FC = () => {
   const result = useSelector((state: RootState) => state.main.search_list);
   const navigate = useNavigate();
   const Url = useParams().currentInput!;
-  console.log(result);
+
   useEffect(() => {
     dispatch(MainActions.postSearchDB(Url, navigate));
 

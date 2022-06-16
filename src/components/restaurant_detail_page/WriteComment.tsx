@@ -13,24 +13,20 @@ const WriteComment: React.FC<{ value: number }> = (props) => {
   ).mycomment;
   const r_code = useSelector((state: RootState) => state.restaurant.r_code);
   const a = useSelector((state: RootState) => state.restaurant);
-  console.log(redux_comment);
-  //   console.log(r_code)
+
   //   const [comment, setComment] = useState("");
   const content = useRef<HTMLTextAreaElement>(null);
   const title = useRef<HTMLTextAreaElement>(null);
   const isLogin = localStorage.getItem("token");
 
   const Comment_confirm = () => {
-    console.log(content.current?.value, title.current?.value, value);
     if (
       content.current?.value.length === 0 ||
       title.current?.value.length === 0 ||
       value === 0
     ) {
-      console.log("평점, 제목과 내용 입력해주세요");
       alert("평점, 제목과 내용 입력해주세요"); // 나중에 다른걸로 바꿀것, 테스트하기위해 추가
     } else {
-      console.log("dd");
       const comments = {
         star: value,
         title: title.current!.value,

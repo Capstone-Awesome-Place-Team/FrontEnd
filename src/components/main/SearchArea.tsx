@@ -68,7 +68,7 @@ const Searchboundary = styled.div`
   }
 `;
 const SearchInput = styled.input.attrs({
-  placeholder: "지역, 식당, 음식으로 댕꿀맛집 찾기!",
+  placeholder: "지역, 식당, 음식으로 맛집 찾기!",
 })`
   border: none;
   background-color: white;

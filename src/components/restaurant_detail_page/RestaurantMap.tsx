@@ -7,7 +7,7 @@ import map_icon from "../../static/image/map_icon.svg";
 const { kakao } = window;
 const RestaurantMap: React.FC<{}> = (props) => {
   const detail = useSelector((state: RootState) => state.restaurant);
-  console.log(detail.address);
+
   useEffect(() => {
     let restaurant_loctaion: any = {};
 
@@ -19,12 +19,11 @@ const RestaurantMap: React.FC<{}> = (props) => {
 
     geocoder.addressSearch(detail.address, (result: any, status: string) => {
       if (status === kakao.maps.services.Status.OK) {
-        console.log(status);
         restaurant_loctaion = {
           title: detail.restaurant_name,
           latlng: new kakao.maps.LatLng(result[0].y / 1, result[0].x / 1),
         };
-        console.log(result[0]);
+
         // 마커 이미지의 이미지 크기 입니다
 
         let container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
@@ -38,7 +37,7 @@ const RestaurantMap: React.FC<{}> = (props) => {
 
         // 마커 이미지를 생성합니다
         let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-        console.log(restaurant_loctaion);
+
         // 마커를 생성합니다
         let marker = new kakao.maps.Marker({
           map: map, // 마커를 표시할 지도
@@ -93,20 +92,20 @@ const RestaurantMap: React.FC<{}> = (props) => {
     </Wrap>
   );
 };
-const Wrap =styled.div`
+const Wrap = styled.div`
   margin: 50px 0;
-  @media(max-width:576px){
-    margin: 20px 0 80px ;
+  @media (max-width: 576px) {
+    margin: 20px 0 80px;
   }
-`
+`;
 
 const Map = styled.div`
   width: 95%;
   height: 413px;
   border: 1px solid black;
   margin: 0px auto;
-  @media(max-width:576px){
-    height:213px;
+  @media (max-width: 576px) {
+    height: 213px;
   }
 `;
 export default RestaurantMap;

@@ -23,7 +23,6 @@ const Review: React.FC<{}> = () => {
   const [value, isValue] = useState(0);
   const detail = useSelector((state: RootState) => state.restaurant);
   const comments = useSelector((state: RootState) => state.restaurant).comments;
-  console.log(comments);
   const star_list = [
     star_1,
     star_1_5,

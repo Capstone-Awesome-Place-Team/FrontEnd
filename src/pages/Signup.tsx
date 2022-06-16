@@ -47,7 +47,6 @@ const Signup: React.FC = (props) => {
       pw: Pwd!,
       nickname: nickName!,
     };
-    console.log(info);
 
     if (
       IdMessageColor &&
@@ -55,7 +54,6 @@ const Signup: React.FC = (props) => {
       NickMessageColor &&
       PwCheckMessageColor
     ) {
-      console.log("요청모두 맞아서 api 호출");
       // API 호출
       dispatch(userActions.SignUpDB(info, navigate));
     }
