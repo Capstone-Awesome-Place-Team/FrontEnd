@@ -11,7 +11,7 @@ const Filter: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
   const isSaved = useSelector((state: RootState) => state.main.IsSaved);
 
   const saved = useSelector((state: RootState) => state.main.save_result);
-  console.log(saved, isSaved);
+
   const [priceClicked, setPriceClicked] = useState([true, false, false, false]);
   const [takeOutClick, setTakeOutClick] = useState(true);
   const [parkClick, setParkClick] = useState(true);
@@ -35,7 +35,6 @@ const Filter: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
         filtered_result = saved.filter(
           (item: any) => item.price < 10000 && item.options.takeout
         );
-        console.log(filtered_result);
       } else if (!takeOutClick && parkClick) {
         filtered_result = saved.filter(
           (item: any) => item.price < 10000 && item.options.parking
@@ -112,7 +111,6 @@ const Filter: React.FC<{ setOpenModal: Function }> = ({ setOpenModal }) => {
         filtered_result = saved.filter((item: any) => item.price > 40000);
       }
     }
-    console.log(filtered_result);
     dispatch(ResultActions.getSearchResult(filtered_result));
     setOpenModal(false);
   };
