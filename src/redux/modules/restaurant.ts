@@ -43,8 +43,6 @@ const getResInfoDB = (r_code: string) => {
     try {
       const res: any = await apis.getResInfo(r_code); //나중에 서버 생기면 넣을것
       dispatch(restaurantDetail(res));
-     
-      console.log(res);
     } catch (error: any) {
       console.log(error.message);
     }
@@ -56,19 +54,16 @@ const likeFavoriteDB = (r_code: number) => {
     try {
       const res = await apis.likeFavorite(r_code);
       dispatch(likeFavorite(r_code));
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
   };
 };
 const cancelFavoriteDB = (r_code: number) => {
-  // console.log()
   return async function (dispatch: Dispatch) {
     try {
       const res = await apis.cancelFavorite(r_code);
       dispatch(cancelFavorite());
-      // console.log(res);
     } catch (error) {
       console.log(error);
     }
