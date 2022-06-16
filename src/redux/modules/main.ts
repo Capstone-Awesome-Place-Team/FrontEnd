@@ -63,7 +63,6 @@ const getThemeListDB = () => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getMain(); 
-      // console.log(res);
       dispatch(getThemeList(res));
     } catch (error: any) {
       console.log(error.message);
@@ -77,7 +76,6 @@ const getResInfoDB = (r_code: string, setIsLoading:Function) => {
       const res: any = await apis.getResInfo(r_code); //나중에 서버 생기면 넣을것
       dispatch(restaurantDetail(res));
       setIsLoading(false);
-      console.log(res);
     } catch (error: any) {
       console.log(error.message);
     }
@@ -90,7 +88,6 @@ const getThemeDetail = (theme_title: string) => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.getThemeDetail(theme_title); //나중에 서버 생기면 넣을것
-      console.log(res);
       dispatch(getThemeDetailList(res));
    
     } catch (error: any) {
@@ -103,7 +100,6 @@ const postSearchDB = (search: string, navigate: Function) => {
   return async function (dispatch: Dispatch) {
     try {
       const res: any = await apis.postSearchInfo(search);
-      console.log(res);
       dispatch(getSearchResult(res));
       navigate(`/list/${search}`);
     } catch (error: any) {
@@ -117,7 +113,6 @@ const getSearchDB = (search: string) => {
     try {
       const res = await apis.getSearchInfo(search);
       dispatch(getSearchResult(res)); // 아직 연결 안됨 404 에러
-      console.log(res);
     } catch (error: any) {
       console.log(error.message);
     }

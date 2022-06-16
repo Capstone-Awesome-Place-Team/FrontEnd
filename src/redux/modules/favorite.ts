@@ -61,7 +61,7 @@ const getFavoriteListDB = () => {
     try {
       const res:any = await apis.getFavorite(); //나중에 서버 생기면 넣을것
       // dispatch(getFavoriteList(dummyfiles));
-      console.log(res);
+     
       dispatch(getFavoriteList(res));
     } catch (error: any) {
       console.log(error.message);
@@ -70,12 +70,11 @@ const getFavoriteListDB = () => {
 };
 
 const cancelFavoriteDB = (r_code: number) => {
-  console.log(r_code)
+
   return async function (dispatch: Dispatch) {
     try {
       const res = await apis.cancelFavorite(r_code) //나중에 api 요청시 사용
       dispatch(cancelFavorite(r_code));
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +119,6 @@ export default function reducer(state = initialState, action: any) {
       return { list: { ...state.list, like_list: NewFavoriteList } };
     }
     case EDIT_INFO: {
-      console.log(action.payload.nickanme);
       return { list: { ...state.list, nickname: action.payload.nickanme } };
     }
     case REMOVE_INFO:{
